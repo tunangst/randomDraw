@@ -1,4 +1,6 @@
-const canvas = document.querySelector('canvas');
+const canvas = document.querySelector('#draw');
+const canvas2 = document.querySelector('#full');
+// const primaryColor = `black`;
 const primaryColor = `rgb(0,0,0)`;
 const randomSecondary = () => {
     const randomColorHex = () => {
@@ -11,7 +13,9 @@ const randomSecondary = () => {
     console.log(color);
     return color;
 };
+// const secondaryColor = 'teal';
 const secondaryColor = randomSecondary();
+// const emptyColor = `white`;
 const emptyColor = `rgba(0,0,0,.0)`;
 const canvasSize = 500;
 const drawSection = 250;
@@ -20,46 +24,127 @@ const pixelSize = drawSection / 5; //draw section divided by how many pixels acr
 console.log(pixelSize);
 let xPos = 0; //starting position
 let yPos = 0; //starting position
+let matrix = [];
 // ^^^^^^^^^^^^^^^^^^ variables ^^^^^^^^^^^^^^^^^^^^^^
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
+//  singles x4
+//      clone
+//      rotate
+//      reflect
+//  doubles x2
+//      clone
+//      rotate
+//      reflect
+//  singles x2 doubles x1
+//      clone (rotate, reflect, clone)
+//      rotate (reflect, clone, rotate)
+//      reflect (clone, rotate, reflect)
+//singles x2
+////singles x2
+////double
+//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
+const roll = (range) => {
+    const test = Math.floor(Math.random() * range + 1); // 1 - range
+    return test;
+};
 const whatToPlace = (xStart, yStart) => {
-    const random = Math.round(Math.random() * 2 + 1); // 1-3
-    ctx.strokeStyle = `rgb(255, 255, 255)`;
-    ctx.strokeRect(xStart, yStart, pixelSize, pixelSize);
-    ctx.fillRect(xStart, yStart, pixelSize, pixelSize);
-    switch (random) {
+    const randomColor = roll(3);
+    let pixel = {
+        xStart,
+        yStart,
+    };
+    // ctx.strokeStyle = `rgb(255, 255, 255)`;
+    // ctx.strokeRect(xStart, yStart, pixelSize, pixelSize);
+    // ctx.fillRect(xStart, yStart, pixelSize, pixelSize);
+    switch (randomColor) {
         case 1:
-            ctx.fillStyle = emptyColor;
+            pixel.color = emptyColor;
             break;
         case 2:
-            ctx.fillStyle = primaryColor;
-            // ctx.fillRect(xStart, 50, pixelSize, pixelSize);
+            pixel.color = primaryColor;
             break;
         case 3:
-            ctx.fillStyle = secondaryColor;
-            // ctx.strokeStyle = `rgb(255, 255, 255)`;
-            // ctx.strokeRect(xStart, 50, pixelSize, pixelSize);
+            pixel.color = secondaryColor;
             break;
         default:
             console.log('error, sorry');
     }
+    return pixel;
 };
-const rotateTimesThree = () => {
-    const rotation = (80 * Math.PI) / 180;
-    let cloneData = ctx;
-    ctx.rotate(rotation);
-    ctx.drawImage(canvas, 250, 0);
-    ctx.rotate(-rotation);
+const fullRotate = (matrix) => {
+    xPos = 0;
+    yPos = 0;
+    let adjustedMatrix = [];
 
-    // let cloneData = ctx.getImageData(0, 0, 250, 250);
-    // let rotateData = cloneData.rotate((90 * Math.PI) / 180);
-    // ctx.translate(250, 0);
-    // debugger;
-    // ctx.translate(-150, -75);
+    // loop over columns in order;
+    // loop over rows backwards;
+    const rotate = (useMatrix, xOffset, yOffset) => {
+        let tempMatrix = [];
+        for (let column = 0; column < useMatrix[0].length; column++) {
+            let rowArr = [];
+            for (let row = useMatrix.length - 1; row >= 0; row--) {
+                const pixel = useMatrix[row][column];
+                pixel.xStart = xPos;
+                pixel.yStart = yPos;
 
-    //(scale horizontal, skew horizontal, skew vertical, scale vertical, moves horizontal, moves vertical)
-    // ctx.putImageData(rotateData, 250, 0);
-    // ctx.setTransform(0, 0, 0, 0, 250, 0);
+                rowArr.push(pixel);
+                xPos += pixelSize;
+            }
+            tempMatrix.push(rowArr);
+            xPos = 0;
+            yPos += pixelSize;
+        }
+        adjustedMatrix = [...tempMatrix];
+        draw(adjustedMatrix, xOffset, yOffset);
+        yPos = 0;
+    };
+    rotate(matrix, 0, 0);
+    rotate(adjustedMatrix, 250, 0);
+    rotate(adjustedMatrix, 250, 250);
+    rotate(adjustedMatrix, 0, 250);
+};
+// const reflect = (useMatrix) => {
+//     xPos = 0;
+//     yPos = 0;
+//     const matrixIndexColumn = 0; // 0 - useMatrix[0].length
+//     const matrixIndexRow = 0; // 0 - useMatrix.length
+//     let editMatrix = [];
+
+//     // loop over columns in order;
+//     // loop over rows backwards;
+
+//     for (let column = 0; column < useMatrix[0].length; column++) {
+//         let rowArr = [];
+//         for (let row = useMatrix.length - 1; row >= 0; row--) {
+//             const pixel = useMatrix[column][row]; // this being column row rotates it
+//             // console.log(matrixRow, matrixColumn);
+//             console.log(`~~~~~~~~~`);
+//             console.log(pixel);
+//             pixel.xStart = xPos;
+//             pixel.yStart = yPos;
+//             console.log(pixel);
+//             console.log(`~~~~~~~~~`);
+//             xPos += pixelSize;
+
+//             rowArr.push(pixel);
+//         }
+//         editMatrix.push(rowArr);
+//         xPos = 0;
+//         yPos += pixelSize;
+//     }
+//     draw(editMatrix, 250, 0);
+//     console.log(editMatrix);
+// };
+const clone = (matrix, xStart, yStart) => {
+    draw(matrix, xStart, yStart);
+};
+const fullClone = (matrix) => {
+    clone(matrix, 0, 0);
+    clone(matrix, 250, 0);
+    clone(matrix, 250, 250);
+    clone(matrix, 0, 250);
 };
 const howToClone = () => {
     const random = Math.round(Math.random() * 2 + 1); // 1-3
@@ -75,30 +160,162 @@ const howToClone = () => {
     }
 };
 
+const createPixelMap = () => {
+    //this will cycle through y axis on pixel size
+    for (let y = 0; y < drawSection; y += pixelSize) {
+        //this will cycle through x axis on pixel size
+        let row = [];
+        for (let x = 0; x < drawSection; x += pixelSize) {
+            // console.log(`${x} starting pixel draw,`);
+            const pixel = whatToPlace(x, y);
+            row.push(pixel);
+            // console.log(pixel);
+        }
+        matrix.push(row);
+    }
+};
+
+const draw = (usingMatrix, xCoord = 0, yCoord = 0) => {
+    for (let matrixRow = 0; matrixRow < matrix.length; matrixRow++) {
+        for (
+            let matrixColumn = 0;
+            matrixColumn < matrix[matrixRow].length;
+            matrixColumn++
+        ) {
+            const pixel = usingMatrix[matrixRow][matrixColumn];
+            let calcX = pixel.xStart + xCoord;
+            let calcY = pixel.yStart + yCoord;
+
+            if (xCoord === 0 && yCoord === 0) {
+                ctx.fillStyle = pixel.color;
+                ctx.fillRect(calcX, calcY, pixelSize, pixelSize);
+                ctx.strokeStyle = `rgb(255, 255, 255)`;
+                ctx.strokeRect(calcX, calcY, pixelSize, pixelSize);
+            }
+
+            ctx2.fillStyle = pixel.color;
+            ctx2.fillRect(calcX, calcY, pixelSize, pixelSize);
+            ctx2.strokeStyle = `rgb(255, 255, 255)`;
+            ctx2.strokeRect(calcX, calcY, pixelSize, pixelSize);
+        }
+    }
+};
+const singlesX4 = () => {
+    //  singles x4
+    //      clone
+    //      rotate
+    //      reflect
+    const typeDice = roll(2);
+    const quadrantDice = roll(4);
+    switch (typeDice) {
+        case 1:
+            fullClone(matrix);
+            break;
+        case 2:
+            fullRotate(matrix);
+            break;
+        case 3:
+            // fullReflect();
+            break;
+        case 4:
+            // halfReflect();
+            break;
+        default:
+            console.log('error in layout variable');
+            break;
+    }
+};
+const specials = () => {
+    //      specials
+    //          type (full clone, full rotate, full reflect, half reflect)
+    // const typeOfSpecial = roll(4);
+    const dice = roll(2);
+    console.log(dice);
+    switch (dice) {
+        case 1:
+            fullClone(matrix);
+            break;
+        case 2:
+            fullRotate(matrix);
+            break;
+        case 3:
+            // fullReflect();
+            break;
+        case 4:
+            // halfReflect();
+            break;
+        default:
+            console.log('error in layout variable');
+            break;
+    }
+};
+
 if (canvas.getContext) {
     // use getContext to use the canvas for drawing
     var ctx = canvas.getContext('2d');
+    var ctx2 = canvas2.getContext('2d');
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ drawSection
-    //this will cycle through y axis on pixel size
-    for (let y = yPos; y < drawSection; y += pixelSize) {
-        //this will cycle through x axis on pixel size
-        for (let x = xPos; x < drawSection; x += pixelSize) {
-            console.log(`${x} starting pixel draw,`);
-            whatToPlace(x, y);
-        }
+    // console.log(matrix);
+    createPixelMap();
+    // console.log(matrix);
+
+    // rotateTimesThree(matrix);
+    // rotateTimesThree(matrix);
+
+    // const layout = roll(4);
+    const layout = 1;
+    console.log(layout);
+    switch (layout) {
+        case 1:
+            singlesX4();
+            break;
+        case 2:
+            // doublesX2();
+            break;
+        case 3:
+            // singlesX2DoublesX1();
+            break;
+        case 4:
+            specials();
+            break;
+        default:
+            console.log('error in layout variable');
+            break;
     }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ drawSection
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ cloneSection
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ cloneSection
-
-    // Draw shapes
-    // ctx.fillStyle = secondaryColor;
-    // ctx.fillRect(25, 25, 100, 100);
-    // ctx.clearRect(45, 45, 60, 60);
-    // ctx.strokeRect(50, 50, 50, 50);
-    rotateTimesThree();
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
+    //  singles x4
+    //      clone
+    //      rotate
+    //      reflect
+    //  doubles x2
+    //      clone
+    //      rotate
+    //      reflect
+    //  singles x2 doubles x1
+    //      clone (rotate, reflect, clone)
+    //      rotate (reflect, clone, rotate)
+    //      reflect (clone, rotate, reflect)
+    //
+    //  specials
+    //      full clone (4 clone)
+    //      full rotate (4 singles)
+    //      full reflect (4 singles)
+    //      half reflect (vertical, horizontal)
+    //
+    //  roll #1: type (singles x4, doubles x2, singles x2 doubles x1, specials)
+    //  roll #2: ↓
+    //      singles x4
+    //          quadrant (1,2,3,4)
+    //          type (clone, rotate, reflect)
+    //          ... x4
+    //      doubles x1 singles x2
+    //          quadrant (vertical, horizontal)
+    //          type (clone, rotate, reflect)
+    //              type (clone, rotate, reflect)
+    //      specials
+    //          type (full clone, full rotate, full reflect, half reflect)
+    //
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
 } else {
     alert('You need Safari or Firefox 1.5+ to see this demo.');
 }
