@@ -77,7 +77,6 @@ const fullRotate = (matrix) => {
     xPos = 0;
     yPos = 0;
     let adjustedMatrix = [];
-
     // loop over columns in order;
     // loop over rows backwards;
     const rotate = (useMatrix, xOffset, yOffset) => {
@@ -100,10 +99,75 @@ const fullRotate = (matrix) => {
         draw(adjustedMatrix, xOffset, yOffset);
         yPos = 0;
     };
-    rotate(matrix, 0, 0);
-    rotate(adjustedMatrix, 250, 0);
+    draw(matrix, 0, 0);
+    rotate(matrix, 250, 0);
     rotate(adjustedMatrix, 250, 250);
     rotate(adjustedMatrix, 0, 250);
+};
+const fullReflect = (matrix) => {
+    xPos = 0;
+    yPos = 0;
+    let adjustedMatrix = [];
+    let combinedMatrix = [];
+    // loop over rows in order;
+    // loop over columns backwards;
+    const reflectHorizontal = (useMatrix, xOffset, yOffset) => {
+        let tempMatrix = [];
+        for (let row = 0; row < useMatrix.length; row++) {
+            let rowArr = [];
+            for (
+                let column = useMatrix[row].length - 1;
+                column >= 0;
+                column--
+            ) {
+                const pixel = useMatrix[row][column];
+                pixel.xStart = xPos;
+                pixel.yStart = yPos;
+
+                rowArr.push(pixel);
+                xPos += pixelSize;
+            }
+            tempMatrix.push(rowArr);
+            xPos = 0;
+            yPos += pixelSize;
+        }
+        adjustedMatrix = [...tempMatrix];
+        yPos = 0;
+        draw(adjustedMatrix, xOffset, yOffset);
+    };
+    // loop over rows backwards;
+    // loop over columns in order;
+    const reflectVertical = (useMatrix, xOffset, yOffset) => {
+        let tempMatrix = [];
+        for (let row = useMatrix.length - 1; row >= 0; row--) {
+            let rowArr = [];
+            for (let column = 0; column < useMatrix[row].length; column++) {
+                const pixel = useMatrix[row][column];
+                //have to create a new obj because combinedMatrix[4] would === combinedMatrix[5]
+                const newPixel = {};
+                newPixel.xStart = xPos;
+                newPixel.yStart = yPos;
+                newPixel.color = pixel.color;
+                rowArr.push(newPixel);
+                xPos += pixelSize;
+            }
+            tempMatrix.push(rowArr);
+            xPos = 0;
+            yPos += pixelSize;
+        }
+        adjustedMatrix = [...tempMatrix];
+        yPos = 0;
+        draw(adjustedMatrix, xOffset, yOffset);
+    };
+
+    draw(matrix, 0, 0);
+    reflectHorizontal(matrix, 250, 0);
+    // build combinedMatrix
+    for (let i = 0; i < matrix.length; i++) {
+        const combine = [...matrix[i], ...adjustedMatrix[i]];
+        combinedMatrix.push(combine);
+    }
+    reflectVertical(combinedMatrix, 0, 250);
 };
 // const reflect = (useMatrix) => {
 //     xPos = 0;
@@ -146,19 +210,6 @@ const fullClone = (matrix) => {
     clone(matrix, 250, 250);
     clone(matrix, 0, 250);
 };
-const howToClone = () => {
-    const random = Math.round(Math.random() * 2 + 1); // 1-3
-    switch (random) {
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        default:
-            console.log('error, sorry');
-    }
-};
 
 const createPixelMap = () => {
     //this will cycle through y axis on pixel size
@@ -169,17 +220,16 @@ const createPixelMap = () => {
             // console.log(`${x} starting pixel draw,`);
             const pixel = whatToPlace(x, y);
             row.push(pixel);
-            // console.log(pixel);
         }
         matrix.push(row);
     }
 };
 
 const draw = (usingMatrix, xCoord = 0, yCoord = 0) => {
-    for (let matrixRow = 0; matrixRow < matrix.length; matrixRow++) {
+    for (let matrixRow = 0; matrixRow < usingMatrix.length; matrixRow++) {
         for (
             let matrixColumn = 0;
-            matrixColumn < matrix[matrixRow].length;
+            matrixColumn < usingMatrix[matrixRow].length;
             matrixColumn++
         ) {
             const pixel = usingMatrix[matrixRow][matrixColumn];
@@ -200,36 +250,37 @@ const draw = (usingMatrix, xCoord = 0, yCoord = 0) => {
         }
     }
 };
-const singlesX4 = () => {
-    //  singles x4
-    //      clone
-    //      rotate
-    //      reflect
-    const typeDice = roll(2);
-    const quadrantDice = roll(4);
-    switch (typeDice) {
-        case 1:
-            fullClone(matrix);
-            break;
-        case 2:
-            fullRotate(matrix);
-            break;
-        case 3:
-            // fullReflect();
-            break;
-        case 4:
-            // halfReflect();
-            break;
-        default:
-            console.log('error in layout variable');
-            break;
-    }
-};
+// const singlesX4 = () => {
+//     //  singles x4
+//     //      clone
+//     //      rotate
+//     //      reflect
+//     const typeDice = roll(2);
+//     const quadrantDice = roll(4);
+//     switch (typeDice) {
+//         case 1:
+//             fullClone(matrix);
+//             break;
+//         case 2:
+//             fullRotate(matrix);
+//             break;
+//         case 3:
+//             // fullReflect();
+//             break;
+//         case 4:
+//             // halfReflect();
+//             break;
+//         default:
+//             console.log('error in layout variable');
+//             break;
+//     }
+// };
 const specials = () => {
     //      specials
     //          type (full clone, full rotate, full reflect, half reflect)
     // const typeOfSpecial = roll(4);
-    const dice = roll(2);
+    // const dice = roll(2);
+    const dice = 4;
     console.log(dice);
     switch (dice) {
         case 1:
@@ -239,7 +290,7 @@ const specials = () => {
             fullRotate(matrix);
             break;
         case 3:
-            // fullReflect();
+            fullReflect(matrix);
             break;
         case 4:
             // halfReflect();
@@ -263,7 +314,7 @@ if (canvas.getContext) {
     // rotateTimesThree(matrix);
 
     // const layout = roll(4);
-    const layout = 1;
+    const layout = 4;
     console.log(layout);
     switch (layout) {
         case 1:
