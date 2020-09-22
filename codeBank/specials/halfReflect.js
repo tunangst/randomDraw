@@ -1,6 +1,5 @@
 import {
     draw,
-    roll,
     combineMatrixLeftHalf,
     combineMatrixTopHalf,
 } from '../utilities.js';

@@ -1,8 +1,8 @@
 import { pixelSize } from '../variables.js';
 
 const rotate = (useMatrix, xOffset, yOffset) => {
-    let xPos = 0;
-    let yPos = 0;
+    let xPos = xOffset;
+    let yPos = yOffset;
     let tempMatrix = [];
     let rotatedMatrix = [];
 
@@ -11,21 +11,19 @@ const rotate = (useMatrix, xOffset, yOffset) => {
 
         for (let row = useMatrix.length - 1; row >= 0; row--) {
             const pixel = useMatrix[row][column];
-            const newPixel = {};
-            newPixel.xStart = xPos;
-            newPixel.yStart = yPos;
-            newPixel.color = pixel.color;
-            pixel.xStart = xPos;
-            pixel.yStart = yPos;
-
+            const newPixel = {
+                xStart: xPos,
+                yStart: yPos,
+                color: pixel.color,
+            };
             rowArr.push(newPixel);
             xPos += pixelSize;
         }
         tempMatrix.push(rowArr);
-        xPos = 0;
+        xPos = xOffset;
         yPos += pixelSize;
     }
-    yPos = 0;
+    yPos = yOffset;
     rotatedMatrix = [...tempMatrix];
 
     return rotatedMatrix;

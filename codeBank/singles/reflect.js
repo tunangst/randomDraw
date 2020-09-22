@@ -39,10 +39,11 @@ const reflectHorizontalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
         for (let column = 0; column < useMatrix[row].length; column++) {
             const pixel = useMatrix[row][column];
             //have to create a new obj because combinedMatrix[4] would === combinedMatrix[5]
-            const newPixel = {};
-            newPixel.xStart = xPos;
-            newPixel.yStart = yPos;
-            newPixel.color = pixel.color;
+            const newPixel = {
+                xStart: xPos,
+                yStart: yPos,
+                color: pixel.color,
+            };
             rowArr.push(newPixel);
             xPos += pixelSize;
         }

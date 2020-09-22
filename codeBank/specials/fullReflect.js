@@ -5,7 +5,7 @@ import {
 import { draw, combineMatrixTopHalf } from '../utilities.js';
 
 const fullReflect = (matrix) => {
-    console.log(fullReflect);
+    console.log(`fullReflect`);
 
     let adjustedMatrix = [];
     let combinedMatrix = [];

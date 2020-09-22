@@ -1,14 +1,17 @@
 import { matrix, canvas } from './codeBank/variables.js';
 import specials from './codeBank/specials/specials.js';
-import { createPixelMap } from './codeBank/utilities.js';
+import singles from './codeBank/singles/singles.js';
+import { createPixelMap, draw } from './codeBank/utilities.js';
 
 if (canvas.getContext) {
     createPixelMap();
 
-    const layout = 4;
+    draw(matrix, null, null);
+
+    const layout = 1;
     switch (layout) {
         case 1:
-            singlesX4();
+            singles(matrix);
             break;
         case 2:
             // doublesX2();
