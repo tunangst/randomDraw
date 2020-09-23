@@ -1,7 +1,7 @@
 import { roll, findQuadrantOrder, draw } from '../utilities.js';
 import clone from './clone.js';
 import { reflectVerticalAxis, reflectHorizontalAxis } from './reflect.js';
-import rotate from './rotate.js';
+import { rotateClockwise, rotateCounterClockwise } from './rotate.js';
 
 const singles = (matrix) => {
     console.log(`singles layout`);
@@ -38,15 +38,15 @@ const singles = (matrix) => {
                 break;
             case 2:
                 console.log(`reflect`);
-                const directionDice = roll(2); // 1 = vertical axis reflect. 2 = horizontal axis reflect
+                const directionDiceReflect = roll(2); // 1 = vertical axis reflect. 2 = horizontal axis reflect
                 console.log(
                     `${
-                        directionDice === 1
+                        directionDiceReflect === 1
                             ? 'vertical axis reflect'
                             : 'horizontal axis reflect'
                     }`
                 );
-                directionDice === 1
+                directionDiceReflect === 1
                     ? (adjustedMatrix = reflectVerticalAxis(matrix, xPos, yPos))
                     : (adjustedMatrix = reflectHorizontalAxis(
                           matrix,
@@ -59,13 +59,30 @@ const singles = (matrix) => {
                 break;
             case 3:
                 console.log(`rotate`);
-                adjustedMatrix = rotate(matrix, xPos, yPos);
+                // const directionDiceRotate = roll(2); // 1 = clockwise rotate. 2 = counter clockwise rotate
+                const directionDiceRotate = 2; // 1 = clockwise rotate. 2 = counter clockwise rotate
+                console.log(
+                    `${
+                        directionDiceRotate === 1
+                            ? 'clockwise rotate'
+                            : 'counter clockwise rotate'
+                    }`
+                );
+                directionDiceRotate === 1
+                    ? (adjustedMatrix = rotateClockwise(matrix, xPos, yPos))
+                    : (adjustedMatrix = rotateCounterClockwise(
+                          matrix,
+                          xPos,
+                          yPos
+                      ));
+
+                // adjustedMatrix = rotate(matrix, xPos, yPos);
 
                 draw(adjustedMatrix);
 
                 break;
             default:
-                console.log('error in layout variable');
+                console.log('error in number variable');
                 break;
         }
     });

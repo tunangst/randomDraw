@@ -1,27 +1,26 @@
 import { matrix, canvas } from './codeBank/variables.js';
 import specials from './codeBank/specials/specials.js';
 import singles from './codeBank/singles/singles.js';
-import { createPixelMap, draw } from './codeBank/utilities.js';
+import doubles from './codeBank/doubles/doubles.js';
+import { roll, draw, createPixelMap } from './codeBank/utilities.js';
 
 if (canvas.getContext) {
     createPixelMap();
 
-    draw(matrix, null, null);
+    draw(matrix, null, null); // draw on ctx not ctx2
 
-    const layout = 1;
-    switch (layout) {
+    const dice = roll(3);
+    switch (dice) {
         case 1:
-            singles(matrix);
-            break;
-        case 2:
-            // doublesX2();
-            break;
-        case 3:
-            // singlesX2DoublesX1();
-            break;
-        case 4:
             specials(matrix);
             break;
+        case 2:
+            singles(matrix);
+            break;
+        case 3:
+            doubles(matrix);
+            break;
+
         default:
             console.log('error in layout variable');
             break;

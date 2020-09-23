@@ -1,4 +1,5 @@
 import {
+    roll,
     draw,
     combineMatrixLeftHalf,
     combineMatrixTopHalf,
@@ -15,8 +16,7 @@ const halfReflect = (matrix) => {
     let combinedMatrix = [];
     let reflectedMatrix = [];
 
-    // const quadrantDice = roll(2);
-    const quadrantDice = 2;
+    const quadrantDice = roll(2);
     switch (quadrantDice) {
         case 1:
             console.log(`halfReflect: horizontal reflect`);

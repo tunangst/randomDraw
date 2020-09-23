@@ -1,4 +1,4 @@
-import rotate from '../singles/rotate.js';
+import { rotateClockwise } from '../singles/rotate.js';
 import { draw } from '../utilities.js';
 
 const fullRotate = (matrix) => {
@@ -10,13 +10,13 @@ const fullRotate = (matrix) => {
 
     draw(matrix);
 
-    rotatedMatrix1 = rotate(matrix);
+    rotatedMatrix1 = rotateClockwise(matrix);
     draw(rotatedMatrix1, 250, 0);
 
-    rotatedMatrix2 = rotate(rotatedMatrix1);
+    rotatedMatrix2 = rotateClockwise(rotatedMatrix1);
     draw(rotatedMatrix2, 250, 250);
 
-    rotatedMatrix3 = rotate(rotatedMatrix2);
+    rotatedMatrix3 = rotateClockwise(rotatedMatrix2);
     draw(rotatedMatrix3, 0, 250);
 };
 
