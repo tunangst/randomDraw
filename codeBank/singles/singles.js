@@ -12,8 +12,8 @@ const singles = (matrix) => {
     //          ... x4
     //      quadrants
     //          _________
-    //          |_1_|_2_|  {x: 0, y: 0}     ,{x: 250, y: 0}
-    //          |_3_|_4_|  {x: 0, y: 250}   ,{x: 250, y: 250}
+    //          |_1_|_2_|  {x: 0, y: 0}             ,{x: drawSection, y: 0}
+    //          |_3_|_4_|  {x: 0, y: drawSection}   ,{x: drawSection, y: drawSection}
     //      rolls
     //          1 = clone
     //          2 = reflect
@@ -28,6 +28,7 @@ const singles = (matrix) => {
         const xPos = quadrantDice[index].x;
         const yPos = quadrantDice[index].y;
         let adjustedMatrix = [];
+
         switch (number) {
             case 1:
                 console.log(`clone`);
@@ -59,8 +60,7 @@ const singles = (matrix) => {
                 break;
             case 3:
                 console.log(`rotate`);
-                // const directionDiceRotate = roll(2); // 1 = clockwise rotate. 2 = counter clockwise rotate
-                const directionDiceRotate = 2; // 1 = clockwise rotate. 2 = counter clockwise rotate
+                const directionDiceRotate = roll(2); // 1 = clockwise rotate. 2 = counter clockwise rotate
                 console.log(
                     `${
                         directionDiceRotate === 1
@@ -75,8 +75,6 @@ const singles = (matrix) => {
                           xPos,
                           yPos
                       ));
-
-                // adjustedMatrix = rotate(matrix, xPos, yPos);
 
                 draw(adjustedMatrix);
 

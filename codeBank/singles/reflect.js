@@ -1,8 +1,6 @@
 import { pixelSize } from '../variables.js';
-import { draw } from '../utilities.js';
 
 const reflectVerticalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
-    // reset();
     let xPos = xOffset;
     let yPos = yOffset;
     let tempMatrix = [];
@@ -22,15 +20,12 @@ const reflectVerticalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
         xPos = xOffset;
         yPos += pixelSize;
     }
-    // adjustedMatrix = [...tempMatrix];
-
     yPos = yOffset;
-    // draw(tempMatrix);
+
     return tempMatrix;
 };
 
 const reflectHorizontalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
-    // reset();
     let xPos = xOffset;
     let yPos = yOffset;
     let tempMatrix = [];
@@ -51,9 +46,8 @@ const reflectHorizontalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
         xPos = xOffset;
         yPos += pixelSize;
     }
-    // adjustedMatrix = [...tempMatrix];
     yPos = yOffset;
-    // draw(tempMatrix, xOffset, yOffset);
+
     return tempMatrix;
 };
 

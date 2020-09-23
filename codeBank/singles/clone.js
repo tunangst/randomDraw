@@ -1,9 +1,8 @@
 import { pixelSize } from '../variables.js';
-import { draw } from '../utilities.js';
 
-const clone = (usingMatrix, xCoord, yCoord) => {
-    let xPos = xCoord;
-    let yPos = yCoord;
+const clone = (usingMatrix, xOffset = 0, yOffset = 0) => {
+    let xPos = xOffset;
+    let yPos = yOffset;
     let tempMatrix = [];
     for (let matrixRow = 0; matrixRow < usingMatrix.length; matrixRow++) {
         let rowArr = [];
@@ -22,11 +21,11 @@ const clone = (usingMatrix, xCoord, yCoord) => {
             xPos += pixelSize;
         }
         tempMatrix.push(rowArr);
-        xPos = xCoord;
+        xPos = xOffset;
         yPos += pixelSize;
     }
-    yPos = yCoord;
-    // draw(tempMatrix);
+    yPos = yOffset;
+
     return tempMatrix;
 };
 

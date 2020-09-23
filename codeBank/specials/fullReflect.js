@@ -1,3 +1,4 @@
+import { drawSection } from '../variables.js';
 import {
     reflectVerticalAxis,
     reflectHorizontalAxis,
@@ -13,11 +14,11 @@ const fullReflect = (matrix) => {
 
     draw(matrix);
 
-    adjustedMatrix = reflectVerticalAxis(matrix, 250, 0);
+    adjustedMatrix = reflectVerticalAxis(matrix, drawSection, 0);
     draw(adjustedMatrix);
 
     combinedMatrix = combineMatrixTopHalf(matrix, adjustedMatrix);
-    reflectedMatrix = reflectHorizontalAxis(combinedMatrix, 0, 250);
+    reflectedMatrix = reflectHorizontalAxis(combinedMatrix, 0, drawSection);
     draw(reflectedMatrix);
 };
 

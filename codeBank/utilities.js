@@ -79,9 +79,6 @@ const whatToPlace = (xStart, yStart) => {
         xStart,
         yStart,
     };
-    // ctx.strokeStyle = `rgb(255, 255, 255)`;
-    // ctx.strokeRect(xStart, yStart, pixelSize, pixelSize);
-    // ctx.fillRect(xStart, yStart, pixelSize, pixelSize);
     switch (randomColor) {
         case 1:
             pixel.color = emptyColor;
@@ -138,16 +135,16 @@ const findQuadrantOrder = () => {
                     quadrant.y = 0;
                     break;
                 case 2:
-                    quadrant.x = 250;
+                    quadrant.x = drawSection;
                     quadrant.y = 0;
                     break;
                 case 3:
-                    quadrant.x = 250;
-                    quadrant.y = 250;
+                    quadrant.x = drawSection;
+                    quadrant.y = drawSection;
                     break;
                 case 4:
                     quadrant.x = 0;
-                    quadrant.y = 250;
+                    quadrant.y = drawSection;
                     break;
                 default:
                     console.log('error in findQuadrantOrder');

@@ -1,3 +1,4 @@
+import { drawSection } from '../variables.js';
 import { draw } from '../utilities.js';
 import clone from '../singles/clone.js';
 
@@ -10,13 +11,13 @@ const fullClone = (matrix) => {
 
     draw(matrix);
 
-    cloneMatrix1 = clone(matrix, 250, 0);
+    cloneMatrix1 = clone(matrix, drawSection, 0);
     draw(cloneMatrix1);
 
-    cloneMatrix2 = clone(matrix, 250, 250);
+    cloneMatrix2 = clone(matrix, drawSection, drawSection);
     draw(cloneMatrix2);
 
-    cloneMatrix3 = clone(matrix, 0, 250);
+    cloneMatrix3 = clone(matrix, 0, drawSection);
     draw(cloneMatrix3);
 };
 

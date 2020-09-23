@@ -1,3 +1,4 @@
+import { drawSection } from '../variables.js';
 import {
     roll,
     draw,
@@ -21,7 +22,7 @@ const halfReflect = (matrix) => {
         case 1:
             console.log(`halfReflect: horizontal reflect`);
 
-            clonedMatrix = clone(matrix, 250, 0);
+            clonedMatrix = clone(matrix, drawSection, 0);
             draw(clonedMatrix);
 
             combinedMatrix = combineMatrixTopHalf(matrix, clonedMatrix);
@@ -32,7 +33,7 @@ const halfReflect = (matrix) => {
         case 2:
             console.log(`halfReflect: vertical reflect`);
 
-            clonedMatrix = clone(matrix, 0, 250);
+            clonedMatrix = clone(matrix, 0, drawSection);
             draw(clonedMatrix);
 
             combinedMatrix = combineMatrixLeftHalf(matrix, clonedMatrix);

@@ -1,3 +1,4 @@
+import { drawSection } from '../variables.js';
 import { roll, draw } from '../utilities.js';
 import clone from '../singles/clone.js';
 import {
@@ -15,8 +16,8 @@ const doubles = (matrix) => {
     //          type (clone, rotate [r, l], reflect [r, l])
     //      quadrants
     //          _________
-    //          |_1_|_2_|  {x: 0, y: 0}     ,{x: 250, y: 0}
-    //          |_3_|_4_|  {x: 0, y: 250}   ,{x: 250, y: 250}
+    //          |_1_|_2_|  {x: 0, y: 0}             ,{x: drawSection, y: 0}
+    //          |_3_|_4_|  {x: 0, y: drawSection}   ,{x: drawSection, y: drawSection}
     //      type
     //          1 = clone
     //          2 = rotate
@@ -31,9 +32,14 @@ const doubles = (matrix) => {
     let directionDice = 0;
     let adjustedMatrix = [];
 
-    const quadrant = quadrantDice === 1 ? { x: 250, y: 0 } : { x: 0, y: 250 };
+    const quadrant =
+        quadrantDice === 1
+            ? { x: drawSection, y: 0 }
+            : { x: 0, y: drawSection };
     const quadrantDouble =
-        quadrantDice === 1 ? { x: 0, y: 250 } : { x: 250, y: 0 };
+        quadrantDice === 1
+            ? { x: 0, y: drawSection }
+            : { x: drawSection, y: 0 };
 
     switch (styleDice) {
         case 1:
