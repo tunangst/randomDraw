@@ -7,8 +7,141 @@
         <title>randomDraw</title>
     </head>
     <body>
-        <canvas id="draw" width="250px" height="250px"></canvas>
-        <canvas id="full" width="500px" height="500px"></canvas>
+        <div class="controls">
+            <canvas id="preview" width="250px" height="250px"></canvas>
+            <form action="#">
+                <label for="typeOfDrawing">
+                    type of drawing:
+                    <select name="typeOfDrawing" id="typeOfDrawing">
+                        <option value="random">random</option>
+                        <option value="Box Drawing">Box Drawing:</option>
+                    </select>
+                </label>
+                <fieldset>
+                    <label for="typeOfStyle">
+                        type of style:
+                        <select name="typeOfStyle" id="typeOfStyle">
+                            <option value="random">random</option>
+                            <option value="full clone">full clone</option>
+                            <option value="full reflect">full reflect</option>
+                            <option value="full rotate">full rotate</option>
+                            <option value="full half reflect">
+                                full half reflect
+                            </option>
+                        </select>
+                    </label>
+
+                    <label for="canvasSize">
+                        canvas size:
+                        <input name="canvasSize" type="number" value="500" />
+                    </label>
+
+                    <label for="boxCount">
+                        box count:
+                        <input name="boxCount" type="number" value="10" />
+                    </label>
+
+                    <label class="colors" for="primaryColor">
+                        primary color:
+                        <label for="primaryDefault">default</label>
+                        <input
+                            name="primaryToggle"
+                            type="radio"
+                            id="primaryDefault"
+                            value="default"
+                            checked
+                        />
+
+                        <label for="primaryRandom">random</label>
+                        <input
+                            name="primaryToggle"
+                            type="radio"
+                            id="primaryRandom"
+                            value="random"
+                        />
+                        <label for="primaryChoose">choose</label>
+                        <input
+                            name="primaryToggle"
+                            type="radio"
+                            id="primaryChoose"
+                            value="choose"
+                        />
+                        <input
+                            id="primaryColor"
+                            name="primaryColor"
+                            type="color"
+                            value="rgb(0,0,0)"
+                        />
+                    </label>
+
+                    <label class="colors" for="secondaryColor"
+                        >secondary color:
+                        <label for="secondaryDefault">default</label>
+                        <input
+                            name="secondaryToggle"
+                            type="radio"
+                            id="secondaryDefault"
+                            value="default"
+                            checked
+                        />
+
+                        <label for="secondaryRandom">random</label>
+                        <input
+                            name="secondaryToggle"
+                            type="radio"
+                            id="secondaryRandom"
+                            value="random"
+                        />
+                        <label for="secondaryChoose">choose</label>
+                        <input
+                            name="secondaryToggle"
+                            type="radio"
+                            id="secondaryChoose"
+                            value="choose"
+                        />
+                        <input
+                            name="secondaryColor"
+                            type="color"
+                            value="#8f1fff"
+                        />
+                    </label>
+
+                    <label class="colors" for="backgroundColor"
+                        >background color:
+                        <label for="backgroundDefault">default</label>
+                        <input
+                            name="backgroundToggle"
+                            type="radio"
+                            id="backgroundDefault"
+                            value="default"
+                            checked
+                        />
+
+                        <label for="backgroundRandom">random</label>
+                        <input
+                            name="backgroundToggle"
+                            type="radio"
+                            id="backgroundRandom"
+                            value="random"
+                        />
+                        <label for="backgroundChoose">choose</label>
+                        <input
+                            name="backgroundToggle"
+                            type="radio"
+                            id="backgroundChoose"
+                            value="choose"
+                        />
+                        <input
+                            name="backgroundColor"
+                            type="color"
+                            value="#cfcfcf"
+                        />
+                    </label>
+                </fieldset>
+                <input type="submit" value="draw" />
+            </form>
+        </div>
+        <canvas id="draw" width="500px" height="500px"></canvas>
         <script type="module" src="./index.js"></script>
     </body>
 </html>

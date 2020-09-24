@@ -1,64 +1,63 @@
-import { matrix, canvas } from './codeBank/variables.js';
-import specials from './codeBank/specials/specials.js';
-import singles from './codeBank/singles/singles.js';
-import doubles from './codeBank/doubles/doubles.js';
-import { roll, draw, createPixelMap } from './codeBank/utilities.js';
+// import boxDrawing from './codeBank/boxDrawing/boxDrawing.js';
+import randomDraw from './codeBank/randomDraw.js';
+import { randomColor } from './codeBank/boxDrawing/utilities.js';
+const boxDrawing = randomDraw.boxDrawing;
 
-if (canvas.getContext) {
-    createPixelMap();
+const form = document.querySelector('form');
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.log('form submit');
+    const form = event.target.elements;
+    const typeOfDrawing = form.typeOfDrawing.value;
+    const typeOfStyle = form.typeOfStyle.value;
+    const canvasSize = form.canvasSize.value;
+    const boxCount = form.boxCount.value;
 
-    draw(matrix, null, null); // draw on ctx not ctx2
+    // const primaryToggle = form.primaryToggle.value === 'on' ?
 
-    const dice = roll(3);
-    switch (dice) {
-        case 1:
-            specials(matrix);
-            break;
-        case 2:
-            singles(matrix);
-            break;
-        case 3:
-            doubles(matrix);
-            break;
+    const defaultPrimary = '#000000';
+    const defaultSecondary = null;
+    const defaultBackground = '#ffffff00';
 
-        default:
-            console.log('error in layout variable');
-            break;
-    }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
-    //  singles x4
-    //      clone
-    //      rotate
-    //      reflect
-    //  doubles x2
-    //      clone
-    //      rotate
-    //      reflect
-    //  singles x2 doubles x1
-    //      clone (rotate, reflect, clone)
-    //      rotate (reflect, clone, rotate)
-    //      reflect (clone, rotate, reflect)
-    //
-    //  specials
-    //      full clone (4 clone)
-    //      full rotate (4 singles)
-    //      full reflect (4 singles)
-    //      half reflect (vertical, horizontal)
-    //
-    //  roll #1: type (singles x4, doubles x2, singles x2 doubles x1, specials)
-    //  roll #2: ↓
-    //      singles x4
-    //          quadrant (1,2,3,4)
-    //          type (clone, rotate, reflect)
-    //          ... x4
-    //      doubles x1 singles x2
-    //          quadrant (vertical, horizontal)
-    //          type (clone, rotate, reflect)
-    //              type (clone, rotate, reflect)
-    //      specials
-    //          type (full clone, full rotate, full reflect, half reflect)
-    //
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
-} else {
-    alert('You need Safari or Firefox 1.5+ to see this demo.');
-}
+    const primaryColor =
+        form.primaryToggle.value === 'default'
+            ? defaultPrimary
+            : form.primaryToggle.value === 'random'
+            ? randomColor()
+            : form.primaryColor.value;
+
+    const secondaryColor =
+        form.secondaryToggle.value === 'default'
+            ? defaultSecondary
+            : form.secondaryToggle.value === 'random'
+            ? randomColor()
+            : form.secondaryColor.value;
+
+    const backgroundColor =
+        form.backgroundToggle.value === 'default'
+            ? defaultBackground
+            : form.backgroundToggle.value === 'random'
+            ? randomColor()
+            : form.backgroundColor.value;
+
+    console.log(typeOfDrawing);
+    console.log(typeOfStyle);
+    console.log(canvasSize);
+    console.log(boxCount);
+    console.log(primaryColor);
+    console.log(secondaryColor);
+    console.log(backgroundColor);
+
+    //get info here
+    let setObj = {
+        typeOfStyle,
+        canvasSize,
+        boxCount,
+        primaryColor,
+        secondaryColor,
+        backgroundColor,
+    };
+    if (typeOfDrawing === 'Box Drawing') boxDrawing(setObj);
+});
+
+// boxDrawing();

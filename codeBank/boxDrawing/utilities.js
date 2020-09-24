@@ -6,7 +6,8 @@ import {
     primaryColor,
     secondaryColor,
     emptyColor,
-    matrix,
+    // matrix,
+    canvasSize,
 } from './variables.js';
 
 const roll = (range) => {
@@ -61,7 +62,7 @@ const draw = (usingMatrix, xCoord = 0, yCoord = 0) => {
     return usingMatrix;
 };
 
-const randomSecondary = () => {
+const randomColor = () => {
     const randomColorHex = () => {
         return Math.round(Math.random() * 255);
     };
@@ -95,7 +96,7 @@ const whatToPlace = (xStart, yStart) => {
     return pixel;
 };
 
-const createPixelMap = () => {
+const createPixelMap = (matrix) => {
     //this will cycle through y axis on pixel size
     for (let y = 0; y < drawSection; y += pixelSize) {
         //this will cycle through x axis on pixel size
@@ -157,10 +158,17 @@ const findQuadrantOrder = () => {
     return quadrantArray;
 };
 
+const clear = (matrix) => {
+    matrix = [];
+    ctx.clearRect(0, 0, canvasSize, canvasSize);
+    ctx2.clearRect(0, 0, canvasSize, canvasSize);
+};
+
 export {
     roll,
+    clear,
     draw,
-    randomSecondary,
+    randomColor,
     createPixelMap,
     combineMatrixTopHalf,
     combineMatrixLeftHalf,
