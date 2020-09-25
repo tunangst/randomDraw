@@ -1,3 +1,4 @@
+import { PixelNode } from '../boxDrawingUtilities.js';
 import { pixelSize } from '../boxDrawing.js';
 
 const clone = (usingMatrix, xOffset = 0, yOffset = 0) => {
@@ -12,11 +13,8 @@ const clone = (usingMatrix, xOffset = 0, yOffset = 0) => {
             matrixColumn++
         ) {
             const pixel = usingMatrix[matrixRow][matrixColumn];
-            const newPixel = {
-                xStart: xPos,
-                yStart: yPos,
-                color: pixel.color,
-            };
+            const newPixel = new PixelNode(xPos, yPos, pixel.color);
+
             rowArr.push(newPixel);
             xPos += pixelSize;
         }

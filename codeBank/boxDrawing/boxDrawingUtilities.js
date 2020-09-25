@@ -10,7 +10,7 @@ import {
     canvasSize,
 } from './boxDrawing.js';
 
-const draw = (usingMatrix, xCoord = 0, yCoord = 0) => {
+const boxDraw = (usingMatrix, xCoord = 0, yCoord = 0) => {
     if (xCoord === null && yCoord === null) {
         for (let matrixRow = 0; matrixRow < usingMatrix.length; matrixRow++) {
             for (
@@ -56,25 +56,17 @@ const draw = (usingMatrix, xCoord = 0, yCoord = 0) => {
     }
     return usingMatrix;
 };
-
-const randomColor = () => {
-    const randomColorHex = () => {
-        return Math.round(Math.random() * 255);
-    };
-    const randomR = randomColorHex();
-    const randomG = randomColorHex();
-    const randomB = randomColorHex();
-    const color = `rgb(${randomR},${randomG},${randomB})`;
-    return color;
-};
-
+class PixelNode {
+    constructor(xStart, yStart, color = '#020') {
+        this.xStart = xStart;
+        this.yStart = yStart;
+        this.color = color;
+    }
+}
 const whatToPlace = (xStart, yStart) => {
-    const randomColor = roll(3);
-    let pixel = {
-        xStart,
-        yStart,
-    };
-    switch (randomColor) {
+    const rollColor = roll(3);
+    let pixel = new PixelNode(xStart, yStart);
+    switch (rollColor) {
         case 1:
             pixel.color = backgroundColor;
             break;
@@ -152,17 +144,9 @@ const findQuadrantOrder = () => {
     return quadrantArray;
 };
 
-const clear = (matrix) => {
-    matrix = [];
-    ctx.clearRect(0, 0, canvasSize, canvasSize);
-    ctx2.clearRect(0, 0, canvasSize, canvasSize);
-    return matrix;
-};
-
 export {
-    clear,
-    draw,
-    randomColor,
+    boxDraw,
+    PixelNode,
     createPixelMap,
     combineMatrixTopHalf,
     combineMatrixLeftHalf,

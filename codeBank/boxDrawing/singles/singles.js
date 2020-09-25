@@ -1,5 +1,5 @@
 import { roll } from '../../utilities.js';
-import { findQuadrantOrder, draw } from '../boxDrawingUtilities.js';
+import { findQuadrantOrder, boxDraw } from '../boxDrawingUtilities.js';
 import clone from './clone.js';
 import { reflectVerticalAxis, reflectHorizontalAxis } from './reflect.js';
 import { rotateClockwise, rotateCounterClockwise } from './rotate.js';
@@ -35,7 +35,7 @@ const singles = (matrix) => {
                 console.log(`clone`);
                 adjustedMatrix = clone(matrix, xPos, yPos);
 
-                draw(adjustedMatrix);
+                boxDraw(adjustedMatrix);
 
                 break;
             case 2:
@@ -56,7 +56,7 @@ const singles = (matrix) => {
                           yPos
                       ));
 
-                draw(adjustedMatrix);
+                boxDraw(adjustedMatrix);
 
                 break;
             case 3:
@@ -77,7 +77,7 @@ const singles = (matrix) => {
                           yPos
                       ));
 
-                draw(adjustedMatrix);
+                boxDraw(adjustedMatrix);
 
                 break;
             default:

@@ -1,7 +1,7 @@
 import { drawSection } from '../boxDrawing.js';
 import { roll } from '../../utilities.js';
 import {
-    draw,
+    boxDraw,
     combineMatrixLeftHalf,
     combineMatrixTopHalf,
 } from '../boxDrawingUtilities.js';
@@ -12,7 +12,7 @@ import {
 } from '../singles/reflect.js';
 
 const halfReflect = (matrix) => {
-    draw(matrix);
+    boxDraw(matrix);
     let clonedMatrix = [];
     let combinedMatrix = [];
     let reflectedMatrix = [];
@@ -23,22 +23,22 @@ const halfReflect = (matrix) => {
             console.log(`halfReflect: horizontal reflect`);
 
             clonedMatrix = clone(matrix, drawSection, 0);
-            draw(clonedMatrix);
+            boxDraw(clonedMatrix);
 
             combinedMatrix = combineMatrixTopHalf(matrix, clonedMatrix);
             reflectedMatrix = reflectHorizontalAxis(combinedMatrix, 0, 250);
-            draw(reflectedMatrix);
+            boxDraw(reflectedMatrix);
 
             break;
         case 2:
             console.log(`halfReflect: vertical reflect`);
 
             clonedMatrix = clone(matrix, 0, drawSection);
-            draw(clonedMatrix);
+            boxDraw(clonedMatrix);
 
             combinedMatrix = combineMatrixLeftHalf(matrix, clonedMatrix);
             reflectedMatrix = reflectVerticalAxis(combinedMatrix, 250, 0);
-            draw(reflectedMatrix);
+            boxDraw(reflectedMatrix);
 
             break;
         default:

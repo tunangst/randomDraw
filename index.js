@@ -1,6 +1,4 @@
-// import boxDrawing from './codeBank/boxDrawing/boxDrawing.js';
 import randomDraw from './codeBank/randomDraw.js';
-import { randomColor } from './codeBank/boxDrawing/boxDrawingUtilities.js';
 
 const boxDrawing = randomDraw.boxDrawing;
 const randomDrawing = randomDraw.randomDrawing;
@@ -14,10 +12,6 @@ form.addEventListener('submit', (event) => {
     const typeOfStyle = form.typeOfStyle.value;
     const canvasSize = form.canvasSize.value;
     const boxCount = form.boxCount.value;
-
-    const defaultPrimary = '#000000';
-    const defaultSecondary = null;
-    const defaultBackground = '#ffffff00';
 
     const primaryToggle = form.primaryToggle.value;
     const primaryColor = form.primaryColor.value;
@@ -43,5 +37,3 @@ form.addEventListener('submit', (event) => {
     if (typeOfDrawing === 'random') randomDrawing(setObj);
     if (typeOfDrawing === 'Box Drawing') boxDrawing(setObj);
 });
-
-// boxDrawing();

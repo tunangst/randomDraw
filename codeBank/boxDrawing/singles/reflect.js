@@ -1,3 +1,4 @@
+import { PixelNode } from '../boxDrawingUtilities.js';
 import { pixelSize } from '../boxDrawing.js';
 
 const reflectVerticalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
@@ -8,10 +9,7 @@ const reflectVerticalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
         let rowArr = [];
         for (let column = useMatrix[row].length - 1; column >= 0; column--) {
             const pixel = useMatrix[row][column];
-            const newPixel = {};
-            newPixel.xStart = xPos;
-            newPixel.yStart = yPos;
-            newPixel.color = pixel.color;
+            const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
             rowArr.push(newPixel);
             xPos += pixelSize;
@@ -33,12 +31,8 @@ const reflectHorizontalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
         let rowArr = [];
         for (let column = 0; column < useMatrix[row].length; column++) {
             const pixel = useMatrix[row][column];
-            //have to create a new obj because combinedMatrix[4] would === combinedMatrix[5]
-            const newPixel = {
-                xStart: xPos,
-                yStart: yPos,
-                color: pixel.color,
-            };
+            const newPixel = new PixelNode(xPos, yPos, pixel.color);
+
             rowArr.push(newPixel);
             xPos += pixelSize;
         }

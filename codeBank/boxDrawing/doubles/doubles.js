@@ -1,16 +1,19 @@
 import { drawSection } from '../boxDrawing.js';
 import { roll } from '../../utilities.js';
-import { draw } from '../boxDrawingUtilities.js';
+import {
+    boxDraw,
+    combineMatrixTopHalf,
+    combineMatrixLeftHalf,
+} from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 import {
     reflectHorizontalAxis,
     reflectVerticalAxis,
 } from '../singles/reflect.js';
 import { rotateClockwise, rotateCounterClockwise } from '../singles/rotate.js';
-import {
-    combineMatrixTopHalf,
-    combineMatrixLeftHalf,
-} from '../boxDrawingUtilities.js';
+// import {
+
+// } from '../boxDrawingUtilities.js';
 
 const doubles = (matrix) => {
     console.log(`doubles layout`);
@@ -29,7 +32,7 @@ const doubles = (matrix) => {
     //  roll #2: ↓
     //      type (clone, rotate x2, reflect)
 
-    draw(matrix);
+    boxDraw(matrix);
     const quadrantDice = roll(2); // 1 = q2. 2 = q3
     const styleDice = roll(3); // 1= clone, 2= rotate, 3= reflect
     const doubleDice = roll(3); // 1= clone, 2= rotate x2, 3= reflect
@@ -49,7 +52,7 @@ const doubles = (matrix) => {
         case 1:
             console.log(`clone`);
             adjustedMatrix = clone(matrix, quadrant.x, quadrant.y);
-            draw(adjustedMatrix);
+            boxDraw(adjustedMatrix);
             break;
         case 2:
             console.log(`rotate`);
@@ -68,7 +71,7 @@ const doubles = (matrix) => {
             console.log(
                 directionDice === 1 ? 'clockwise' : 'counter clockwise'
             );
-            draw(adjustedMatrix);
+            boxDraw(adjustedMatrix);
             break;
         case 3:
             console.log(`reflect`);
@@ -87,7 +90,7 @@ const doubles = (matrix) => {
             console.log(
                 directionDice === 1 ? 'vertical axis' : 'horizontal axis'
             );
-            draw(adjustedMatrix);
+            boxDraw(adjustedMatrix);
             break;
         default:
             console.log('error in style dice variable');
@@ -104,7 +107,7 @@ const doubles = (matrix) => {
     switch (doubleDice) {
         case 1:
             console.log(`clone`);
-            draw(combinedMatrix, quadrantDouble.x, quadrantDouble.y);
+            boxDraw(combinedMatrix, quadrantDouble.x, quadrantDouble.y);
             break;
         case 2: //quadrantDice === 1, combine top
             console.log(`rotate`);
@@ -113,7 +116,7 @@ const doubles = (matrix) => {
                 quadrantDouble.x,
                 quadrantDouble.y
             ); // rotate twice
-            draw(rotatedMatrix);
+            boxDraw(rotatedMatrix);
             break;
         case 3: // quadrantDice === 1, reflect horizontal : reflect vertical
             console.log(`reflect`);
@@ -129,7 +132,7 @@ const doubles = (matrix) => {
                           quadrantDouble.x,
                           quadrantDouble.y
                       );
-            draw(reflectedMatrix);
+            boxDraw(reflectedMatrix);
 
             break;
 

@@ -1,3 +1,4 @@
+import { PixelNode } from '../boxDrawingUtilities.js';
 import { pixelSize } from '../boxDrawing.js';
 
 const rotateClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
@@ -11,11 +12,8 @@ const rotateClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
 
         for (let row = useMatrix.length - 1; row >= 0; row--) {
             const pixel = useMatrix[row][column];
-            const newPixel = {
-                xStart: xPos,
-                yStart: yPos,
-                color: pixel.color,
-            };
+            const newPixel = new PixelNode(xPos, yPos, pixel.color);
+
             rowArr.push(newPixel);
             xPos += pixelSize;
         }
@@ -42,11 +40,8 @@ const rotateCounterClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
 
         for (let row = 0; row < useMatrix.length; row++) {
             const pixel = useMatrix[row][column];
-            const newPixel = {
-                xStart: xPos,
-                yStart: yPos,
-                color: pixel.color,
-            };
+            const newPixel = new PixelNode(xPos, yPos, pixel.color);
+
             rowArr.push(newPixel);
             xPos += pixelSize;
         }

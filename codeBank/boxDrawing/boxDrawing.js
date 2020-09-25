@@ -1,13 +1,8 @@
 import specials from './specials/specials.js';
 import singles from './singles/singles.js';
 import doubles from './doubles/doubles.js';
-import { roll } from '../utilities.js';
-import {
-    draw,
-    createPixelMap,
-    clear,
-    randomColor,
-} from './boxDrawingUtilities.js';
+import { roll, clear, randomColor } from '../utilities.js';
+import { boxDraw, createPixelMap } from './boxDrawingUtilities.js';
 
 let typeOfStyle = 'random';
 
@@ -85,10 +80,10 @@ const boxDrawing = (props) => {
     }
 
     if (canvasDraw.getContext) {
-        matrix = clear(matrix);
+        matrix = clear(matrix, { ctx, ctx2, canvasSize });
         createPixelMap(matrix);
 
-        draw(matrix, null, null); // draw on ctx not ctx2
+        boxDraw(matrix, null, null); // draw on ctx not ctx2
 
         switch (typeOfStyle) {
             case 'random':

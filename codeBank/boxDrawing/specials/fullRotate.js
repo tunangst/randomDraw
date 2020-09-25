@@ -1,6 +1,6 @@
 import { drawSection } from '../boxDrawing.js';
 import { rotateClockwise } from '../singles/rotate.js';
-import { draw } from '../boxDrawingUtilities.js';
+import { boxDraw } from '../boxDrawingUtilities.js';
 
 const fullRotate = (matrix) => {
     console.log(`fullRotate`);
@@ -9,16 +9,16 @@ const fullRotate = (matrix) => {
     let rotatedMatrix2 = [];
     let rotatedMatrix3 = [];
 
-    draw(matrix);
+    boxDraw(matrix);
 
     rotatedMatrix1 = rotateClockwise(matrix);
-    draw(rotatedMatrix1, drawSection, 0);
+    boxDraw(rotatedMatrix1, drawSection, 0);
 
     rotatedMatrix2 = rotateClockwise(rotatedMatrix1);
-    draw(rotatedMatrix2, drawSection, drawSection);
+    boxDraw(rotatedMatrix2, drawSection, drawSection);
 
     rotatedMatrix3 = rotateClockwise(rotatedMatrix2);
-    draw(rotatedMatrix3, 0, drawSection);
+    boxDraw(rotatedMatrix3, 0, drawSection);
 };
 
 export default fullRotate;

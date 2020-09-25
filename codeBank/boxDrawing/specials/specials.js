@@ -27,23 +27,24 @@ const specials = (matrix, forceDraw) => {
                 console.log('error in layout variable');
                 break;
         }
-    }
-    switch (forceDraw) {
-        case 'fullClone':
-            fullClone(matrix);
-            break;
-        case 'fullReflect':
-            fullReflect(matrix);
-            break;
-        case 'fullRotate':
-            fullRotate(matrix);
-            break;
-        case 'halfReflect':
-            halfReflect(matrix);
-            break;
-        default:
-            console.log('error in forcedraw of specials');
-            break;
+    } else {
+        switch (forceDraw) {
+            case 'fullClone':
+                fullClone(matrix);
+                break;
+            case 'fullReflect':
+                fullReflect(matrix);
+                break;
+            case 'fullRotate':
+                fullRotate(matrix);
+                break;
+            case 'halfReflect':
+                halfReflect(matrix);
+                break;
+            default:
+                console.log('error in forcedraw of specials');
+                break;
+        }
     }
 };
 

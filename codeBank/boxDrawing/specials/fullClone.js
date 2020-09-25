@@ -1,5 +1,5 @@
 import { drawSection } from '../boxDrawing.js';
-import { draw } from '../boxDrawingUtilities.js';
+import { boxDraw } from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 
 const fullClone = (matrix) => {
@@ -9,16 +9,16 @@ const fullClone = (matrix) => {
     let cloneMatrix2 = [];
     let cloneMatrix3 = [];
 
-    draw(matrix);
+    boxDraw(matrix);
 
     cloneMatrix1 = clone(matrix, drawSection, 0);
-    draw(cloneMatrix1);
+    boxDraw(cloneMatrix1);
 
     cloneMatrix2 = clone(matrix, drawSection, drawSection);
-    draw(cloneMatrix2);
+    boxDraw(cloneMatrix2);
 
     cloneMatrix3 = clone(matrix, 0, drawSection);
-    draw(cloneMatrix3);
+    boxDraw(cloneMatrix3);
 };
 
 export default fullClone;

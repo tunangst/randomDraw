@@ -3,7 +3,7 @@ import {
     reflectVerticalAxis,
     reflectHorizontalAxis,
 } from '../singles/reflect.js';
-import { draw, combineMatrixTopHalf } from '../boxDrawingUtilities.js';
+import { boxDraw, combineMatrixTopHalf } from '../boxDrawingUtilities.js';
 
 const fullReflect = (matrix) => {
     console.log(`fullReflect`);
@@ -12,14 +12,14 @@ const fullReflect = (matrix) => {
     let combinedMatrix = [];
     let reflectedMatrix = [];
 
-    draw(matrix);
+    boxDraw(matrix);
 
     adjustedMatrix = reflectVerticalAxis(matrix, drawSection, 0);
-    draw(adjustedMatrix);
+    boxDraw(adjustedMatrix);
 
     combinedMatrix = combineMatrixTopHalf(matrix, adjustedMatrix);
     reflectedMatrix = reflectHorizontalAxis(combinedMatrix, 0, drawSection);
-    draw(reflectedMatrix);
+    boxDraw(reflectedMatrix);
 };
 
 export default fullReflect;
