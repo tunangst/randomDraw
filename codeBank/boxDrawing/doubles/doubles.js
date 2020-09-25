@@ -1,12 +1,16 @@
 import { drawSection } from '../boxDrawing.js';
-import { roll, draw } from '../utilities.js';
+import { roll } from '../../utilities.js';
+import { draw } from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 import {
     reflectHorizontalAxis,
     reflectVerticalAxis,
 } from '../singles/reflect.js';
 import { rotateClockwise, rotateCounterClockwise } from '../singles/rotate.js';
-import { combineMatrixTopHalf, combineMatrixLeftHalf } from '../utilities.js';
+import {
+    combineMatrixTopHalf,
+    combineMatrixLeftHalf,
+} from '../boxDrawingUtilities.js';
 
 const doubles = (matrix) => {
     console.log(`doubles layout`);

@@ -1,6 +1,6 @@
 // import boxDrawing from './codeBank/boxDrawing/boxDrawing.js';
 import randomDraw from './codeBank/randomDraw.js';
-import { randomColor } from './codeBank/boxDrawing/utilities.js';
+import { randomColor } from './codeBank/boxDrawing/boxDrawingUtilities.js';
 
 const boxDrawing = randomDraw.boxDrawing;
 const randomDrawing = randomDraw.randomDrawing;

@@ -1,4 +1,5 @@
-import { roll, findQuadrantOrder, draw } from '../utilities.js';
+import { roll } from '../../utilities.js';
+import { findQuadrantOrder, draw } from '../boxDrawingUtilities.js';
 import clone from './clone.js';
 import { reflectVerticalAxis, reflectHorizontalAxis } from './reflect.js';
 import { rotateClockwise, rotateCounterClockwise } from './rotate.js';

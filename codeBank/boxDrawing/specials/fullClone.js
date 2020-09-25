@@ -1,5 +1,5 @@
 import { drawSection } from '../boxDrawing.js';
-import { draw } from '../utilities.js';
+import { draw } from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 
 const fullClone = (matrix) => {

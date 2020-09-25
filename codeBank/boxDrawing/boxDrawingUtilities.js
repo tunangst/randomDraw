@@ -1,3 +1,4 @@
+import { roll } from '../utilities.js';
 import {
     ctx,
     ctx2,
@@ -8,11 +9,6 @@ import {
     backgroundColor,
     canvasSize,
 } from './boxDrawing.js';
-
-const roll = (range) => {
-    const test = Math.floor(Math.random() * range + 1); // 1 - range
-    return test;
-};
 
 const draw = (usingMatrix, xCoord = 0, yCoord = 0) => {
     if (xCoord === null && yCoord === null) {
@@ -164,7 +160,6 @@ const clear = (matrix) => {
 };
 
 export {
-    roll,
     clear,
     draw,
     randomColor,

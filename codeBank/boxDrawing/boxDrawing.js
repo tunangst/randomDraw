@@ -1,7 +1,13 @@
 import specials from './specials/specials.js';
 import singles from './singles/singles.js';
 import doubles from './doubles/doubles.js';
-import { roll, draw, createPixelMap, clear, randomColor } from './utilities.js';
+import { roll } from '../utilities.js';
+import {
+    draw,
+    createPixelMap,
+    clear,
+    randomColor,
+} from './boxDrawingUtilities.js';
 
 let typeOfStyle = 'random';
 

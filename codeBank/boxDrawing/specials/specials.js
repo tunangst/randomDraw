@@ -1,4 +1,4 @@
-import { roll } from '../utilities.js';
+import { roll } from '../../utilities.js';
 import fullClone from './fullClone.js';
 import fullRotate from './fullRotate.js';
 import fullReflect from './fullReflect.js';

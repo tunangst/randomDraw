@@ -1,10 +1,10 @@
 import { drawSection } from '../boxDrawing.js';
+import { roll } from '../../utilities.js';
 import {
-    roll,
     draw,
     combineMatrixLeftHalf,
     combineMatrixTopHalf,
-} from '../utilities.js';
+} from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 import {
     reflectVerticalAxis,
