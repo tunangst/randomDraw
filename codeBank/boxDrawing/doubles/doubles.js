@@ -1,4 +1,4 @@
-import { drawSection } from '../variables.js';
+import { drawSection } from '../boxDrawing.js';
 import { roll, draw } from '../utilities.js';
 import clone from '../singles/clone.js';
 import {

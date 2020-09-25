@@ -5,10 +5,9 @@ import {
     drawSection,
     primaryColor,
     secondaryColor,
-    emptyColor,
-    // matrix,
+    backgroundColor,
     canvasSize,
-} from './variables.js';
+} from './boxDrawing.js';
 
 const roll = (range) => {
     const test = Math.floor(Math.random() * range + 1); // 1 - range
@@ -70,7 +69,6 @@ const randomColor = () => {
     const randomG = randomColorHex();
     const randomB = randomColorHex();
     const color = `rgb(${randomR},${randomG},${randomB})`;
-    console.log(color);
     return color;
 };
 
@@ -82,7 +80,7 @@ const whatToPlace = (xStart, yStart) => {
     };
     switch (randomColor) {
         case 1:
-            pixel.color = emptyColor;
+            pixel.color = backgroundColor;
             break;
         case 2:
             pixel.color = primaryColor;
@@ -162,6 +160,7 @@ const clear = (matrix) => {
     matrix = [];
     ctx.clearRect(0, 0, canvasSize, canvasSize);
     ctx2.clearRect(0, 0, canvasSize, canvasSize);
+    return matrix;
 };
 
 export {

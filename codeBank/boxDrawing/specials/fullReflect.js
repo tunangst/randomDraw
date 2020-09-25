@@ -1,4 +1,4 @@
-import { drawSection } from '../variables.js';
+import { drawSection } from '../boxDrawing.js';
 import {
     reflectVerticalAxis,
     reflectHorizontalAxis,

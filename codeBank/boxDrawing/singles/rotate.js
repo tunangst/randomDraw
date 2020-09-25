@@ -1,4 +1,4 @@
-import { pixelSize } from '../variables.js';
+import { pixelSize } from '../boxDrawing.js';
 
 const rotateClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
     let xPos = xOffset;

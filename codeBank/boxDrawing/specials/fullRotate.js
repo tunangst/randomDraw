@@ -1,4 +1,4 @@
-import { drawSection } from '../variables.js';
+import { drawSection } from '../boxDrawing.js';
 import { rotateClockwise } from '../singles/rotate.js';
 import { draw } from '../utilities.js';
 
