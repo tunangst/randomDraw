@@ -1,4 +1,4 @@
-import { drawSection } from '../boxDrawing.js';
+import { drawSection } from '../BoxDrawing.js';
 import { roll } from '../../utilities.js';
 import {
     boxDraw,

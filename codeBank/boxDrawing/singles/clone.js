@@ -1,5 +1,5 @@
 import { PixelNode } from '../boxDrawingUtilities.js';
-import { pixelSize } from '../boxDrawing.js';
+import { pixelSize } from '../BoxDrawing.js';
 
 const clone = (usingMatrix, xOffset = 0, yOffset = 0) => {
     let xPos = xOffset;

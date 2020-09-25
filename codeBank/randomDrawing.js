@@ -1,11 +1,15 @@
 import { roll } from './utilities.js';
-import { boxDrawing } from './boxDrawing/boxDrawing.js';
+import { BoxDrawing } from './boxDrawing/BoxDrawing.js';
+import { MandalaDrawing } from './mandalaDrawing/MandalaDrawing.js';
 
-const dice = roll(1);
+const dice = 2;
 let randomDrawing;
 switch (dice) {
     case 1:
-        randomDrawing = boxDrawing;
+        randomDrawing = BoxDrawing;
+        break;
+    case 2:
+        randomDrawing = MandalaDrawing;
         break;
     default:
         console.log('error in randomDraw random dice');

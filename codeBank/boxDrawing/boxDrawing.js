@@ -23,7 +23,7 @@ let ctx = canvasPreview.getContext('2d');
 let ctx2 = canvasDraw.getContext('2d');
 let matrix = [];
 
-const boxDrawing = (props) => {
+const BoxDrawing = (props) => {
     console.log(primaryToggle, secondaryToggle, backgroundToggle);
     typeOfStyle = props.typeOfStyle;
 
@@ -160,7 +160,7 @@ const boxDrawing = (props) => {
 };
 
 export {
-    boxDrawing,
+    BoxDrawing,
     typeOfStyle,
     canvasSize,
     boxCount,

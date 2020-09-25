@@ -1,4 +1,4 @@
-import { drawSection } from '../boxDrawing.js';
+import { drawSection } from '../BoxDrawing.js';
 import { boxDraw } from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 

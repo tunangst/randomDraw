@@ -8,7 +8,7 @@ import {
     secondaryColor,
     backgroundColor,
     canvasSize,
-} from './boxDrawing.js';
+} from './BoxDrawing.js';
 
 const boxDraw = (usingMatrix, xCoord = 0, yCoord = 0) => {
     if (xCoord === null && yCoord === null) {

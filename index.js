@@ -1,6 +1,7 @@
 import randomDraw from './codeBank/randomDraw.js';
 
-const boxDrawing = randomDraw.boxDrawing;
+const BoxDrawing = randomDraw.BoxDrawing;
+const MandalaDrawing = randomDraw.MandalaDrawing;
 const randomDrawing = randomDraw.randomDrawing;
 
 const form = document.querySelector('form');
@@ -35,5 +36,6 @@ form.addEventListener('submit', (event) => {
         backgroundColor,
     };
     if (typeOfDrawing === 'random') randomDrawing(setObj);
-    if (typeOfDrawing === 'Box Drawing') boxDrawing(setObj);
+    if (typeOfDrawing === 'Box Drawing') BoxDrawing(setObj);
+    if (typeOfDrawing === 'Mandala Drawing') MandalaDrawing(setObj);
 });
