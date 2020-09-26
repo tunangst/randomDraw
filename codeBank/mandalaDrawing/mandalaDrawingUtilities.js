@@ -1,4 +1,12 @@
-import { ctx, ctx2 } from './MandalaDrawing.js';
+import { roll, randomColor } from '../utilities.js';
+import {
+    ctx,
+    ctx2,
+    halfWidth,
+    halfHeight,
+    height,
+    width,
+} from './MandalaDrawing.js';
 
 class PointNode {
     constructor(x, y) {
@@ -6,12 +14,36 @@ class PointNode {
         this.y = y;
     }
 }
-const getPoints = (x, y, width, height) => {
-    const pointA = new PointNode(x, y);
-    const pointB = new PointNode(width - x, y);
-    const pointC = new PointNode(x, height - y);
-    const pointD = new PointNode(width - x, height - y);
-    return [pointA, pointB, pointC, pointD];
+
+const randomStartingPoint = () => {
+    const dice = roll(halfWidth);
+    return new PointNode(dice, halfWidth);
+};
+
+const getPoints = (startX, startY, width, height) => {
+    const widthHalf = width / 2;
+    const heightHalf = height / 2;
+    const axisSeparator = heightHalf - startY; // distance from start point to axis
+    const edgeSeparator = startX; // distance from start point to edge of canvas
+
+    const startA = new PointNode(startX, startY);
+    const endA = new PointNode(widthHalf - axisSeparator, edgeSeparator);
+
+    const startB = new PointNode(widthHalf + axisSeparator, edgeSeparator);
+    const endB = new PointNode(width - edgeSeparator, startA.y);
+
+    const startC = new PointNode(endA.x, height - edgeSeparator);
+    const endC = new PointNode(startA.x, heightHalf + axisSeparator);
+
+    const startD = new PointNode(endB.x, endC.y);
+    const endD = new PointNode(startB.x, startC.y);
+
+    return [
+        { start: startA, end: endA },
+        { start: startB, end: endB },
+        { start: startC, end: endC },
+        { start: startD, end: endD },
+    ];
 };
 
 function getQuadraticBezierXYatT(startPt, controlPt, endPt, T) {
@@ -40,23 +72,43 @@ function getQuadraticBezierXYatT(startPt, controlPt, endPt, T) {
 //     ctx.fill();
 // }
 
+const drawLine = () => {
+    ctx2.moveTo(0, 0);
+    ctx2.lineTo(0, 200);
+    ctx2.lineTo(100, 0);
+};
+const drawCircle = (pathRadius, shapeSize) => {
+    // pathRadius = 100, shapeSize = 100 looks cool
+    // 50, 50
+    ctx2.arc(0, pathRadius, shapeSize, 0, 2 * Math.PI, false);
+};
+const drawRect = (shapeSize) => {
+    ctx2.rect(10, 10, shapeSize, shapeSize);
+};
+
 const mandalaDraw = () => {
-    const testPointA = 83.3323;
-    const testPoints = getPoints(testPointA, testPointA * 2, 500, 500);
-    testPoints.forEach((point) => {
-        // ctx2.moveTo(point.x, point.y);
-        console.log(point);
+    const shapeCount = 10;
+    const pathRadius = 150;
+    const shapeSize = 25;
+
+    ctx2.translate(halfWidth, halfHeight);
+
+    for (let i = 1; i <= shapeCount; i++) {
+        // ctx2.fillStyle = randomColor();
         ctx2.beginPath();
-        // ctx2.moveTo(xStart, yStart);
-        // ctx2.quadraticCurveTo(besierPointX, besierPointY, endPointX, endPointY);
-        // ctx2.quadraticCurveTo(Astart.x, Aend.y, Aend.x, Aend.y);
+        // getShape();
+        // drawCircle(pathRadius, shapeSize);
+        // drawRect(shapeSize);
+        // drawLine();
+        drawCircle(50, 50);
+        ctx2.closePath();
+
+        ctx2.rotate((2 * Math.PI) / shapeCount);
+
+        ctx2.lineWidth = 5;
         ctx2.strokeStyle = 'orange';
-        ctx2.lineWidth = '5';
-        ctx2.arc(point.x, point.y, 50, 0, 2 * Math.PI, false);
-        // ctx2.arc(50, 50, 50, 0, 2 * Math.PI, false);
-        // ctx2.arc(xCenter, yCenter, radius, starting angle in radians, ending angle in radians, counterclockwise = true);
         ctx2.stroke();
-    });
+    }
 };
 
 // ctx.fillStyle = pixel.color;
