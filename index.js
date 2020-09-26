@@ -39,3 +39,5 @@ form.addEventListener('submit', (event) => {
     if (typeOfDrawing === 'Box Drawing') BoxDrawing(setObj);
     if (typeOfDrawing === 'Mandala Drawing') MandalaDrawing(setObj);
 });
+
+MandalaDrawing();

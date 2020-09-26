@@ -13,6 +13,7 @@ let matrix = [];
 
 const MandalaDrawing = () => {
     console.log('MandalaDrawing');
+    mandalaDraw();
 };
 
-export { MandalaDrawing };
+export { MandalaDrawing, ctx, ctx2 };
