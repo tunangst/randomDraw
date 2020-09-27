@@ -1,7 +1,12 @@
 const roll = (range) => {
-    const test = Math.floor(Math.random() * range + 1); // 1 - range
-    return test;
+    // 1 - range
+    return Math.floor(Math.random() * range + 1);
 };
+const rollRange = (min, max) => {
+    const answer = Math.floor(Math.random() * (max - min + 1)) + min;
+    return answer;
+};
+
 const clear = (matrix, { ctx, ctx2, canvasSize }) => {
     matrix = [];
     ctx && ctx.clearRect(0, 0, canvasSize, canvasSize);
@@ -16,4 +21,4 @@ const randomColor = () => {
     return `rgb(${randomR},${randomG},${randomB})`;
 };
 
-export { roll, clear, randomColor };
+export { roll, rollRange, clear, randomColor };

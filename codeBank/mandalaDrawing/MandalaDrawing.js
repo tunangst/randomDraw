@@ -1,8 +1,4 @@
-import {
-    PointNode,
-    getPoints,
-    mandalaDraw,
-} from './mandalaDrawingUtilities.js';
+import { PointNode, mandalaDraw } from './mandalaDrawingUtilities.js';
 //looks like ctx.moveTo(x,y) is very powerful here
 
 // let typeOfStyle = 'random';
