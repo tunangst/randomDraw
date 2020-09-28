@@ -23,6 +23,7 @@ import {
     height,
     width,
 } from './MandalaDrawing.js';
+import oneShape from './oneShape/oneShape.js';
 
 class PointNode {
     constructor(x, y) {
@@ -37,6 +38,17 @@ class inputsNode {
         this.shapeCount = shapeCount || null;
     }
 }
+
+const getShapeFunction = (rollShape) => {
+    switch (rollShape) {
+        case 1:
+            shapeFunction = drawCircle;
+            break;
+        default:
+            console.log('error in oneShape roll shape variable');
+            break;
+    }
+};
 
 const randomStartingPoint = () => {
     const dice = roll(halfWidth);
@@ -74,41 +86,43 @@ const clearDrawingArea = (
     ctx2.globalCompositeOperation = 'source-over';
 };
 
-const getShape = (label) => {
+const getShape = (currentPass, totalPasses) => {
+    const percent = currentPass / totalPasses;
     const useSize = width > height ? width : height;
     const useHalfSize = useSize / 2;
+
+    const sizeBasedOnIndex = Math.ceil(useSize * percent);
+    const halfSizeBasedOnIndex = Math.ceil(useHalfSize * percent);
+    const countBasedOnIndex = Math.ceil((100 * percent) / 2);
 
     const maxHalfPath = findHypotenuse(halfWidth, halfHeight);
     const maxFullPath = findHypotenuse(width, height);
 
+    const randomColorValue = randomColor();
     let shapeCount;
     let shapeSize;
     let pathRadius;
 
-    if (label === 'background') {
+    if (currentPass === totalPasses) {
         pathRadius = rollRange(maxHalfPath, maxFullPath); // between halfWidth and width
         shapeCount = rollRange(4, 200); // 4-200 what looks good
         shapeSize = pathRadius;
     } else {
-        shapeCount = 20;
-        const thresh50 = useHalfSize / 2;
-        const thresh25 = thresh50 / 2;
-        // shapeSize = 100;
-        shapeSize = rollRange(20, thresh25);
-        const halfShape = shapeSize / 2;
-        const threshRadius50 = thresh50 - halfShape;
-        const threshRadius25 = thresh25 - halfShape;
-        console.log(threshRadius25, halfHeight);
+        shapeCount = rollRange(20, halfSizeBasedOnIndex);
+        // console.log(`size based on index ${sizeBasedOnIndex}`);
+        // console.log(`half size based on index ${halfSizeBasedOnIndex}`);
+        // console.log(`count based on index ${countBasedOnIndex}`);
 
-        pathRadius = rollRange(0, threshRadius25); // max is width or height min is 10?
+        shapeSize = rollRange(20, halfSizeBasedOnIndex);
+        pathRadius = halfSizeBasedOnIndex; // max is width or height min is 10?
 
         let improperSpacing = shapeSize - pathRadius;
-        console.log(improperSpacing);
         while (improperSpacing >= -5 && improperSpacing <= 5) {
             console.log(
                 'improperspacing while loop, changing pathRadius variable'
             );
-            pathRadius = rollRange(0, threshRadius25);
+            shapeSize = rollRange(20, halfSizeBasedOnIndex);
+            // pathRadius = rollRange(0, threshRadius25);
             improperSpacing = shapeSize - pathRadius;
         }
         // pathRadius = 35; // max is width or height min is 10?
@@ -121,32 +135,20 @@ const getShape = (label) => {
         // range (-5, 5) is not okay
         // 40 - 35 = 5 is okay
     }
-    // const backgroundShapeCount = rollRange(4, 200); // 4-200 || 40
-    // circle
-    // min = findHypotenuse(halfWidth, halfHeight)
-    // max = (width, height)
+    const inputs = new inputsNode(pathRadius, shapeSize, shapeCount);
 
-    // background needs same shapeSize as pathRadius
-    // background needs minimum
-
-    // const shapeCount = backgroundShapeCount;
     ctx2.translate(halfWidth, halfHeight); // move to center
-    // #################################### idea ##############
-    // move this to edges for one of the effects being on the sides off center
-    // ctx2.translate(halfWidth, halfHeight)
-    // #################################### idea ##############
 
     // loop over clearing the path for below
     for (let i = 1; i <= shapeCount; i++) {
-        const inputs = new inputsNode(pathRadius, shapeSize, shapeCount);
-        clearDrawingArea(drawCircle, inputs);
+        // clearDrawingArea(drawCircle, inputs);
     }
     // loop over for drawing the next path
     for (let i = 1; i <= shapeCount; i++) {
         ctx2.beginPath();
         drawCircle(shapeSize, pathRadius);
         ctx2.lineWidth = 1;
-        ctx2.strokeStyle = 'orange';
+        ctx2.strokeStyle = randomColorValue;
         ctx2.stroke();
         ctx2.closePath();
         ctx2.rotate((2 * Math.PI) / shapeCount);
@@ -162,28 +164,49 @@ const getShape = (label) => {
     // ========================================= cool design ideas =========
 };
 
-const mandalaDraw = () => {
+const fillBackground = () => {
+    ctx2.beginPath();
+    ctx2.rect(0, 0, width, height);
+    ctx2.fillStyle = 'black';
+    ctx2.fill();
+    ctx2.closePath();
+};
+
+const getLineWidth = (shapeCount) => {
     // shape size around 250 total
     // shapeCount 200 needs lineWidth of 1;
     // ...        150 could be ...       2
     // ...        100 could be ...       3
     // ...         90 could be ...       4
     // ...         70 could be ...       5
-
-    // const getNumberOfShapes = roll(5);
-    const getNumberOfShapes = 2;
-    console.log(getNumberOfShapes);
-    for (let i = 0; i < getNumberOfShapes; i++) {
-        if (i !== 0) {
-            getShape();
-        } else {
-            getShape('background');
-        }
+    let lineWidth;
+    if (shapeCount >= 200) lineWidth = 1;
+    if (shapeCount >= 150) lineWidth = rollRange(1, 2);
+    if (shapeCount >= 100) lineWidth = rollRange(1, 3);
+    if (shapeCount >= 90) lineWidth = rollRange(1, 4);
+    if (shapeCount >= 70) lineWidth = rollRange(1, 5);
+};
+const mandalaDraw = () => {
+    // const mandalaType = roll(5);
+    const mandalaType = 1;
+    switch (mandalaType) {
+        case 1:
+            oneShape();
+            break;
+        case 2:
+            multiShapes();
+            break;
+        default:
+            break;
     }
-    // ctx2.translate(halfWidth, halfHeight);
-    const shapeSize = 40;
-    const shapeCount = 50;
-    const pathRadius = 200;
+    // fillBackground();
+    const getNumberOfShapes = 5;
+    // const getNumberOfShapes = roll(5);
+    console.log(getNumberOfShapes);
+    for (let currentPass = getNumberOfShapes; currentPass > 0; currentPass--) {
+        console.log(currentPass, getNumberOfShapes);
+        getShape(currentPass, getNumberOfShapes);
+    }
 };
 
 // ctx.fillStyle = pixel.color;
@@ -191,4 +214,4 @@ const mandalaDraw = () => {
 // ctx.strokeStyle = `rgb(255, 255, 255)`;
 // ctx.strokeRect(calcX, calcY, pixelSize, pixelSize);
 
-export { PointNode, mandalaDraw };
+export { PointNode, mandalaDraw, getShapeFunction, drawCircle };
