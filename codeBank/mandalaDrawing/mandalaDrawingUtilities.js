@@ -23,7 +23,8 @@ import {
     height,
     width,
 } from './MandalaDrawing.js';
-import oneShape from './oneShape/oneShape.js';
+import { oneShape } from './oneShape/oneShape.js';
+import specialShape from './special/specialShape.js';
 
 class PointNode {
     constructor(x, y) {
@@ -39,15 +40,33 @@ class inputsNode {
     }
 }
 
-const getShapeFunction = (rollShape) => {
-    switch (rollShape) {
-        case 1:
+const getShapeFunction = (shape) => {
+    debugger;
+    let shapeFunction;
+    switch (shape) {
+        case 'circle':
             shapeFunction = drawCircle;
+            break;
+        case 'square':
+            shapeFunction = drawSquare;
+            break;
+        case 'line':
+            shapeFunction = drawCircle;
+            // shapeFunction = drawLine;
+            break;
+        case 'oval':
+            shapeFunction = drawSquare;
+            // shapeFunction = drawOval;
+            break;
+        case 'rectangle':
+            shapeFunction = drawCircle;
+            // shapeFunction = drawRectangle;
             break;
         default:
             console.log('error in oneShape roll shape variable');
             break;
     }
+    return shapeFunction;
 };
 
 const randomStartingPoint = () => {
@@ -60,30 +79,82 @@ const findHypotenuse = (width, height) => {
     return Math.round(hypotenuse / 2);
 };
 
-const drawLine = () => {
-    ctx2.moveTo(0, 0);
-    ctx2.lineTo(0, 200);
-    ctx2.lineTo(100, 0);
-};
-const drawCircle = (shapeSize, pathRadius) => {
-    ctx2.arc(0, pathRadius, shapeSize, 0, 2 * Math.PI, false);
-};
-const drawRect = (shapeSize) => {
-    ctx2.rect(10, 10, shapeSize, shapeSize);
-};
+// const drawLine = () => {
+//     ctx2.moveTo(0, 0);
+//     ctx2.lineTo(0, 200);
+//     ctx2.lineTo(100, 0);
+// };
+// const drawCircle = (shapeSize, pathRadius) => {
+//     ctx2.arc(0, pathRadius, shapeSize, 0, 2 * Math.PI, false);
+// };
+// const drawSquare = (shapeSize, pathRadius) => {
+//     //(x-start, y-start, width, height)
+//     ctx2.rect(-shapeSize / 2, pathRadius / 2, shapeSize, shapeSize);
+// };
+
+// const getBlendMode = (amount) => {
+//     const dice = roll(amount);
+//     let blend;
+//     switch (dice) {
+//         case 1:
+//             blend = 'source-over';
+//             break;
+//         case 2:
+//             blend = 'screen';
+//             break;
+//         case 3:
+//             blend = 'difference';
+//             break;
+//         case 4:
+//             blend = 'multiply';
+//             break;
+//         default:
+//             console.log('error in getBlendMode');
+//             break;
+//     }
+
+//     return blend;
+// };
 
 const clearDrawingArea = (
+    clearOrDraw,
+    clearSwitch,
     shapeFunction,
-    { pathRadius, shapeSize, shapeCount }
+    pathRadius,
+    shapeSize,
+    shapeCount,
+    color
 ) => {
     //nextShapeDraw is the function
-    ctx2.beginPath();
-    shapeFunction(shapeSize, pathRadius);
-    ctx2.globalCompositeOperation = 'destination-out';
-    ctx2.fill();
-    ctx2.closePath();
+    // debugger;
+    if (clearOrDraw === 'clear') {
+        ctx2.globalCompositeOperation = 'destination-out';
+        ctx2.beginPath();
+        shapeFunction(shapeSize, pathRadius);
+        ctx2.fill();
+        ctx2.closePath();
+        ctx2.globalCompositeOperation = 'source-over';
+    }
+    if (clearOrDraw === 'fill') {
+        let blendMode;
+        if (clearSwitch === 'cleared') {
+            blendMode = getBlendMode(4);
+        } else {
+            blendMode = getBlendMode(3);
+        }
+        // ctx2.globalCompositeOperation = 'multiply'; // great for clear first
+        // ctx2.globalCompositeOperation = 'screen'; // also good option for both
+        // ctx2.globalCompositeOperation = 'difference'; // cool chaos option both ways
+        ctx2.globalCompositeOperation = blendMode;
+        ctx2.beginPath();
+        shapeFunction(shapeSize, pathRadius);
+        ctx2.fillStyle = color;
+        ctx2.fill();
+        ctx2.closePath();
+        ctx2.globalCompositeOperation = 'source-over';
+    }
+
     ctx2.rotate((2 * Math.PI) / shapeCount);
-    ctx2.globalCompositeOperation = 'source-over';
 };
 
 const getShape = (currentPass, totalPasses) => {
@@ -154,14 +225,6 @@ const getShape = (currentPass, totalPasses) => {
         ctx2.rotate((2 * Math.PI) / shapeCount);
     }
     ctx2.translate(-halfWidth, -halfHeight); // move back to (0,0)
-
-    // let shapeCount;
-    // let shapeSize;
-    // let pathRadius;
-    // const middleShapeCount = 40; // 4-200
-    // const middleShapeSize = 250;
-    // const middlePathRadius = 250;
-    // ========================================= cool design ideas =========
 };
 
 const fillBackground = () => {
@@ -191,22 +254,25 @@ const mandalaDraw = () => {
     const mandalaType = 1;
     switch (mandalaType) {
         case 1:
-            oneShape();
+            specialShape();
             break;
         case 2:
+            oneShape();
+            break;
+        case 3:
             multiShapes();
             break;
         default:
             break;
     }
     // fillBackground();
-    const getNumberOfShapes = 5;
+    // const getNumberOfShapes = 5;
     // const getNumberOfShapes = roll(5);
-    console.log(getNumberOfShapes);
-    for (let currentPass = getNumberOfShapes; currentPass > 0; currentPass--) {
-        console.log(currentPass, getNumberOfShapes);
-        getShape(currentPass, getNumberOfShapes);
-    }
+    // console.log(getNumberOfShapes);
+    // for (let currentPass = getNumberOfShapes; currentPass > 0; currentPass--) {
+    //     console.log(currentPass, getNumberOfShapes);
+    //     getShape(currentPass, getNumberOfShapes);
+    // }
 };
 
 // ctx.fillStyle = pixel.color;
@@ -214,4 +280,14 @@ const mandalaDraw = () => {
 // ctx.strokeStyle = `rgb(255, 255, 255)`;
 // ctx.strokeRect(calcX, calcY, pixelSize, pixelSize);
 
-export { PointNode, mandalaDraw, getShapeFunction, drawCircle };
+export {
+    PointNode,
+    mandalaDraw,
+    getShapeFunction,
+    // drawCircle,
+    // drawLine,
+    // drawSquare,
+    findHypotenuse,
+    clearDrawingArea,
+    // getBlendMode,
+};
