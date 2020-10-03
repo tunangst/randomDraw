@@ -1,5 +1,7 @@
 import { roll, coinFlip } from '../../utilities.js';
 
+//ADD COLOR CHANGE AND MAYBE WIDTH CHANGE IN HERE EVENTUALLY
+
 const getDrawType = () => {
     // const dice = roll(3);
     let clearAll = false;
@@ -10,9 +12,21 @@ const getDrawType = () => {
     let fillRandomLoops = false;
     let fillIndividual = false;
 
+    let fillColorAll = false;
+    let fillColorRandomLoops = false;
+    let fillColorIndividual = false;
+
     let strokeAll = false;
     let strokeRandomLoops = false;
     let strokeIndividual = false;
+
+    let strokeColorAll = false;
+    let strokeColorRandomLoops = false;
+    let strokeColorIndividual = false;
+
+    let strokeWidthAll = false;
+    let strokeWidthRandomLoops = false;
+    let strokeWidthIndividual = false;
 
     const loopCycle = (word) => {
         eval(`${word}All = ${coinFlip()}`);
@@ -42,20 +56,29 @@ const getDrawType = () => {
     const strokeOnly = () => {
         // loopCycle('clear');
         strokeAll = true;
+        strokeWidthIndividual = true;
+        strokeColorIndividual = true;
+        // loopCycle('strokeColor');
+        // loopCycle('strokeWidth');
     };
     const fillOnly = () => {
-        loopCycle('clear');
+        // loopCycle('clear');
+        clearAll = true;
         fillAll = true;
+
+        fillColorRandomLoops = true;
     };
     const fillAndStroke = () => {
         loopCycle('clear');
         fillAll = true;
         strokeAll = true;
     };
-    const dice = 1;
+
+    const dice = 2;
     switch (dice) {
         case 1:
             strokeOnly();
+            // testThis();
             break;
         case 2:
             fillOnly();
@@ -77,9 +100,18 @@ const getDrawType = () => {
         fillAll,
         fillRandomLoops,
         fillIndividual,
+        fillColorAll,
+        fillColorRandomLoops,
+        fillColorIndividual,
         strokeAll,
         strokeRandomLoops,
         strokeIndividual,
+        strokeColorAll,
+        strokeColorRandomLoops,
+        strokeColorIndividual,
+        strokeWidthAll,
+        strokeWidthRandomLoops,
+        strokeWidthIndividual,
     };
 };
 

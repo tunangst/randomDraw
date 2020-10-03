@@ -1,17 +1,17 @@
 import { rollRange } from '../../utilities.js';
 
-const checkShapeSpacing = (shapeSize, pathRadius, maxShapeSize) => {
-    let newSize = shapeSize;
-    let improperSpacing = shapeSize - pathRadius;
+const checkShapeSpacing = (inputs) => {
+    let newPath = inputs.pathRadius;
+    let improperSpacing = inputs.shapeSize - inputs.pathRadius;
 
     while (improperSpacing >= -5 && improperSpacing <= 5) {
         console.log('improperspacing while loop, changing pathRadius variable');
 
-        newSize = rollRange(20, maxShapeSize);
-        // pathRadius = rollRange(0, threshRadius25);
-        improperSpacing = newSize - pathRadius;
+        newPath = rollRange(inputs.minPathRadius, inputs.maxPathRadius);
+        improperSpacing = newPath - inputs.pathRadius;
     }
-    return newSize;
+    inputs.pathRadius = newPath;
+    return inputs;
 };
 
 export default checkShapeSpacing;

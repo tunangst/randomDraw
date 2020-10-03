@@ -11,9 +11,18 @@ const getInputStats = (
     fillAll,
     fillRandomLoops,
     fillIndividual,
+    fillColorAll,
+    fillColorRandomLoops,
+    fillColorIndividual,
     strokeAll,
     strokeRandomLoops,
-    strokeIndividual
+    strokeIndividual,
+    strokeColorAll,
+    strokeColorRandomLoops,
+    strokeColorIndividual,
+    strokeWidthAll,
+    strokeWidthRandomLoops,
+    strokeWidthIndividual
 ) => {
     //|||||||||||||||||||||||||||||||||stats|||||||||||||||||||
     let inputObj = {
@@ -22,7 +31,7 @@ const getInputStats = (
         percent: null, // created in loop
 
         backgroundLoopSwitch: true,
-        initSwitch: false,
+        initLoopSwitch: false,
 
         clearSwitch: false,
         clearAll,
@@ -33,23 +42,34 @@ const getInputStats = (
         fillAll,
         fillRandomLoops,
         fillIndividual,
-        fillColor: null,
+        fillColor: lightColor(),
+        fillColorAll,
+        fillColorRandomLoops,
+        fillColorIndividual,
 
         strokeSwitch: true,
         strokeAll,
         strokeRandomLoops,
         strokeIndividual,
-        strokeWidth: 1,
         strokeColor: lightColor(),
+        strokeColorAll,
+        strokeColorRandomLoops,
+        strokeColorIndividual,
+        strokeWidth: 1,
+        strokeWidthAll,
+        strokeWidthRandomLoops,
+        strokeWidthIndividual,
 
         useSize: width > height ? width : height,
         useHalfSize: null,
         maxFullPath: findHypotenuse(width, height),
-        maxHalfPath: findHypotenuse(halfWidth, halfHeight),
 
         pathRadius: null,
-        minBackgroundShapeCount: 4,
-        minShapeCount: 20,
+        minPathRadius: 20,
+        maxPathRadius: findHypotenuse(halfWidth, halfHeight),
+        minShapeCount: 4,
+        maxShapeCount: 200, //
+        maxShapeSize: 200,
 
         shapeCount: null, // default, randomize
         shapeSize: null, //default, shape size needs to be adjusted based on path

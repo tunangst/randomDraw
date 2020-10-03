@@ -1,9 +1,12 @@
 import { ctx2 } from '../../mandalaDrawing.js';
+import checkIndividualSwitches from '../_checkIndividualSwitches.js';
 
 const strokeLoop = (inputs) => {
     const shapeFunction = inputs.shapeArr[inputs.currentLoop - 1];
 
     for (let strokeShape = 1; strokeShape <= inputs.shapeCount; strokeShape++) {
+        inputs = checkIndividualSwitches('stroke', inputs);
+
         // ctx2.globalCompositeOperation = 'multiply'; // great for clear first
         // ctx2.globalCompositeOperation = 'screen'; // also good option for both
         // ctx2.globalCompositeOperation = 'difference'; // always looks good
@@ -13,8 +16,8 @@ const strokeLoop = (inputs) => {
         //     ctx2.fillStyle = color;
         //     ctx2.fill();
         //     ctx2.closePath();
-        //     ctx2.globalCompositeOperation = 'source-over';
-        ctx2.globalCompositeOperation = 'screen';
+        ctx2.globalCompositeOperation = 'source-over';
+        // ctx2.globalCompositeOperation = 'screen';
         ctx2.beginPath();
         shapeFunction(inputs.shapeSize, inputs.pathRadius);
 
