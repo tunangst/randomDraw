@@ -1,14 +1,41 @@
 import loop from './loop.js';
 import getInputStats from '../functionPool/_getInputStats.js';
-import drawBackground from '../functionPool/draw/drawBackground.js';
+import getBackgroundLoopStats from '../functionPool/_getBackgroundLoopStats.js';
+import getInitLoopStats from '../functionPool/_getInitLoopStats.js';
+import getFollowingLoopStats from '../functionPool/_getFollowingLoopStats.js';
+import getDrawType from '../functionPool/_getDrawType.js';
+import getResetSwitches from '../functionPool/_getResetSwitches.js';
 
 const specialShape = () => {
     //|||||||||||||||||||||||||||||||||stats|||||||||||||||||||
-    // const loopCount = roll(5);
-    let inputStats = getInputStats();
+    // let stroke;
+    // let fill;
+    // let clear;
+
+    // const chaos = () => {
+
+    // }
+    // const strokeOnly = () => {
+    //     stroke = true;
+    //     fill = false;
+    //     clear = roll(2)
+    // }
+    const drawType = getDrawType();
+
+    let inputStats = getInputStats(
+        drawType.clearAll,
+        drawType.clearRandomLoops,
+        drawType.clearIndividual,
+        drawType.fillAll,
+        drawType.fillRandomLoops,
+        drawType.fillIndividual,
+        drawType.strokeAll,
+        drawType.strokeRandomLoops,
+        drawType.strokeIndividual
+    );
 
     //draw background
-    drawBackground(inputStats.background);
+    // drawBackground(inputStats.background);
 
     //start looping
     for (
@@ -20,11 +47,24 @@ const specialShape = () => {
         // 'strokeWidthType''strokeColorType''fillColorType''clearType'
         // 'allSame''loopsSame''none''loopsRandom''allRandom'
         inputStats.currentLoop = currentLoop;
+        inputStats.percent = currentLoop / inputStats.loopCount;
+        inputStats.maxShapeCount = Math.ceil(
+            inputStats.useHalfSize * inputStats.percent
+        );
+
+        if (inputStats.backgroundLoopSwitch) {
+            inputStats = getBackgroundLoopStats(inputStats);
+        } else if (inputStats.initLoopSwitch) {
+            inputStats = getInitLoopStats(inputStats);
+        } else {
+            inputStats = getFollowingLoopStats(inputStats);
+        }
         //call loop
         inputStats = loop(inputStats);
         //reset loop stats
-        inputStats.backgroundLoopSwitch = true;
-        inputStats.initSwitch = false;
+        if (inputStats.percent === 1) {
+            inputStats = getResetSwitches(inputStats);
+        }
     }
 
     //write things needing before the loop

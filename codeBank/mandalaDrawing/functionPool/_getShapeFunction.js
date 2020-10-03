@@ -4,7 +4,7 @@ import drawSquare from './draw/drawSquare.js';
 import drawLine from './draw/drawLine.js';
 
 const getShapeFunction = (forceNumber) => {
-    const diceRange = 2; // length of cases when ready
+    const diceRange = 1; // length of cases when ready
     // let dice = roll(5);
     let dice;
     //forceNumber should increment, lets the invoke call the case

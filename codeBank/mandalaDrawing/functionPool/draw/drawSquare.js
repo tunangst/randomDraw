@@ -1,6 +1,9 @@
+import { ctx2 } from '../../MandalaDrawing.js';
+
 const drawSquare = (shapeSize, pathRadius) => {
-    //(x-start, y-start, width, height)
-    ctx2.rect(-shapeSize / 2, pathRadius / 2, shapeSize, shapeSize);
+    ctx2.rect(pathRadius / 2, pathRadius, -shapeSize, -shapeSize);
+    // ctx2.rect(pathRadius / 2, pathRadius, -shapeSize, -shapeSize + 10);
+    // ctx2.rect(two / 2, two, -two, -two);
 };
 
 export default drawSquare;

@@ -1,48 +1,70 @@
-import { roll, randomColor } from '../../utilities.js';
+import { roll, randomColor, lightColor } from '../../utilities.js';
 import { halfWidth, halfHeight, height, width } from '../mandalaDrawing.js';
 import { findHypotenuse } from '../mandalaDrawingUtilities.js';
-import getBackground from './_getBackground.js';
-import getShapeArr from './_getShapeArr.js';
 // import getBlendMode from './_getBlendMode.js';
-import getType from './_getType.js';
+import getShapeArr from './_getShapeArr.js';
 
-const getInputStats = () => {
-    const useSize = width > height ? width : height;
+const getInputStats = (
+    clearAll,
+    clearRandomLoops,
+    clearIndividual,
+    fillAll,
+    fillRandomLoops,
+    fillIndividual,
+    strokeAll,
+    strokeRandomLoops,
+    strokeIndividual
+) => {
     //|||||||||||||||||||||||||||||||||stats|||||||||||||||||||
     let inputObj = {
-        currentLoop: null,
         loopCount: 5, //roll(5)
+        currentLoop: null,
+        percent: null, // created in loop
+
         backgroundLoopSwitch: true,
         initSwitch: false,
-        pathRadius: null,
+
+        clearSwitch: false,
+        clearAll,
+        clearRandomLoops,
+        clearIndividual,
+
+        fillSwitch: true, //set for background only
+        fillAll,
+        fillRandomLoops,
+        fillIndividual,
+        fillColor: null,
+
+        strokeSwitch: true,
+        strokeAll,
+        strokeRandomLoops,
+        strokeIndividual,
+        strokeWidth: 1,
+        strokeColor: lightColor(),
+
         useSize: width > height ? width : height,
         useHalfSize: null,
-        percent: null, // created in loop
         maxFullPath: findHypotenuse(width, height),
         maxHalfPath: findHypotenuse(halfWidth, halfHeight),
-        background: getBackground(),
-        shapeSizeType: getType(3),
-        shapeSize: null, //default, shape size needs to be adjusted based on path
+
+        pathRadius: null,
+        minBackgroundShapeCount: 4,
+        minShapeCount: 20,
+
         shapeCount: null, // default, randomize
+        shapeSize: null, //default, shape size needs to be adjusted based on path
         shapeArr: null,
-        strokeWidthType: getType(3),
-        strokeWidth: 1,
-        strokeColorType: getType(),
-        strokeColor: randomColor(),
-        fillColorType: getType(),
-        fillColor: randomColor(),
-        fill: false,
-        clearType: getType(3),
-        clear: false,
+        // strokeSwitch: true,
+        // fillSwitch: true,
         blendMode: null, // have to find in loop
-        testInput: 'hello',
     };
-    inputObj.useHalfSize = useSize / 2;
+    inputObj.useHalfSize = inputObj.useSize / 2;
     inputObj.shapeArr = getShapeArr(inputObj.loopCount, 'same');
     //strokeWidthType = 'allSame''allRandom''loopsSame''loopsRandom''none'
 
     // const blendModeInput = inputObj.clearSwitch === true ? 4 : 3;
     // inputObj.blendMode = getBlendMode(blendModeInput);
+    inputObj.blendMode = 'multiply';
     return inputObj;
 };
 

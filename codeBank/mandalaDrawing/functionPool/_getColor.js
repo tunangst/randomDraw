@@ -1,5 +1,5 @@
 import { randomColor } from '../../utilities.js';
-const getStrokeColor = (type) => {
+const getColor = (type) => {
     if (type === 'allNone' || type === 'none') {
         return 'rgba(255,255,255,0)';
     } else {
@@ -7,4 +7,4 @@ const getStrokeColor = (type) => {
     }
 };
 
-export default getStrokeColor;
+export default getColor;

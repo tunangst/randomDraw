@@ -1,4 +1,4 @@
-const findWidth = () => {
+const findWidth = (shapeCount) => {
     // shape size around 250 total
     // shapeCount 200 needs lineWidth of 1;
     // ...        150 could be ...       2
