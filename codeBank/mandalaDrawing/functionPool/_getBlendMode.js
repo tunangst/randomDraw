@@ -1,21 +1,20 @@
 import { roll } from '../../utilities.js';
 
-const getBlendMode = (force) => {
+const getBlendMode = (inputs, force) => {
     if (force) {
         const blends = ['source-over', 'screen', 'difference', 'multiply'];
         if (blends.includes(force)) return force;
     }
     const dice = roll(3);
-    let blend;
     switch (dice) {
         case 1:
-            blend = 'difference';
+            inputs.blendMode = 'difference';
             break;
         case 2:
-            blend = 'screen';
+            inputs.blendMode = 'screen';
             break;
         case 3:
-            blend = 'multiply';
+            inputs.blendMode = 'multiply';
             break;
         // case 4:
         //     blend = 'source-over';
@@ -25,7 +24,7 @@ const getBlendMode = (force) => {
             break;
     }
 
-    return blend;
+    return inputs;
 };
 
 export default getBlendMode;

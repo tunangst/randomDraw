@@ -3,14 +3,19 @@ import { slant, starburst } from './draw/drawLine.js';
 import { square, diamond } from './draw/drawSquare.js';
 import { circle, oval } from './draw/drawEllipse.js';
 
-const getShapeFunction = (forceNumber) => {
+const getShapeFunction = (inputs, forceNumber) => {
     const diceRange = 3; // length of cases when ready
     let dice;
     //forceNumber should increment, lets the invoke call the case
-    while (forceNumber && forceNumber > diceRange) {
-        forceNumber = forceNumber - diceRange;
+    if (forceNumber) {
+        while (forceNumber && forceNumber > diceRange) {
+            forceNumber = forceNumber - diceRange;
+        }
+        dice = forceNumber;
     }
-    forceNumber ? (dice = forceNumber) : (dice = roll(diceRange)); //roll(3)
+    if (inputs.customShape === 'noLine') {
+        dice = roll(2);
+    }
     switch (dice) {
         case 1: // draw ellipse
             const ellipseDice = roll(2);

@@ -16,6 +16,10 @@ const getFollowingLoopStats = (inputs) => {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ check clear fill stroke ~~~~~~~~~~~
     inputs = checkLoopSwitches(inputs);
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ check clear fill stroke ~~~~~~~~~~~
+    if (inputs.customBackgroundSwitch) {
+        inputs.fillColor = inputs.customBackgroundColor;
+        inputs.strokeColor = inputs.customStrokeColor;
+    }
 
     return inputs;
 };

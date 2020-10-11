@@ -1,7 +1,7 @@
 import { roll } from '../../utilities.js';
 import getShapeFunction from './_getShapeFunction.js';
 
-const getShapeArr = (loopCount, forceNumber) => {
+const getShapeArr = (inputs, forceNumber) => {
     let shapeStyleDice;
 
     if (forceNumber) {
@@ -14,19 +14,19 @@ const getShapeArr = (loopCount, forceNumber) => {
     let shapeArr = [];
     switch (shapeStyleDice) {
         case 1:
-            for (let loop = 0; loop < loopCount; loop++) {
-                shapeArr.push(getShapeFunction());
+            for (let loop = 0; loop < inputs.loopCount; loop++) {
+                shapeArr.push(getShapeFunction(inputs));
             }
             break;
         case 2:
-            const sameShape = getShapeFunction();
-            for (let loop = 0; loop < loopCount; loop++) {
+            const sameShape = getShapeFunction(inputs);
+            for (let loop = 0; loop < inputs.loopCount; loop++) {
                 shapeArr.push(sameShape);
             }
             break;
         case 3:
-            for (let loop = 0; loop < loopCount; loop++) {
-                shapeArr.push(getShapeFunction(loop + 1));
+            for (let loop = 0; loop < inputs.loopCount; loop++) {
+                shapeArr.push(getShapeFunction(inputs, loop + 1));
             }
             break;
         default:

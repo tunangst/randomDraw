@@ -1,4 +1,4 @@
-import { rollRange, lightColor } from '../../utilities.js';
+import { rollRange } from '../../utilities.js';
 import getColorType from './_getColorType.js';
 
 const getBackgroundStats = (inputs) => {
@@ -7,8 +7,16 @@ const getBackgroundStats = (inputs) => {
     inputs.shapeSize = inputs.pathRadius;
     // //****************INSIDE FIRST ROLL****************
     // //****************INSIDE FIRST ROLL****************
-    inputs.fillColor = getColorType(inputs);
-    inputs.strokeColor = getColorType(inputs);
+    console.log(inputs);
+    // debugger;
+
+    if (inputs.customBackgroundSwitch) {
+        inputs.fillColor = inputs.customBackgroundColor;
+        inputs.strokeColor = inputs.customStrokeColor;
+    } else {
+        inputs.fillColor = getColorType(inputs);
+        inputs.strokeColor = getColorType(inputs);
+    }
 
     inputs.fillSwitch = true;
     inputs.backgroundLoopSwitch = false; // switch off

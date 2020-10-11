@@ -2,50 +2,21 @@ import { roll, coinFlip } from '../../utilities.js';
 
 //ADD COLOR CHANGE AND MAYBE WIDTH CHANGE IN HERE EVENTUALLY
 
-const getDrawType = (forceType) => {
-    // const dice = roll(3);
-    // let clearSwitch = false;
-    let strokeSwitch = false;
-    let fillSwitch = false;
-
-    let clearAll = false;
-    let clearRandomLoops = false;
-    let clearIndividual = false;
-
-    let fillAll = false;
-    let fillRandomLoops = false;
-    let fillIndividual = false;
-
-    let fillColorAll = false;
-    let fillColorRandomLoops = false;
-    let fillColorIndividual = false;
-
-    let strokeAll = false;
-    let strokeRandomLoops = false;
-    let strokeIndividual = false;
-
-    let strokeColorAll = false;
-    let strokeColorRandomLoops = false;
-    let strokeColorIndividual = false;
-
-    let strokeWidthAll = false;
-    let strokeWidthRandomLoops = false;
-    let strokeWidthIndividual = false;
-
+const getDrawType = (inputs, forceType) => {
     const loopCycle = (word) => {
-        eval(`${word}All = ${coinFlip()}`);
+        eval(`inputs.${word}All = ${coinFlip()}`);
 
-        if (!eval(`${word}All`)) {
-            eval(`${word}RandomLoops = ${coinFlip()}`);
+        if (!eval(`inputs.${word}All`)) {
+            eval(`inputs.${word}RandomLoops = ${coinFlip()}`);
         } else {
             return;
         }
-        if (!eval(`${word}RandomLoops`)) {
-            eval(`${word}Individual = ${coinFlip()}`);
+        if (!eval(`inputs.${word}RandomLoops`)) {
+            eval(`inputs.${word}Individual = ${coinFlip()}`);
         } else {
             return;
         }
-        if (!eval(`${word}Individual`)) {
+        if (!eval(`inputs.${word}Individual`)) {
             loopCycle(word);
         } else {
             return;
@@ -53,8 +24,8 @@ const getDrawType = (forceType) => {
     };
 
     const chaos = () => {
-        fillSwitch = true;
-        strokeSwitch = true;
+        inputs.fillSwitch = true;
+        inputs.strokeSwitch = true;
         loopCycle('clear');
         loopCycle('fill');
         loopCycle('fillColor');
@@ -63,112 +34,93 @@ const getDrawType = (forceType) => {
         loopCycle('strokeWidth');
     };
     const strokeOnly = () => {
-        fillSwitch = true;
-        strokeSwitch = true;
+        inputs.fillSwitch = true;
+        inputs.strokeSwitch = true;
         // loopCycle('clear');
-        clearIndividual = true;
-        strokeAll = true;
+        inputs.clearIndividual = true;
+        inputs.strokeAll = true;
         loopCycle('strokeColor');
         loopCycle('strokeWidth');
     };
     const testThis = () => {
         // loopCycle('clear');
-        clearIndividual = true;
-        strokeAll = true;
-        strokeColorRandomLoops = true;
+        inputs.clearIndividual = true;
+        inputs.strokeAll = true;
+        inputs.strokeColorRandomLoops = true;
         // loopCycle('strokeColor');
         loopCycle('strokeWidth');
     };
     const fillOnly = () => {
-        fillSwitch = true;
-        clearAll = true;
-        fillAll = true;
+        inputs.fillSwitch = true;
+        inputs.clearAll = true;
+        inputs.fillAll = true;
         loopCycle('fillColor');
         // fillColorRandomLoops = true;
     };
     const fillAndStroke = () => {
-        fillSwitch = true;
-        strokeSwitch = true;
-        fillAll = true;
-        strokeAll = true;
+        inputs.fillSwitch = true;
+        inputs.strokeSwitch = true;
+        inputs.fillAll = true;
+        inputs.strokeAll = true;
         loopCycle('clear');
         loopCycle('strokeColor');
         loopCycle('fillColor');
     };
     const individual = () => {
-        fillSwitch = true;
-        strokeSwitch = true;
-        clearIndividual = true;
-        fillIndividual = true;
-        fillColorIndividual = true;
-        strokeIndividual = true;
-        strokeColorIndividual = true;
-        strokeWidthIndividual = true;
+        inputs.fillSwitch = true;
+        inputs.strokeSwitch = true;
+        inputs.clearIndividual = true;
+        inputs.fillIndividual = true;
+        inputs.fillColorIndividual = true;
+        inputs.strokeIndividual = true;
+        inputs.strokeColorIndividual = true;
+        inputs.strokeWidthIndividual = true;
+    };
+    const outline = () => {
+        inputs.customBackgroundSwitch = true;
+        inputs.customBackgroundColor = '#fff';
+        inputs.customStrokeColor = '#000';
+        inputs.blendMode = 'source-over';
+        // debugger;
+        inputs.maxShapeCount = 50;
+        inputs.customShape = 'noLine';
+
+        inputs.strokeSwitch = true;
+        inputs.fillSwitch = false;
+        inputs.strokeAll = true;
+        inputs.clearAll = true;
+        // inputs.clearRandomLoops = true;
+        inputs.strokeColorAll = true;
+        inputs.strokeWidthAll = true;
     };
 
-    // const dice = 2;
-    // work on this
-    // work on this
-    // work on this
-    // work on this
-    // work on this
-    // work on this
-    const dice = 5;
-    switch (forceType) {
-        case 'strokeOnly':
-            break;
-        case 'fillOnly':
-            break;
+    if (forceType) {
+        eval(`${forceType}()`);
+    } else {
+        const dice = roll(5);
+        switch (dice) {
+            case 1:
+                strokeOnly();
+                // testThis();
+                break;
+            case 2:
+                fillOnly();
+                break;
+            case 3:
+                fillAndStroke();
+                break;
+            case 4:
+                individual();
+                break;
+            case 5:
+                chaos();
+                break;
+            default:
+                console.log('error in getDrawType');
+                break;
+        }
     }
-    // work on this
-    // work on this
-    // work on this
-    // work on this
-    // work on this
-    // work on this
-    switch (dice) {
-        case 1:
-            strokeOnly();
-            // testThis();
-            break;
-        case 2:
-            fillOnly();
-            break;
-        case 3:
-            fillAndStroke();
-            break;
-        case 4:
-            individual();
-            break;
-        case 5:
-            chaos();
-            break;
-        default:
-            console.log('error in getDrawType');
-            break;
-    }
-    return {
-        strokeSwitch,
-        fillSwitch,
-        clearAll,
-        clearRandomLoops,
-        clearIndividual,
-        fillAll,
-        fillRandomLoops,
-        fillIndividual,
-        fillColorAll,
-        fillColorRandomLoops,
-        fillColorIndividual,
-        strokeAll,
-        strokeRandomLoops,
-        strokeIndividual,
-        strokeColorAll,
-        strokeColorRandomLoops,
-        strokeColorIndividual,
-        strokeWidthAll,
-        strokeWidthRandomLoops,
-        strokeWidthIndividual,
-    };
+    return inputs;
 };
 
 export default getDrawType;

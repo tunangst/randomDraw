@@ -1,4 +1,4 @@
-import { coinFlip, lightColor } from '../../utilities.js';
+import { coinFlip } from '../../utilities.js';
 import getStrokeWidth from './_getStrokeWidth.js';
 import getColorType from './_getColorType.js';
 

@@ -32,10 +32,3 @@ const checkResetBackgroundSwitches = (inputs) => {
     return inputs;
 };
 export default checkResetBackgroundSwitches;
-
-// let clearAll = false;
-//     let fillAll = false;
-//     let fillColorAll = false;
-//     let strokeAll = false;
-//     let strokeColorAll = false;
-//     let strokeWidthAll = false;

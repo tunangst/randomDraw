@@ -1,32 +1,10 @@
-import { roll, randomColor, lightColor } from '../../utilities.js';
+// import { roll, randomColor, lightColor } from '../../utilities.js';
 import { halfWidth, halfHeight, height, width } from '../mandalaDrawing.js';
 import { findHypotenuse } from '../mandalaDrawingUtilities.js';
 // import getBlendMode from './_getBlendMode.js';
 import getShapeArr from './_getShapeArr.js';
 
-const getInputStats = (
-    blendMode,
-    strokeSwitch,
-    fillSwitch,
-    clearAll,
-    clearRandomLoops,
-    clearIndividual,
-    fillAll,
-    fillRandomLoops,
-    fillIndividual,
-    fillColorAll,
-    fillColorRandomLoops,
-    fillColorIndividual,
-    strokeAll,
-    strokeRandomLoops,
-    strokeIndividual,
-    strokeColorAll,
-    strokeColorRandomLoops,
-    strokeColorIndividual,
-    strokeWidthAll,
-    strokeWidthRandomLoops,
-    strokeWidthIndividual
-) => {
+const getInputStats = () => {
     //|||||||||||||||||||||||||||||||||stats|||||||||||||||||||
     let inputObj = {
         loopCount: 5, //roll(5)
@@ -36,32 +14,37 @@ const getInputStats = (
         backgroundLoopSwitch: true,
         initLoopSwitch: false,
 
+        customBackgroundSwitch: false,
+        customBackgroundColor: null,
+        customStrokeColor: null,
+        customShape: null,
+
         clearSwitch: false,
-        clearAll,
-        clearRandomLoops,
-        clearIndividual,
+        clearAll: false,
+        clearRandomLoops: false,
+        clearIndividual: false,
 
-        fillSwitch, //set for background only
-        fillAll,
-        fillRandomLoops,
-        fillIndividual,
+        fillSwitch: false,
+        fillAll: false,
+        fillRandomLoops: false,
+        fillIndividual: false,
         fillColor: null,
-        fillColorAll,
-        fillColorRandomLoops,
-        fillColorIndividual,
+        fillColorAll: false,
+        fillColorRandomLoops: false,
+        fillColorIndividual: false,
 
-        strokeSwitch,
-        strokeAll,
-        strokeRandomLoops,
-        strokeIndividual,
+        strokeSwitch: false,
+        strokeAll: false,
+        strokeRandomLoops: false,
+        strokeIndividual: false,
         strokeColor: null,
-        strokeColorAll,
-        strokeColorRandomLoops,
-        strokeColorIndividual,
+        strokeColorAll: false,
+        strokeColorRandomLoops: false,
+        strokeColorIndividual: false,
         strokeWidth: 1,
-        strokeWidthAll,
-        strokeWidthRandomLoops,
-        strokeWidthIndividual,
+        strokeWidthAll: false,
+        strokeWidthRandomLoops: false,
+        strokeWidthIndividual: false,
 
         useSize: width > height ? width : height,
         useHalfSize: null,
@@ -78,10 +61,9 @@ const getInputStats = (
         shapeSize: null, //default, shape size needs to be adjusted based on path
         shapeArr: null,
 
-        blendMode, // have to find in loop
+        blendMode: null, // have to find in loop
     };
     inputObj.useHalfSize = inputObj.useSize / 2;
-    inputObj.shapeArr = getShapeArr(inputObj.loopCount);
 
     return inputObj;
 };
