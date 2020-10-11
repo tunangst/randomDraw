@@ -1,29 +1,53 @@
 import { roll } from '../../utilities.js';
-import drawCircle from './draw/drawCircle.js';
-import drawSquare from './draw/drawSquare.js';
-import drawLine from './draw/drawLine.js';
+import { slant, starburst } from './draw/drawLine.js';
+import { square, diamond } from './draw/drawSquare.js';
+import { circle, oval } from './draw/drawEllipse.js';
 
 const getShapeFunction = (forceNumber) => {
-    const diceRange = 1; // length of cases when ready
-    // let dice = roll(5);
+    const diceRange = 3; // length of cases when ready
     let dice;
     //forceNumber should increment, lets the invoke call the case
     while (forceNumber && forceNumber > diceRange) {
         forceNumber = forceNumber - diceRange;
     }
-    forceNumber ? (dice = forceNumber) : (dice = roll(diceRange)); //roll(5)
-
+    forceNumber ? (dice = forceNumber) : (dice = roll(diceRange)); //roll(3)
     switch (dice) {
-        case 1:
+        case 1: // draw ellipse
+            const ellipseDice = roll(2);
+            // ellipseDice = 2;
+            switch (ellipseDice) {
+                case 1:
+                    return circle;
+                case 2:
+                    return oval;
+                default:
+                    console.log('error in getShapeFunction ellipse');
+                    break;
+            }
             return drawCircle;
-        case 2:
-            return drawSquare;
-        case 3:
-            return drawLine; // not ready yet
-        case 4:
-            return 'oval'; // not built yet
-        case 5:
-            return 'rectangle'; // not built yet
+        case 2: // draw square
+            let squareDice = roll(2);
+            switch (squareDice) {
+                case 1:
+                    return square;
+                case 2:
+                    return diamond;
+                default:
+                    console.log('error in getShapeFunction square');
+                    break;
+            }
+        case 3: // draw line
+            let lineDice = roll(2);
+            switch (lineDice) {
+                case 1:
+                    return starburst;
+                case 2:
+                    return slant;
+                default:
+                    console.log('error in getShapeFunction line');
+                    break;
+            }
+
         default:
             console.log('error in getShapeType');
             return;

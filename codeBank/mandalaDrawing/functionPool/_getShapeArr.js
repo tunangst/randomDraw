@@ -1,3 +1,4 @@
+import { roll } from '../../utilities.js';
 import getShapeFunction from './_getShapeFunction.js';
 
 const getShapeArr = (loopCount, forceNumber) => {
@@ -25,7 +26,7 @@ const getShapeArr = (loopCount, forceNumber) => {
             break;
         case 3:
             for (let loop = 0; loop < loopCount; loop++) {
-                shapeArr.push(getShapeFunction(loop));
+                shapeArr.push(getShapeFunction(loop + 1));
             }
             break;
         default:

@@ -13,8 +13,6 @@ const getFollowingLoopStats = (inputs) => {
     inputs.shapeCount = rollRange(inputs.minShapeCount, inputs.maxShapeCount);
     inputs = checkShapeSpacing(inputs);
 
-    // inputs.fillColor = lightColor(inputs.shapeCount);
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ check clear fill stroke ~~~~~~~~~~~
     inputs = checkLoopSwitches(inputs);
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ check clear fill stroke ~~~~~~~~~~~

@@ -1,4 +1,4 @@
-import { lightColor } from '../../utilities.js';
+import getColorType from './_getColorType.js';
 
 const checkResetBackgroundSwitches = (inputs) => {
     if (inputs.clearAll) {
@@ -10,7 +10,7 @@ const checkResetBackgroundSwitches = (inputs) => {
         inputs.fillSwitch = true;
 
         if (inputs.fillColorAll) {
-            inputs.fillColor = lightColor();
+            inputs.fillColor = getColorType(inputs);
         }
     } else {
         inputs.fillSwitch = false;
@@ -19,7 +19,7 @@ const checkResetBackgroundSwitches = (inputs) => {
         inputs.strokeSwitch = true;
 
         if (inputs.strokeColorAll) {
-            inputs.strokeColor = lightColor();
+            inputs.strokeColor = getColorType(inputs);
         }
         if (inputs.strokeWidthAll) {
             inputs.strokeWidth = 1;

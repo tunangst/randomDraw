@@ -1,5 +1,6 @@
 import { coinFlip, lightColor } from '../../utilities.js';
 import getStrokeWidth from './_getStrokeWidth.js';
+import getColorType from './_getColorType.js';
 
 const checkIndividualSwitches = (type, inputs) => {
     if (!type) {
@@ -12,22 +13,22 @@ const checkIndividualSwitches = (type, inputs) => {
         }
     }
     if (type === 'fill') {
-        if (inputs.fillIndividual) {
-            inputs.fillSwitch = coinFlip();
-        }
+        // if (inputs.fillIndividual) {
+        //     inputs.fillSwitch = coinFlip();
+        // }
         if (inputs.fillSwitch) {
             if (inputs.fillColorIndividual) {
-                inputs.fillColor = lightColor();
+                inputs.fillColor = getColorType(inputs);
             }
         }
     }
     if (type === 'stroke') {
-        if (inputs.strokeIndividual) {
-            inputs.strokeSwitch = coinFlip();
-        }
+        // if (inputs.strokeIndividual) {
+        //     inputs.strokeSwitch = coinFlip();
+        // }
         if (inputs.strokeSwitch) {
             if (inputs.strokeColorIndividual) {
-                inputs.strokeColor = lightColor();
+                inputs.strokeColor = getColorType(inputs);
             }
             if (inputs.strokeWidthIndividual) {
                 inputs.strokeWidth = getStrokeWidth(inputs.shapeCount);

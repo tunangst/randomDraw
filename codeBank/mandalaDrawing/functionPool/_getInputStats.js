@@ -5,6 +5,9 @@ import { findHypotenuse } from '../mandalaDrawingUtilities.js';
 import getShapeArr from './_getShapeArr.js';
 
 const getInputStats = (
+    blendMode,
+    strokeSwitch,
+    fillSwitch,
     clearAll,
     clearRandomLoops,
     clearIndividual,
@@ -38,20 +41,20 @@ const getInputStats = (
         clearRandomLoops,
         clearIndividual,
 
-        fillSwitch: true, //set for background only
+        fillSwitch, //set for background only
         fillAll,
         fillRandomLoops,
         fillIndividual,
-        fillColor: lightColor(),
+        fillColor: null,
         fillColorAll,
         fillColorRandomLoops,
         fillColorIndividual,
 
-        strokeSwitch: true,
+        strokeSwitch,
         strokeAll,
         strokeRandomLoops,
         strokeIndividual,
-        strokeColor: lightColor(),
+        strokeColor: null,
         strokeColorAll,
         strokeColorRandomLoops,
         strokeColorIndividual,
@@ -74,17 +77,12 @@ const getInputStats = (
         shapeCount: null, // default, randomize
         shapeSize: null, //default, shape size needs to be adjusted based on path
         shapeArr: null,
-        // strokeSwitch: true,
-        // fillSwitch: true,
-        blendMode: null, // have to find in loop
+
+        blendMode, // have to find in loop
     };
     inputObj.useHalfSize = inputObj.useSize / 2;
-    inputObj.shapeArr = getShapeArr(inputObj.loopCount, 'same');
-    //strokeWidthType = 'allSame''allRandom''loopsSame''loopsRandom''none'
+    inputObj.shapeArr = getShapeArr(inputObj.loopCount);
 
-    // const blendModeInput = inputObj.clearSwitch === true ? 4 : 3;
-    // inputObj.blendMode = getBlendMode(blendModeInput);
-    inputObj.blendMode = 'multiply';
     return inputObj;
 };
 

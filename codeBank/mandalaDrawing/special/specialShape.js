@@ -1,16 +1,21 @@
 import loop from './loop.js';
 import getInputStats from '../functionPool/_getInputStats.js';
 import getBackgroundLoopStats from '../functionPool/_getBackgroundLoopStats.js';
-import getInitLoopStats from '../functionPool/_getInitLoopStats.js';
+// import getInitLoopStats from '../functionPool/_getInitLoopStats.js';
 import getFollowingLoopStats from '../functionPool/_getFollowingLoopStats.js';
 import getDrawType from '../functionPool/_getDrawType.js';
 import checkBackgroundSwitches from '../functionPool/_checkBackgroundSwitches.js';
+import getBlendMode from '../functionPool/_getBlendMode.js';
 
 const specialShape = () => {
     //|||||||||||||||||||||||||||||||||stats|||||||||||||||||||
     const drawType = getDrawType();
-
+    // debugger;
+    const blendMode = getBlendMode();
     let inputStats = getInputStats(
+        blendMode,
+        drawType.strokeSwitch,
+        drawType.fillSwitch,
         drawType.clearAll,
         drawType.clearRandomLoops,
         drawType.clearIndividual,
@@ -50,7 +55,9 @@ const specialShape = () => {
             inputStats = getFollowingLoopStats(inputStats);
         }
         //call loop
-        debugger;
+        // console.log({ ...inputStats });
+        console.log(inputStats.pathRadius, inputStats.shapeSize);
+        // debugger;
         inputStats = loop(inputStats);
         //reset loop stats
         if (inputStats.percent === 1) {

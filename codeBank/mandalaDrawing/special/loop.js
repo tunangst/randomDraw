@@ -9,12 +9,6 @@ import fillLoop from '../functionPool/draw/fillLoop.js';
 import strokeLoop from '../functionPool/draw/strokeLoop.js';
 
 const loop = (inputs) => {
-    // inputs.pathRadius = rollRange(inputs.minPathRadius, inputs.maxPathRadius);
-    // inputs.shapeSize = inputs.maxShapeSize * inputs.percent;
-    // inputs.shapeCount = rollRange(inputs.minShapeCount, inputs.maxShapeCount);
-
-    // inputs = checkShapeSpacing(inputs);
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ check clear fill stroke ~~~~~~~~~~~
 
     ctx2.save();

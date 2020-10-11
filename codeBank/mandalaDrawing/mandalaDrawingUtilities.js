@@ -23,7 +23,7 @@ import {
     height,
     width,
 } from './MandalaDrawing.js';
-import { oneShape } from './oneShape/oneShape.js';
+// import { oneShape } from './oneShape/oneShape.js';
 import specialShape from './special/specialShape.js';
 
 class PointNode {

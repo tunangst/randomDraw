@@ -2,8 +2,12 @@ import { roll, coinFlip } from '../../utilities.js';
 
 //ADD COLOR CHANGE AND MAYBE WIDTH CHANGE IN HERE EVENTUALLY
 
-const getDrawType = () => {
+const getDrawType = (forceType) => {
     // const dice = roll(3);
+    // let clearSwitch = false;
+    let strokeSwitch = false;
+    let fillSwitch = false;
+
     let clearAll = false;
     let clearRandomLoops = false;
     let clearIndividual = false;
@@ -49,32 +53,79 @@ const getDrawType = () => {
     };
 
     const chaos = () => {
-        clearIndividual = true;
-        fillIndividual = true;
-        strokeIndividual = true;
+        fillSwitch = true;
+        strokeSwitch = true;
+        loopCycle('clear');
+        loopCycle('fill');
+        loopCycle('fillColor');
+        loopCycle('stroke');
+        loopCycle('strokeColor');
+        loopCycle('strokeWidth');
     };
     const strokeOnly = () => {
+        fillSwitch = true;
+        strokeSwitch = true;
         // loopCycle('clear');
+        clearIndividual = true;
         strokeAll = true;
-        strokeWidthIndividual = true;
-        strokeColorIndividual = true;
+        loopCycle('strokeColor');
+        loopCycle('strokeWidth');
+    };
+    const testThis = () => {
+        // loopCycle('clear');
+        clearIndividual = true;
+        strokeAll = true;
+        strokeColorRandomLoops = true;
         // loopCycle('strokeColor');
-        // loopCycle('strokeWidth');
+        loopCycle('strokeWidth');
     };
     const fillOnly = () => {
-        // loopCycle('clear');
+        fillSwitch = true;
         clearAll = true;
         fillAll = true;
-
-        fillColorRandomLoops = true;
+        loopCycle('fillColor');
+        // fillColorRandomLoops = true;
     };
     const fillAndStroke = () => {
-        loopCycle('clear');
+        fillSwitch = true;
+        strokeSwitch = true;
         fillAll = true;
         strokeAll = true;
+        loopCycle('clear');
+        loopCycle('strokeColor');
+        loopCycle('fillColor');
+    };
+    const individual = () => {
+        fillSwitch = true;
+        strokeSwitch = true;
+        clearIndividual = true;
+        fillIndividual = true;
+        fillColorIndividual = true;
+        strokeIndividual = true;
+        strokeColorIndividual = true;
+        strokeWidthIndividual = true;
     };
 
-    const dice = 2;
+    // const dice = 2;
+    // work on this
+    // work on this
+    // work on this
+    // work on this
+    // work on this
+    // work on this
+    const dice = 5;
+    switch (forceType) {
+        case 'strokeOnly':
+            break;
+        case 'fillOnly':
+            break;
+    }
+    // work on this
+    // work on this
+    // work on this
+    // work on this
+    // work on this
+    // work on this
     switch (dice) {
         case 1:
             strokeOnly();
@@ -87,6 +138,9 @@ const getDrawType = () => {
             fillAndStroke();
             break;
         case 4:
+            individual();
+            break;
+        case 5:
             chaos();
             break;
         default:
@@ -94,6 +148,8 @@ const getDrawType = () => {
             break;
     }
     return {
+        strokeSwitch,
+        fillSwitch,
         clearAll,
         clearRandomLoops,
         clearIndividual,
