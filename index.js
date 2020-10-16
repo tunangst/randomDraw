@@ -1,7 +1,7 @@
 import randomDraw from './randomDraw.js';
 // import { initBoxBtns } from './helperFunctions/helperFunctions.js';
 import boxDrawerTemplate from './htmlTemplates/boxDrawerTemplate.js';
-randomDraw();
+import mandalaDrawerTemplate from './htmlTemplates/mandalaDrawerTemplate.js';
 
 let forceDesignObj = {
 	typeOfDrawer: 'random',
@@ -14,6 +14,7 @@ let forceDesignObj = {
 	},
 	mandalaDraw: {},
 };
+randomDraw(forceDesignObj);
 
 // const form = document.querySelector('form');
 const typeOfDrawerElement = document.querySelector('#typeOfDrawer');
@@ -25,6 +26,12 @@ const dimensionHeight = document.querySelector('#dimensionHeight');
 const subControls = document.querySelector('.subControls');
 let btns = document.querySelectorAll('.btns');
 
+dimensionWidth.addEventListener('change', (event) => {
+	forceDesignObj.dimensions.width = event.target.value;
+});
+dimensionHeight.addEventListener('change', (event) => {
+	forceDesignObj.dimensions.height = event.target.value;
+});
 const initBoxBtnFunctions = () => {
 	//boxCount
 	const boxCount = document.querySelector('#boxCount');
@@ -43,15 +50,16 @@ const initBoxBtnFunctions = () => {
 		'#choosePrimaryColorBtn'
 	);
 	defaultPrimaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.primaryColor = 'default';
+		forceDesignObj.boxDrawObj.primaryToggle = 'default';
 		randomDraw(forceDesignObj);
 	});
 	randomPrimaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.primaryColor = 'random';
+		forceDesignObj.boxDrawObj.primaryToggle = 'random';
 		randomDraw(forceDesignObj);
 	});
 	choosePrimaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.primaryColor = 'choose';
+		forceDesignObj.boxDrawObj.primaryToggle = 'choose';
+		forceDesignObj.boxDrawObj.primaryColor = event.target.children[0].value;
 		randomDraw(forceDesignObj);
 	});
 	//primaryColor
@@ -59,22 +67,24 @@ const initBoxBtnFunctions = () => {
 	const defaultSecondaryColorBtn = document.querySelector(
 		'#defaultSecondaryColorBtn'
 	);
-	const randomSecondaryColorBtn = document.querySelector(
-		'#randomSecondaryColorBtn'
-	);
+	// const randomSecondaryColorBtn = document.querySelector(
+	// 	'#randomSecondaryColorBtn'
+	// );
 	const chooseSecondaryColorBtn = document.querySelector(
 		'#chooseSecondaryColorBtn'
 	);
 	defaultSecondaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.secondaryColor = 'default';
+		forceDesignObj.boxDrawObj.secondaryToggle = 'default';
 		randomDraw(forceDesignObj);
 	});
-	randomSecondaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.secondaryColor = 'random';
-		randomDraw(forceDesignObj);
-	});
+	// randomSecondaryColorBtn.addEventListener('click', (event) => {
+	// 	forceDesignObj.boxDrawObj.secondaryToggle = 'random';
+	// 	randomDraw(forceDesignObj);
+	// });
 	chooseSecondaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.secondaryColor = 'choose';
+		forceDesignObj.boxDrawObj.secondaryToggle = 'choose';
+		forceDesignObj.boxDrawObj.secondaryColor =
+			event.target.children[0].value;
 		randomDraw(forceDesignObj);
 	});
 	//secondaryColor
@@ -89,15 +99,17 @@ const initBoxBtnFunctions = () => {
 		'#chooseBackgroundColorBtn'
 	);
 	defaultBackgroundColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.backgroundColor = 'default';
+		forceDesignObj.boxDrawObj.backgroundToggle = 'default';
 		randomDraw(forceDesignObj);
 	});
 	randomBackgroundColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.backgroundColor = 'random';
+		forceDesignObj.boxDrawObj.backgroundToggle = 'random';
 		randomDraw(forceDesignObj);
 	});
 	chooseBackgroundColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.backgroundColor = 'choose';
+		forceDesignObj.boxDrawObj.backgroundToggle = 'choose';
+		forceDesignObj.boxDrawObj.backgroundColor =
+			event.target.children[0].value;
 		randomDraw(forceDesignObj);
 	});
 	//backgroundColor
@@ -130,7 +142,13 @@ randomDrawerBtn.addEventListener('click', (event) => {
 	};
 	randomDraw(forceDesignObj);
 });
+let showBoxDrawFunctions = false;
 boxDrawerBtn.addEventListener('click', (event) => {
+	//clear options
+	if (showMandalaDrawFunctions) {
+		subControls.innerHTML = '';
+		showMandalaDrawFunctions = false;
+	}
 	//get stats
 	forceDesignObj.typeOfDrawer = 'boxDraw';
 	forceDesignObj.dimensions = {
@@ -140,18 +158,34 @@ boxDrawerBtn.addEventListener('click', (event) => {
 	//draw with stats
 	randomDraw(forceDesignObj);
 	//show options
-	subControls.innerHTML = subControls.innerHTML + boxDrawerTemplate();
+	if (!showBoxDrawFunctions) {
+		subControls.innerHTML = subControls.innerHTML + boxDrawerTemplate();
+		showBoxDrawFunctions = true;
+	}
 	//activate new activebtn listeners
 	initBtnActiveListeners();
 	//activate new functional listeners
 	initBoxBtnFunctions();
 });
+let showMandalaDrawFunctions = false;
 mandalaDrawerBtn.addEventListener('click', (event) => {
+	//clear options
+	if (showBoxDrawFunctions) {
+		subControls.innerHTML = '';
+		showBoxDrawFunctions = false;
+	}
 	forceDesignObj.typeOfDrawer = 'mandalaDraw';
 	forceDesignObj.dimensions = {
 		width: dimensionWidth.value,
 		height: dimensionHeight.value,
 	};
+
+	//show options
+	if (!showMandalaDrawFunctions) {
+		subControls.innerHTML = subControls.innerHTML + mandalaDrawerTemplate();
+		showMandalaDrawFunctions = true;
+	}
+
 	randomDraw(forceDesignObj);
 });
 

@@ -1,3 +1,7 @@
+const mandalaDrawerTemplate = () => {
+	return '';
+};
+
 // <div class="separatorContainer">
 //     <div class="separators">
 //         <p>
@@ -105,3 +109,5 @@
 //         Full Reflect
 //     </button>
 // </div>
+
+export default mandalaDrawerTemplate;

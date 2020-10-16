@@ -64,6 +64,7 @@ class PixelNode {
 		this.color = color;
 	}
 }
+
 const whatToPlace = (xStart, yStart) => {
 	const rollColor = roll(3);
 	let pixel = new PixelNode(xStart, yStart);

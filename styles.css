@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	/* border: 1px solid greenyellow; */
+	border: 1px solid greenyellow;
 }
 :root {
 	--outerContainerColor: hsl(203, 90%, 75%);
@@ -111,4 +111,13 @@ p {
 
 .active {
 	background-color: lightsalmon;
+}
+
+.randomDraw {
+	flex: 1;
+	margin-left: 20px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

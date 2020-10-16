@@ -21,8 +21,7 @@ const boxDrawerTemplate = () => {
 	html += `<div class='separators'>`;
 	html += `<p>Secondary Color:</p>`;
 	html += `<div class="secondaryColorContainer btnContainer">`;
-	html += `<button id='defaultSecondaryColorBtn' class='btns active'>Default</button>`;
-	html += `<button id='randomSecondaryColorBtn' class='btns'>Random</button>`;
+	html += `<button id='defaultSecondaryColorBtn' class='btns active'>Default Random</button>`;
 	html += `<button id='chooseSecondaryColorBtn' class='btns'>`;
 	html += `Choose`;
 	html += `<input id="chooseSecondaryColor" type="color" value="#8C00FF" />`;

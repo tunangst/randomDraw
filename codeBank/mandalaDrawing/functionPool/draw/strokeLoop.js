@@ -1,23 +1,23 @@
-import { ctx2 } from '../../mandalaDrawing.js';
+// import { ctx2 } from '../../mandalaDrawing.js';
 import checkIndividualSwitches from '../_checkIndividualSwitches.js';
 
 const strokeLoop = (inputs) => {
-    const shapeFunction = inputs.shapeArr[inputs.currentLoop - 1];
+	const shapeFunction = inputs.shapeArr[inputs.currentLoop - 1];
 
-    for (let strokeShape = 1; strokeShape <= inputs.shapeCount; strokeShape++) {
-        inputs = checkIndividualSwitches('stroke', inputs);
+	for (let strokeShape = 1; strokeShape <= inputs.shapeCount; strokeShape++) {
+		inputs = checkIndividualSwitches('stroke', inputs);
 
-        ctx2.globalCompositeOperation = 'source-over';
-        ctx2.beginPath();
-        shapeFunction(inputs.shapeSize, inputs.pathRadius);
+		inputs.ctx2.globalCompositeOperation = 'source-over';
+		inputs.ctx2.beginPath();
+		shapeFunction(inputs);
 
-        ctx2.lineWidth = inputs.strokeWidth;
-        ctx2.strokeStyle = inputs.strokeColor;
-        ctx2.stroke();
-        ctx2.closePath();
-        ctx2.globalCompositeOperation = 'source-over';
-        ctx2.rotate((2 * Math.PI) / inputs.shapeCount);
-    }
+		inputs.ctx2.lineWidth = inputs.strokeWidth;
+		inputs.ctx2.strokeStyle = inputs.strokeColor;
+		inputs.ctx2.stroke();
+		inputs.ctx2.closePath();
+		inputs.ctx2.globalCompositeOperation = 'source-over';
+		inputs.ctx2.rotate((2 * Math.PI) / inputs.shapeCount);
+	}
 };
 // ctx2.beginPath();
 // drawCircle(shapeSize, pathRadius);

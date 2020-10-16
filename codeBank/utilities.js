@@ -12,6 +12,40 @@ const coinFlip = () => {
 	const face = coin === 1 ? true : false;
 	return face;
 };
+const createCanvasTemplate = (width, height) => {
+	//remove old canvas
+	const old = document.querySelector('#canvasTemplate');
+	if (old) {
+		old.remove();
+	}
+	//create new canvas
+	let canvasTemplate = document.createElement('canvas');
+	canvasTemplate.id = 'canvasTemplate';
+	canvasTemplate.width = width;
+	canvasTemplate.height = height;
+	const ctx = canvasTemplate.getContext('2d');
+
+	return [canvasTemplate, ctx];
+};
+const createCanvasDraw = (width, height) => {
+	//find user defined space for canvas
+	const parentSpace =
+		document.querySelector('.randomDraw') ||
+		document.querySelector('#randomDraw');
+	//remove old canvas
+	parentSpace.innerHTML = '';
+	//create new canvas
+	let canvasDraw = document.createElement('canvas');
+	canvasDraw.id = 'canvasDraw';
+	canvasDraw.width = width;
+	canvasDraw.height = height;
+	const ctx2 = canvasDraw.getContext('2d');
+
+	//place canvas
+	parentSpace.appendChild(canvasDraw);
+
+	return [canvasDraw, ctx2];
+};
 
 const clear = (matrix, { ctx, ctx2, canvasWidth, canvasHeight }) => {
 	matrix = [];
@@ -60,4 +94,14 @@ const darkColor = (shapeCount) => {
 	return `hsl(${randomH},${randomS}%,${randomL}%)`;
 };
 
-export { roll, rollRange, coinFlip, clear, randomColor, lightColor, darkColor };
+export {
+	roll,
+	rollRange,
+	coinFlip,
+	createCanvasTemplate,
+	createCanvasDraw,
+	clear,
+	randomColor,
+	lightColor,
+	darkColor,
+};

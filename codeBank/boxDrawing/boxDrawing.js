@@ -4,13 +4,15 @@ import doubles from './doubles/doubles.js';
 import { roll, clear, randomColor } from '../utilities.js';
 import { boxDraw, createPixelMap } from './boxDrawingUtilities.js';
 
+import { createCanvasTemplate, createCanvasDraw } from '../utilities.js';
+
 // let typeOfStyle = 'random';
 
 let canvasWidth = 500;
 let canvasHeight = 500;
 let boxCount = 10;
 let pixelWidth = canvasWidth / boxCount; //draw section divided by how many pixels across
-let pixelHeight = canvasWidth / boxCount; //draw section divided by how many pixels across
+let pixelHeight = canvasHeight / boxCount; //draw section divided by how many pixels across
 let drawSectionWidth = canvasWidth / 2;
 let drawSectionHeight = canvasHeight / 2;
 let primaryToggle = 'default';
@@ -20,10 +22,12 @@ let secondaryToggle = 'default';
 let backgroundColor = '#ffffff00';
 let backgroundToggle = 'default';
 
-let canvasPreview = document.querySelector('#preview');
-let canvasDraw = document.querySelector('#draw');
-let ctx = canvasPreview.getContext('2d');
-let ctx2 = canvasDraw.getContext('2d');
+let canvasTemplate = null;
+let canvasDraw = null;
+// let canvasPreview = document.querySelector('#preview');
+// let canvasDraw = document.querySelector('#draw');
+let ctx = null;
+let ctx2 = null;
 let matrix = [];
 
 const BoxDrawing = (forceDesignObj) => {
@@ -34,19 +38,22 @@ const BoxDrawing = (forceDesignObj) => {
 	} = forceDesignObj;
 	if (width) canvasWidth = width;
 	if (height) canvasHeight = height;
+	// debugger;
 	if (width && height) {
 		pixelWidth = canvasWidth / boxCount;
-		pixelHeight = canvasWidth / boxCount;
+		pixelHeight = canvasHeight / boxCount;
 		drawSectionWidth = canvasWidth / 2;
 		drawSectionHeight = canvasHeight / 2;
 	}
-
 	if (boxDrawObj.boxCount) boxCount = boxDrawObj.boxCount;
-
+	if (boxDrawObj.primaryToggle) primaryToggle = boxDrawObj.primaryToggle;
+	if (boxDrawObj.secondaryToggle)
+		secondaryToggle = boxDrawObj.secondaryToggle;
+	if (boxDrawObj.backgroundToggle)
+		backgroundToggle = boxDrawObj.backgroundToggle;
 	// canvasSize = width || 500;
-	boxCount = forceDesignObj.boxCount || 10;
+	// boxCount = forceDesignObj.boxCount || 10;
 
-	primaryToggle = 'default';
 	switch (primaryToggle) {
 		case 'default':
 			primaryColor = '#000000';
@@ -55,14 +62,13 @@ const BoxDrawing = (forceDesignObj) => {
 			primaryColor = randomColor();
 			break;
 		case 'choose':
-			primaryColor = props.primaryColor;
+			primaryColor = boxDrawObj.primaryColor;
 			break;
 		default:
 			console.log('error in primarytoggle');
 			break;
 	}
 
-	secondaryToggle = 'default';
 	switch (secondaryToggle) {
 		case 'default':
 			secondaryColor = randomColor(); //new color seed on refresh;
@@ -71,14 +77,13 @@ const BoxDrawing = (forceDesignObj) => {
 			secondaryColor = randomColor();
 			break;
 		case 'choose':
-			secondaryColor = props.secondaryColor;
+			secondaryColor = boxDrawObj.secondaryColor;
 			break;
 		default:
 			console.log('error in secondaryToggle');
 			break;
 	}
 
-	backgroundToggle = 'default';
 	switch (backgroundToggle) {
 		case 'default':
 			backgroundColor = '#ffffff00';
@@ -87,12 +92,23 @@ const BoxDrawing = (forceDesignObj) => {
 			backgroundColor = randomColor();
 			break;
 		case 'choose':
-			backgroundColor = props.backgroundColor;
+			backgroundColor = boxDrawObj.backgroundColor;
 			break;
 		default:
 			console.log('error in backgroundToggle');
 			break;
 	}
+
+	// canvasTemplate = createCanvasTemplate();
+	// canvasDraw = createCanvasDraw();
+	// ctx = canvasTemplate.getContext('2d');
+	// ctx2 = canvasDraw.getContext('2d');
+
+	[canvasTemplate, ctx] = createCanvasTemplate(
+		drawSectionWidth,
+		drawSectionHeight
+	);
+	[canvasDraw, ctx2] = createCanvasDraw(canvasWidth, canvasHeight);
 
 	if (canvasDraw.getContext) {
 		matrix = clear(matrix, { ctx, ctx2, canvasWidth, canvasHeight });
@@ -187,7 +203,7 @@ export {
 	primaryColor,
 	secondaryColor,
 	backgroundColor,
-	canvasPreview,
+	canvasTemplate,
 	canvasDraw,
 	ctx,
 	ctx2,

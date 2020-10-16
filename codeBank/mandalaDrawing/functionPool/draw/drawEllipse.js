@@ -1,12 +1,27 @@
-import { ctx2 } from '../../MandalaDrawing.js';
+// import { ctx2 } from '../../MandalaDrawing.js';
 
-const circle = (shapeSize, pathRadius) => {
-    ctx2.arc(0, pathRadius, shapeSize, 0, 2 * Math.PI, false);
+const circle = (inputs) => {
+	inputs.ctx2.arc(
+		0,
+		inputs.pathRadius,
+		inputs.shapeSize,
+		0,
+		2 * Math.PI,
+		false
+	);
 };
 
-const oval = (shapeSize, pathRadius) => {
-    // ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle [, anticlockwise]);
-    ctx2.ellipse(0, pathRadius, shapeSize / 5, shapeSize, 0, 0, 2 * Math.PI);
+const oval = (inputs) => {
+	// ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle [, anticlockwise]);
+	inputs.ctx2.ellipse(
+		0,
+		inputs.pathRadius,
+		inputs.shapeSize / 5,
+		inputs.shapeSize,
+		0,
+		0,
+		2 * Math.PI
+	);
 };
 
 export { circle, oval };

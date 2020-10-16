@@ -1,7 +1,7 @@
-import { ctx2, width, height } from '../../mandalaDrawing.js';
+// import { ctx2, width, height } from '../../mandalaDrawing.js';
 
-const clearDrawingArea = () => {
-    ctx2.clearRect(0, 0, width, height);
+const clearDrawingArea = (inputs) => {
+	inputs.ctx2.clearRect(0, 0, inputs.width, inputs.height);
 };
 
 export default clearDrawingArea;
