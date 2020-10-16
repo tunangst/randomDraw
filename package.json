@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prefixForGitPages": "git subtree push --prefix dist origin gh-pages",
-    "build": "webpack -c ./webpack.config.js --color --progress && npm run prefixForGitPages"
+    "build": "webpack -c ./webpack.config.js --color --progress"
   },
   "repository": {
     "type": "git",
