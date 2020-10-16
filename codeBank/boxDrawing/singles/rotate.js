@@ -1,58 +1,58 @@
 import { PixelNode } from '../boxDrawingUtilities.js';
-import { pixelSize } from '../BoxDrawing.js';
+import { pixelWidth, pixelHeight } from '../BoxDrawing.js';
 
 const rotateClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
-    let xPos = xOffset;
-    let yPos = yOffset;
-    let tempMatrix = [];
-    let rotatedMatrix = [];
+	let xPos = xOffset;
+	let yPos = yOffset;
+	let tempMatrix = [];
+	let rotatedMatrix = [];
 
-    for (let column = 0; column < useMatrix[0].length; column++) {
-        let rowArr = [];
+	for (let column = 0; column < useMatrix[0].length; column++) {
+		let rowArr = [];
 
-        for (let row = useMatrix.length - 1; row >= 0; row--) {
-            const pixel = useMatrix[row][column];
-            const newPixel = new PixelNode(xPos, yPos, pixel.color);
+		for (let row = useMatrix.length - 1; row >= 0; row--) {
+			const pixel = useMatrix[row][column];
+			const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
-            rowArr.push(newPixel);
-            xPos += pixelSize;
-        }
-        tempMatrix.push(rowArr);
-        xPos = xOffset;
-        yPos += pixelSize;
-    }
-    yPos = yOffset;
-    rotatedMatrix = [...tempMatrix];
+			rowArr.push(newPixel);
+			xPos += pixelWidth;
+		}
+		tempMatrix.push(rowArr);
+		xPos = xOffset;
+		yPos += pixelHeight;
+	}
+	yPos = yOffset;
+	rotatedMatrix = [...tempMatrix];
 
-    return rotatedMatrix;
+	return rotatedMatrix;
 };
 
 const rotateCounterClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
-    //loop columns reverse
-    //loop over rows in order
-    let xPos = xOffset;
-    let yPos = yOffset;
-    let tempMatrix = [];
-    let rotatedMatrix = [];
+	//loop columns reverse
+	//loop over rows in order
+	let xPos = xOffset;
+	let yPos = yOffset;
+	let tempMatrix = [];
+	let rotatedMatrix = [];
 
-    for (let column = useMatrix[0].length - 1; column >= 0; column--) {
-        let rowArr = [];
+	for (let column = useMatrix[0].length - 1; column >= 0; column--) {
+		let rowArr = [];
 
-        for (let row = 0; row < useMatrix.length; row++) {
-            const pixel = useMatrix[row][column];
-            const newPixel = new PixelNode(xPos, yPos, pixel.color);
+		for (let row = 0; row < useMatrix.length; row++) {
+			const pixel = useMatrix[row][column];
+			const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
-            rowArr.push(newPixel);
-            xPos += pixelSize;
-        }
-        tempMatrix.push(rowArr);
-        xPos = xOffset;
-        yPos += pixelSize;
-    }
-    yPos = yOffset;
-    rotatedMatrix = [...tempMatrix];
+			rowArr.push(newPixel);
+			xPos += pixelWidth;
+		}
+		tempMatrix.push(rowArr);
+		xPos = xOffset;
+		yPos += pixelHeight;
+	}
+	yPos = yOffset;
+	rotatedMatrix = [...tempMatrix];
 
-    return rotatedMatrix;
+	return rotatedMatrix;
 };
 
 export { rotateClockwise, rotateCounterClockwise };

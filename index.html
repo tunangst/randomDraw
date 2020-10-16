@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./styles.css" />
-        <title>randomDraw</title>
-    </head>
-    <body>
-        <section class="controlsBox">
-            <canvas id="preview" width="250px" height="250px"></canvas>
-            <div class='controls'>
-                <div class="drawerContainer">
-                    <button id='randomDrawerBtn' class='drawerBtns'>Random Draw</button>
-                    <button id='boxDrawerBtn' class='drawerBtns'>Box Draw</button>
-                    <button id='mandalaDrawerBtn' class='drawerBtns'>Mandala Draw</button>
-                </div>
-                <p>Dimensions:
-                    <input id='dimensionWidth' class='dimensionInput' type="number" value='500' />
-                     x 
-                    <input id='dimensionHeight' class='dimensionInput' type="number" value='500' />
-                </p>
-                <div id='deleteMe'>
-                    <div class="styleContainer">
-                        <button id='randomBtn' class='styleBtns'>Random</button>
-                        <button id='fullCloneBtn' class='styleBtns'>Full Clone</button>
-                        <button id='fullReflectBtn' class='styleBtns'>Full Reflect</button>
-                        <button id='fullRotateBtn' class='styleBtns'>Full Rotate</button>
-                        <button id='halfReflectBtn' class='styleBtns'>Full Reflect</button>
-                    </div>
-                </div>
-
-            </div>
-            <div class='codeInjection'></div>
-        </section>
-        <section class='canvasBox'>
-            <canvas id="draw" width="500px" height="500px"></canvas>
-        </section>
-        <script type="module" src="./index.js"></script>
-    </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./styles.css" />
+		<title>randomDraw</title>
+	</head>
+	<body>
+		<section class="controlsBox">
+			<canvas id="preview" width="250px" height="250px"></canvas>
+			<div class="codeInjection">randomDraw({})</div>
+			<div class="controls">
+				<div class="mainControls">
+					<div class="drawerContainer btnContainer">
+						<button id="randomDrawerBtn" class="btns">
+							Random Draw
+						</button>
+						<button id="boxDrawerBtn" class="btns">Box Draw</button>
+						<button id="mandalaDrawerBtn" class="btns">
+							Mandala Draw
+						</button>
+					</div>
+					<p>
+						Dimensions:
+						<input
+							id="dimensionWidth"
+							class="inputField"
+							type="number"
+							value="500"
+						/>
+						x
+						<input
+							id="dimensionHeight"
+							class="inputField"
+							type="number"
+							value="500"
+						/>
+					</p>
+				</div>
+				<div class="subControls"></div>
+			</div>
+		</section>
+		<section class="canvasBox">
+			<canvas id="draw" width="500px" height="500px"></canvas>
+		</section>
+		<script type="module" src="./index.js"></script>
+	</body>
 </html>

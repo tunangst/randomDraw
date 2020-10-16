@@ -1,25 +1,27 @@
-import { drawSection } from '../BoxDrawing.js';
+import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
 import {
-    reflectVerticalAxis,
-    reflectHorizontalAxis,
+	reflectVerticalAxis,
+	reflectHorizontalAxis,
 } from '../singles/reflect.js';
 import { boxDraw, combineMatrixTopHalf } from '../boxDrawingUtilities.js';
 
 const fullReflect = (matrix) => {
-    console.log(`fullReflect`);
+	let adjustedMatrix = [];
+	let combinedMatrix = [];
+	let reflectedMatrix = [];
 
-    let adjustedMatrix = [];
-    let combinedMatrix = [];
-    let reflectedMatrix = [];
+	boxDraw(matrix);
 
-    boxDraw(matrix);
+	adjustedMatrix = reflectVerticalAxis(matrix, drawSectionWidth, 0);
+	boxDraw(adjustedMatrix);
 
-    adjustedMatrix = reflectVerticalAxis(matrix, drawSection, 0);
-    boxDraw(adjustedMatrix);
-
-    combinedMatrix = combineMatrixTopHalf(matrix, adjustedMatrix);
-    reflectedMatrix = reflectHorizontalAxis(combinedMatrix, 0, drawSection);
-    boxDraw(reflectedMatrix);
+	combinedMatrix = combineMatrixTopHalf(matrix, adjustedMatrix);
+	reflectedMatrix = reflectHorizontalAxis(
+		combinedMatrix,
+		0,
+		drawSectionHeight
+	);
+	boxDraw(reflectedMatrix);
 };
 
 export default fullReflect;

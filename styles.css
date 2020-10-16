@@ -1,66 +1,114 @@
 * {
-    box-sizing: border-box;
-    border: 1px solid greenyellow;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	/* border: 1px solid greenyellow; */
+}
+:root {
+	--outerContainerColor: hsl(203, 90%, 75%);
+	--innerContainerColor: hsl(203, 90%, 90%);
 }
 html,
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 body {
-    background-color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	background-color: white;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-.controlsBox {
-    /* width: 300px; */
-    max-width: 350px;
+p {
+	margin: 5px;
+	/* padding: 5px; */
+}
+.mainControls {
+	background-color: var(--outerContainerColor);
+	padding: 5px;
+}
 
-    display: flex;
-    flex-direction: column;
+.controlsBox {
+	max-width: 350px;
+
+	display: flex;
+	flex-direction: column;
 }
-.controls {
+
+.btns {
+	position: relative;
+	padding: 30px 10px;
+	margin: 5px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
-.drawerContainer {
-    display: flex;
-    justify-content: space-evenly;
+.btns input[type='color'] {
+	position: absolute;
+
+	height: 30%;
+	width: 100%;
+	bottom: 0;
+	left: 0;
 }
-.drawerBtns {
-    padding: 30px 10px;
-    margin: 5px;
-}
-.dimensionInput {
-    width: 50px;
+.inputField {
+	width: 50px;
 }
 
 .codeInjection {
 }
-
-.styleContainer {
-    display: flex;
-    flex-wrap: wrap;
+.separatorContainer {
+	background-color: var(--innerContainerColor);
+	margin: 0 10px;
 }
-.styleBtns {
-    padding: 20px;
+.separators {
+	padding: 10px;
+	margin: 0;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+.separators:first-child p {
+	align-self: flex-start;
+}
+. .separators p {
+	/* padding-top: 10px; */
+	/* margin: 1px; */
+}
+.btnContainer {
+	width: 100%;
+
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+.color {
 }
 
 .canvasBox {
-    flex: 1;
+	flex: 1;
 
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
-/* fieldset {
-    display: flex;
-    flex-direction: column;
-} */
-
 #preview {
-    display: none;
+	display: none;
+}
+
+.styleContainer {
+	padding: 5px;
+	background-color: var(--outerContainerColor);
+}
+
+.active {
+	background-color: lightsalmon;
 }

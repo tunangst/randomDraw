@@ -6,10 +6,13 @@ import { boxDraw, createPixelMap } from './boxDrawingUtilities.js';
 
 // let typeOfStyle = 'random';
 
-let canvasSize = 500;
+let canvasWidth = 500;
+let canvasHeight = 500;
 let boxCount = 10;
-let pixelSize = canvasSize / boxCount; //draw section divided by how many pixels across
-let drawSection = canvasSize / 2;
+let pixelWidth = canvasWidth / boxCount; //draw section divided by how many pixels across
+let pixelHeight = canvasWidth / boxCount; //draw section divided by how many pixels across
+let drawSectionWidth = canvasWidth / 2;
+let drawSectionHeight = canvasHeight / 2;
 let primaryToggle = 'default';
 let primaryColor = '#000000';
 let secondaryColor = randomColor();
@@ -24,157 +27,168 @@ let ctx2 = canvasDraw.getContext('2d');
 let matrix = [];
 
 const BoxDrawing = (forceDesignObj) => {
-    // console.log(primaryToggle, secondaryToggle, backgroundToggle);
-    const {
-        typeOfStyle,
-        // dimensions: { width, height },
-    } = forceDesignObj;
+	console.log(forceDesignObj);
+	const {
+		dimensions: { width, height },
+		boxDrawObj,
+	} = forceDesignObj;
+	if (width) canvasWidth = width;
+	if (height) canvasHeight = height;
+	if (width && height) {
+		pixelWidth = canvasWidth / boxCount;
+		pixelHeight = canvasWidth / boxCount;
+		drawSectionWidth = canvasWidth / 2;
+		drawSectionHeight = canvasHeight / 2;
+	}
 
-    canvasSize = 500;
-    // canvasSize = width || 500;
-    boxCount = forceDesignObj.boxCount || 10;
+	if (boxDrawObj.boxCount) boxCount = boxDrawObj.boxCount;
 
-    primaryToggle = 'default';
-    switch (primaryToggle) {
-        case 'default':
-            primaryColor = '#000000';
-            break;
-        case 'random':
-            primaryColor = randomColor();
-            break;
-        case 'choose':
-            primaryColor = props.primaryColor;
-            break;
-        default:
-            console.log('error in primarytoggle');
-            break;
-    }
+	// canvasSize = width || 500;
+	boxCount = forceDesignObj.boxCount || 10;
 
-    secondaryToggle = 'default';
-    switch (secondaryToggle) {
-        case 'default':
-            secondaryColor = randomColor(); //new color seed on refresh;
-            break;
-        case 'random':
-            secondaryColor = randomColor();
-            break;
-        case 'choose':
-            secondaryColor = props.secondaryColor;
-            break;
-        default:
-            console.log(secondaryToggle);
-            console.log('error in secondaryToggle');
-            break;
-    }
+	primaryToggle = 'default';
+	switch (primaryToggle) {
+		case 'default':
+			primaryColor = '#000000';
+			break;
+		case 'random':
+			primaryColor = randomColor();
+			break;
+		case 'choose':
+			primaryColor = props.primaryColor;
+			break;
+		default:
+			console.log('error in primarytoggle');
+			break;
+	}
 
-    backgroundToggle = 'default';
-    switch (backgroundToggle) {
-        case 'default':
-            backgroundColor = '#ffffff00';
-            break;
-        case 'random':
-            backgroundColor = randomColor();
-            break;
-        case 'choose':
-            backgroundColor = props.backgroundColor;
-            break;
-        default:
-            console.log('error in backgroundToggle');
-            break;
-    }
+	secondaryToggle = 'default';
+	switch (secondaryToggle) {
+		case 'default':
+			secondaryColor = randomColor(); //new color seed on refresh;
+			break;
+		case 'random':
+			secondaryColor = randomColor();
+			break;
+		case 'choose':
+			secondaryColor = props.secondaryColor;
+			break;
+		default:
+			console.log('error in secondaryToggle');
+			break;
+	}
 
-    if (canvasDraw.getContext) {
-        matrix = clear(matrix, { ctx, ctx2, canvasSize });
-        createPixelMap(matrix);
+	backgroundToggle = 'default';
+	switch (backgroundToggle) {
+		case 'default':
+			backgroundColor = '#ffffff00';
+			break;
+		case 'random':
+			backgroundColor = randomColor();
+			break;
+		case 'choose':
+			backgroundColor = props.backgroundColor;
+			break;
+		default:
+			console.log('error in backgroundToggle');
+			break;
+	}
 
-        boxDraw(matrix, null, null); // draw on ctx not ctx2
+	if (canvasDraw.getContext) {
+		matrix = clear(matrix, { ctx, ctx2, canvasWidth, canvasHeight });
+		createPixelMap(matrix);
 
-        switch ('random') {
-            case 'random':
-                let dice = roll(3);
-                switch (dice) {
-                    case 1:
-                        specials(matrix);
-                        break;
-                    case 2:
-                        singles(matrix);
-                        break;
-                    case 3:
-                        doubles(matrix);
-                        break;
-                    default:
-                        console.log('error in layout variable no dice');
-                        break;
-                }
-                break;
-            case 'full clone':
-                specials(matrix, 'fullClone');
-                break;
-            case 'full reflect':
-                specials(matrix, 'fullReflect');
-                break;
-            case 'full rotate':
-                specials(matrix, 'fullRotate');
-                break;
-            case 'half reflect':
-                specials(matrix, 'halfReflect');
-                break;
-            default:
-                console.log('error in type of style switch cases');
-                break;
-        }
+		boxDraw(matrix, null, null); // draw on ctx not ctx2
 
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
-        //  singles x4
-        //      clone
-        //      rotate
-        //      reflect
-        //  doubles x2
-        //      clone
-        //      rotate
-        //      reflect
-        //  singles x2 doubles x1
-        //      clone (rotate, reflect, clone)
-        //      rotate (reflect, clone, rotate)
-        //      reflect (clone, rotate, reflect)
-        //
-        //  specials
-        //      full clone (4 clone)
-        //      full rotate (4 singles)
-        //      full reflect (4 singles)
-        //      half reflect (vertical, horizontal)
-        //
-        //  roll #1: type (singles x4, doubles x2, singles x2 doubles x1, specials)
-        //  roll #2: ↓
-        //      singles x4
-        //          quadrant (1,2,3,4)
-        //          type (clone, rotate, reflect)
-        //          ... x4
-        //      doubles x1 singles x2
-        //          quadrant (vertical, horizontal)
-        //          type (clone, rotate, reflect)
-        //              type (clone, rotate, reflect)
-        //      specials
-        //          type (full clone, full rotate, full reflect, half reflect)
-        //
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
-    } else {
-        alert('You need Safari or Firefox 1.5+ to see this demo.');
-    }
+		switch ('random') {
+			case 'random':
+				let dice = roll(3);
+				switch (dice) {
+					case 1:
+						specials(matrix);
+						break;
+					case 2:
+						singles(matrix);
+						break;
+					case 3:
+						doubles(matrix);
+						break;
+					default:
+						console.log('error in layout variable no dice');
+						break;
+				}
+				break;
+			case 'full clone':
+				specials(matrix, 'fullClone');
+				break;
+			case 'full reflect':
+				specials(matrix, 'fullReflect');
+				break;
+			case 'full rotate':
+				specials(matrix, 'fullRotate');
+				break;
+			case 'half reflect':
+				specials(matrix, 'halfReflect');
+				break;
+			default:
+				console.log('error in type of style switch cases');
+				break;
+		}
+
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
+		//  singles x4
+		//      clone
+		//      rotate
+		//      reflect
+		//  doubles x2
+		//      clone
+		//      rotate
+		//      reflect
+		//  singles x2 doubles x1
+		//      clone (rotate, reflect, clone)
+		//      rotate (reflect, clone, rotate)
+		//      reflect (clone, rotate, reflect)
+		//
+		//  specials
+		//      full clone (4 clone)
+		//      full rotate (4 singles)
+		//      full reflect (4 singles)
+		//      half reflect (vertical, horizontal)
+		//
+		//  roll #1: type (singles x4, doubles x2, singles x2 doubles x1, specials)
+		//  roll #2: ↓
+		//      singles x4
+		//          quadrant (1,2,3,4)
+		//          type (clone, rotate, reflect)
+		//          ... x4
+		//      doubles x1 singles x2
+		//          quadrant (vertical, horizontal)
+		//          type (clone, rotate, reflect)
+		//              type (clone, rotate, reflect)
+		//      specials
+		//          type (full clone, full rotate, full reflect, half reflect)
+		//
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~options~~~~~~~~~~~~~~~~~
+	} else {
+		alert('You need Safari or Firefox 1.5+ to see this demo.');
+	}
 };
 
 export {
-    BoxDrawing,
-    // typeOfStyle,
-    canvasSize,
-    boxCount,
-    pixelSize,
-    drawSection,
-    primaryColor,
-    secondaryColor,
-    backgroundColor,
-    canvasPreview,
-    canvasDraw,
-    ctx,
-    ctx2,
+	BoxDrawing,
+	// typeOfStyle,
+	canvasWidth,
+	canvasHeight,
+	boxCount,
+	pixelWidth,
+	pixelHeight,
+	drawSectionWidth,
+	drawSectionHeight,
+	primaryColor,
+	secondaryColor,
+	backgroundColor,
+	canvasPreview,
+	canvasDraw,
+	ctx,
+	ctx2,
 };
