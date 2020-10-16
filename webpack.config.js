@@ -7,3 +7,5 @@ module.export = {
 		path: path.resolve(__dirname, 'dist'),
 	},
 };
+
+// "prefixForGitPages": "git subtree push --prefix=dist origin gh-pages",
