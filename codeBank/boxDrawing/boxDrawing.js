@@ -4,7 +4,7 @@ import doubles from './doubles/doubles.js';
 import { roll, clear, randomColor } from '../utilities.js';
 import { boxDraw, createPixelMap } from './boxDrawingUtilities.js';
 
-let typeOfStyle = 'random';
+// let typeOfStyle = 'random';
 
 let canvasSize = 500;
 let boxCount = 10;
@@ -23,14 +23,18 @@ let ctx = canvasPreview.getContext('2d');
 let ctx2 = canvasDraw.getContext('2d');
 let matrix = [];
 
-const BoxDrawing = (props) => {
-    console.log(primaryToggle, secondaryToggle, backgroundToggle);
-    typeOfStyle = props.typeOfStyle;
+const BoxDrawing = (forceDesignObj) => {
+    // console.log(primaryToggle, secondaryToggle, backgroundToggle);
+    const {
+        typeOfStyle,
+        // dimensions: { width, height },
+    } = forceDesignObj;
 
-    canvasSize = props.canvasSize;
-    boxCount = props.boxCount;
+    canvasSize = 500;
+    // canvasSize = width || 500;
+    boxCount = forceDesignObj.boxCount || 10;
 
-    primaryToggle = props.primaryToggle;
+    primaryToggle = 'default';
     switch (primaryToggle) {
         case 'default':
             primaryColor = '#000000';
@@ -46,7 +50,7 @@ const BoxDrawing = (props) => {
             break;
     }
 
-    secondaryToggle = props.secondaryToggle;
+    secondaryToggle = 'default';
     switch (secondaryToggle) {
         case 'default':
             secondaryColor = randomColor(); //new color seed on refresh;
@@ -63,7 +67,7 @@ const BoxDrawing = (props) => {
             break;
     }
 
-    backgroundToggle = props.backgroundToggle;
+    backgroundToggle = 'default';
     switch (backgroundToggle) {
         case 'default':
             backgroundColor = '#ffffff00';
@@ -85,7 +89,7 @@ const BoxDrawing = (props) => {
 
         boxDraw(matrix, null, null); // draw on ctx not ctx2
 
-        switch (typeOfStyle) {
+        switch ('random') {
             case 'random':
                 let dice = roll(3);
                 switch (dice) {
@@ -161,7 +165,7 @@ const BoxDrawing = (props) => {
 
 export {
     BoxDrawing,
-    typeOfStyle,
+    // typeOfStyle,
     canvasSize,
     boxCount,
     pixelSize,

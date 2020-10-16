@@ -54,7 +54,7 @@ const getInputStats = () => {
         minPathRadius: 20,
         maxPathRadius: findHypotenuse(halfWidth, halfHeight),
         minShapeCount: 4,
-        maxShapeCount: 200, //
+        maxShapeCount: 200,
         maxShapeSize: 200,
 
         shapeCount: null, // default, randomize

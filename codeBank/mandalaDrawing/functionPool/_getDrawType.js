@@ -94,6 +94,7 @@ const getDrawType = (inputs, forceType) => {
         inputs.strokeWidthAll = true;
     };
 
+    // debugger;
     if (forceType) {
         eval(`${forceType}()`);
     } else {

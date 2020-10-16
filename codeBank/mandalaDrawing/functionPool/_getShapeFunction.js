@@ -12,9 +12,10 @@ const getShapeFunction = (inputs, forceNumber) => {
             forceNumber = forceNumber - diceRange;
         }
         dice = forceNumber;
-    }
-    if (inputs.customShape === 'noLine') {
+    } else if (inputs.customShape === 'noLine') {
         dice = roll(2);
+    } else {
+        dice = roll(3);
     }
     switch (dice) {
         case 1: // draw ellipse

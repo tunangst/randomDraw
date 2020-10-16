@@ -1,5 +1,6 @@
 import loop from './loop.js';
 import getInputStats from '../functionPool/_getInputStats.js';
+import clearDrawingArea from '../functionPool/draw/clearDrawingArea.js';
 import getBackgroundLoopStats from '../functionPool/_getBackgroundLoopStats.js';
 // import getInitLoopStats from '../functionPool/_getInitLoopStats.js';
 import getFollowingLoopStats from '../functionPool/_getFollowingLoopStats.js';
@@ -9,13 +10,17 @@ import checkBackgroundSwitches from '../functionPool/_checkBackgroundSwitches.js
 import getBlendMode from '../functionPool/_getBlendMode.js';
 
 const specialShape = () => {
+    // clear canvas
+    clearDrawingArea();
+    // clear canvas
     //|||||||||||||||||||||||||||||||||stats|||||||||||||||||||
     //init stats
     let inputStats = getInputStats();
     //'strokeOnly','fillOnly','fillAndStroke','individual','chaos','outline'
     inputStats = getBlendMode(inputStats);
     //overrides
-    inputStats = getDrawType(inputStats, 'outline');
+    // inputStats = getDrawType(inputStats, 'outline');
+    inputStats = getDrawType(inputStats);
     //build arr
     inputStats.shapeArr = getShapeArr(inputStats);
 
@@ -41,7 +46,7 @@ const specialShape = () => {
         }
         //call loop
         // console.log({ ...inputStats });
-        console.log(inputStats.pathRadius, inputStats.shapeSize);
+        // console.log(inputStats.pathRadius, inputStats.shapeSize);
         // debugger;
         inputStats = loop(inputStats);
         //reset loop stats

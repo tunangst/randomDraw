@@ -10,20 +10,57 @@ body {
     padding: 0;
 }
 body {
+    background-color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.controlsBox {
+    /* width: 300px; */
+    max-width: 350px;
+
+    display: flex;
+    flex-direction: column;
+}
+.controls {
+}
+.drawerContainer {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
-    background-color: white;
 }
-canvas {
-    /* background-color: rgba(0, 0, 0, 0.02); */
-    border: 1px dotted black;
+.drawerBtns {
+    padding: 30px 10px;
+    margin: 5px;
 }
-fieldset {
+.dimensionInput {
+    width: 50px;
+}
+
+.codeInjection {
+}
+
+.styleContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.styleBtns {
+    padding: 20px;
+}
+
+.canvasBox {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* fieldset {
     display: flex;
     flex-direction: column;
-}
-form {
-    display: flex;
-    flex-direction: column;
+} */
+
+#preview {
+    display: none;
 }

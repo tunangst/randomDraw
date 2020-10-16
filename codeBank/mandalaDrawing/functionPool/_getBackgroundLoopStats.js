@@ -7,7 +7,7 @@ const getBackgroundStats = (inputs) => {
     inputs.shapeSize = inputs.pathRadius;
     // //****************INSIDE FIRST ROLL****************
     // //****************INSIDE FIRST ROLL****************
-    console.log(inputs);
+    // console.log(inputs);
     // debugger;
 
     if (inputs.customBackgroundSwitch) {

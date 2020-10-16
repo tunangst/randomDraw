@@ -1,11 +1,11 @@
-import randomDrawing from './randomDrawing.js';
+import RandomDrawing from './randomDrawing.js';
 import { BoxDrawing } from './boxDrawing/BoxDrawing.js';
 import { MandalaDrawing } from './mandalaDrawing/MandalaDrawing.js';
 
-const randomDraw = {
-    randomDrawing,
+const randomInterface = {
+    RandomDrawing,
     BoxDrawing,
     MandalaDrawing,
 };
 
-export default randomDraw;
+export default randomInterface;
