@@ -1,7 +1,7 @@
 import { PixelNode } from '../boxDrawingUtilities.js';
-import { pixelWidth, pixelHeight } from '../BoxDrawing.js';
 
-const reflectVerticalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
+const reflectVerticalAxis = (boxDrawObj, xOffset = 0, yOffset = 0) => {
+	const useMatrix = boxDrawObj.matrix;
 	let xPos = xOffset;
 	let yPos = yOffset;
 	let tempMatrix = [];
@@ -12,18 +12,19 @@ const reflectVerticalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
 			const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
 			rowArr.push(newPixel);
-			xPos += pixelWidth;
+			xPos += boxDrawObj.pixelWidth;
 		}
 		tempMatrix.push(rowArr);
 		xPos = xOffset;
-		yPos += pixelHeight;
+		yPos += boxDrawObj.pixelHeight;
 	}
 	yPos = yOffset;
 
 	return tempMatrix;
 };
 
-const reflectHorizontalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
+const reflectHorizontalAxis = (boxDrawObj, xOffset = 0, yOffset = 0) => {
+	const useMatrix = boxDrawObj.matrix;
 	let xPos = xOffset;
 	let yPos = yOffset;
 	let tempMatrix = [];
@@ -34,11 +35,11 @@ const reflectHorizontalAxis = (useMatrix, xOffset = 0, yOffset = 0) => {
 			const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
 			rowArr.push(newPixel);
-			xPos += pixelWidth;
+			xPos += boxDrawObj.pixelWidth;
 		}
 		tempMatrix.push(rowArr);
 		xPos = xOffset;
-		yPos += pixelHeight;
+		yPos += boxDrawObj.pixelHeight;
 	}
 	yPos = yOffset;
 

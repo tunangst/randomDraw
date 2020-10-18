@@ -114,6 +114,21 @@ const initBoxBtnFunctions = () => {
 	});
 	//backgroundColor
 };
+const initBoxDrawChoiceListeners = () => {
+	const boxPatternBtns = document.querySelectorAll('.boxPatternBtns');
+	boxPatternBtns.forEach((boxPatternBtn) => {
+		boxPatternBtn.addEventListener('click', (event) => {
+			let convertedWord;
+			const word = event.target.innerText;
+			convertedWord =
+				word.charAt(0).toLowerCase() + word.replace(/\s/g, '').slice(1);
+
+			forceDesignObj.boxDrawObj.drawStyle = convertedWord;
+			randomDraw(forceDesignObj);
+		});
+	});
+};
+
 const initBtnActiveListeners = () => {
 	btns = document.querySelectorAll('.btns');
 	btns.forEach((btn) => {
@@ -131,6 +146,7 @@ const initBtnActiveListeners = () => {
 			event.target.classList.add('active');
 		});
 	});
+	initBoxDrawChoiceListeners();
 };
 initBtnActiveListeners();
 

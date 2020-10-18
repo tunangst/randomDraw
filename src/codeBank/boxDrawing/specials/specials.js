@@ -4,41 +4,41 @@ import fullRotate from './fullRotate.js';
 import fullReflect from './fullReflect.js';
 import halfReflect from './halfReflect.js';
 
-const specials = (matrix, forceDraw) => {
+const specials = (boxDrawObj) => {
 	//      specials
 	//          type (full clone, full rotate, full reflect, half reflect)
-	if (!forceDraw) {
+	if (!boxDrawObj.drawStyle || boxDrawObj.drawStyle === 'random') {
 		const dice = roll(4);
 		switch (dice) {
 			case 1:
-				fullClone(matrix);
+				fullClone(boxDrawObj);
 				break;
 			case 2:
-				fullRotate(matrix);
+				fullRotate(boxDrawObj);
 				break;
 			case 3:
-				fullReflect(matrix);
+				fullReflect(boxDrawObj);
 				break;
 			case 4:
-				halfReflect(matrix);
+				halfReflect(boxDrawObj);
 				break;
 			default:
 				console.log('error in layout variable');
 				break;
 		}
 	} else {
-		switch (forceDraw) {
+		switch (boxDrawObj.drawStyle) {
 			case 'fullClone':
-				fullClone(matrix);
+				fullClone(boxDrawObj);
 				break;
 			case 'fullReflect':
-				fullReflect(matrix);
+				fullReflect(boxDrawObj);
 				break;
 			case 'fullRotate':
-				fullRotate(matrix);
+				fullRotate(boxDrawObj);
 				break;
 			case 'halfReflect':
-				halfReflect(matrix);
+				halfReflect(boxDrawObj);
 				break;
 			default:
 				console.log('error in forcedraw of specials');

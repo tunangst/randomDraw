@@ -1,5 +1,5 @@
-import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
 import { roll } from '../../utilities.js';
+import { InputNode } from '../boxDrawingUtilities.js';
 import {
 	boxDraw,
 	combineMatrixTopHalf,
@@ -11,27 +11,9 @@ import {
 	reflectVerticalAxis,
 } from '../singles/reflect.js';
 import { rotateClockwise, rotateCounterClockwise } from '../singles/rotate.js';
-// import {
 
-// } from '../boxDrawingUtilities.js';
-
-const doubles = (matrix) => {
-	//  roll #1: ↓
-	//      singles x1
-	//          quadrant (2,3)
-	//          type (clone, rotate [r, l], reflect [r, l])
-	//      quadrants
-	//          _________
-	//          |_1_|_2_|  {x: 0, y: 0}             ,{x: drawSectionWidth, y: 0}
-	//          |_3_|_4_|  {x: 0, y: drawSectionHeight}   ,{x: drawSectionWidth, y: drawSectionHeight}
-	//      type
-	//          1 = clone
-	//          2 = rotate
-	//          3 = reflect
-	//  roll #2: ↓
-	//      type (clone, rotate x2, reflect)
-
-	boxDraw(matrix);
+const doubles = (boxDrawObj) => {
+	boxDraw(boxDrawObj);
 	const quadrantDice = roll(2); // 1 = q2. 2 = q3
 	const styleDice = roll(3); // 1= clone, 2= rotate, 3= reflect
 	const doubleDice = roll(3); // 1= clone, 2= rotate x2, 3= reflect
@@ -40,35 +22,48 @@ const doubles = (matrix) => {
 
 	const quadrant =
 		quadrantDice === 1
-			? { x: drawSectionWidth, y: 0 }
-			: { x: 0, y: drawSectionHeight };
+			? { x: boxDrawObj.drawSectionWidth, y: 0 }
+			: { x: 0, y: boxDrawObj.drawSectionHeight };
 	const quadrantDouble =
 		quadrantDice === 1
-			? { x: 0, y: drawSectionHeight }
-			: { x: drawSectionWidth, y: 0 };
+			? { x: 0, y: boxDrawObj.drawSectionHeight }
+			: { x: boxDrawObj.drawSectionWidth, y: 0 };
+
+	let inputNode = new InputNode(
+		boxDrawObj.ctx,
+		boxDrawObj.ctx2,
+		boxDrawObj.matrix,
+		boxDrawObj.pixelWidth,
+		boxDrawObj.pixelHeight
+	);
 
 	switch (styleDice) {
 		case 1:
 			//clone
-			adjustedMatrix = clone(matrix, quadrant.x, quadrant.y);
-			boxDraw(adjustedMatrix);
+			adjustedMatrix = clone(boxDrawObj, quadrant.x, quadrant.y);
+
+			inputNode.matrix = adjustedMatrix;
+
+			boxDraw(inputNode);
 			break;
 		case 2:
 			//rotate
 			directionDice = roll(2); // 1 = clockwise. 2 = counter clockwise
 			directionDice === 1
 				? (adjustedMatrix = rotateClockwise(
-						matrix,
+						inputNode,
 						quadrant.x,
 						quadrant.y
 				  ))
 				: (adjustedMatrix = rotateCounterClockwise(
-						matrix,
+						inputNode,
 						quadrant.x,
 						quadrant.y
 				  ));
 
-			boxDraw(adjustedMatrix);
+			inputNode.matrix = adjustedMatrix;
+
+			boxDraw(inputNode);
 			break;
 		case 3:
 			//reflect
@@ -76,17 +71,19 @@ const doubles = (matrix) => {
 			directionDice = roll(2); // 1 = vertical axis reflect. 2 = horizontal axis reflect
 			directionDice === 1
 				? (adjustedMatrix = reflectVerticalAxis(
-						matrix,
+						inputNode,
 						quadrant.x,
 						quadrant.y
 				  ))
 				: (adjustedMatrix = reflectHorizontalAxis(
-						matrix,
+						inputNode,
 						quadrant.x,
 						quadrant.y
 				  ));
 
-			boxDraw(adjustedMatrix);
+			inputNode.matrix = adjustedMatrix;
+
+			boxDraw(inputNode);
 			break;
 		default:
 			console.log('error in style dice variable');
@@ -95,40 +92,58 @@ const doubles = (matrix) => {
 
 	let combinedMatrix = [];
 	quadrantDice === 1
-		? (combinedMatrix = combineMatrixTopHalf(matrix, adjustedMatrix))
-		: (combinedMatrix = combineMatrixLeftHalf(matrix, adjustedMatrix));
+		? (combinedMatrix = combineMatrixTopHalf(
+				boxDrawObj.matrix,
+				adjustedMatrix
+		  ))
+		: (combinedMatrix = combineMatrixLeftHalf(
+				boxDrawObj.matrix,
+				adjustedMatrix
+		  ));
 	let rotatedMatrix = [];
 	let reflectedMatrix = [];
+
+	inputNode.matrix = combinedMatrix;
 
 	switch (doubleDice) {
 		case 1:
 			//clone
-			boxDraw(combinedMatrix, quadrantDouble.x, quadrantDouble.y);
+
+			boxDraw(inputNode, quadrantDouble.x, quadrantDouble.y);
 			break;
 		case 2: //quadrantDice === 1, combine top
 			//rotate
+
+			rotatedMatrix = rotateClockwise(inputNode);
+			inputNode.matrix = rotatedMatrix;
 			rotatedMatrix = rotateClockwise(
-				rotateClockwise(combinedMatrix),
+				inputNode,
 				quadrantDouble.x,
 				quadrantDouble.y
 			); // rotate twice
-			boxDraw(rotatedMatrix);
+
+			inputNode.matrix = rotatedMatrix;
+
+			boxDraw(inputNode);
 			break;
 		case 3: // quadrantDice === 1, reflect horizontal : reflect vertical
 			//reflect
 			reflectedMatrix =
 				quadrantDice === 1
 					? reflectHorizontalAxis(
-							combinedMatrix,
+							inputNode,
 							quadrantDouble.x,
 							quadrantDouble.y
 					  )
 					: reflectVerticalAxis(
-							combinedMatrix,
+							inputNode,
 							quadrantDouble.x,
 							quadrantDouble.y
 					  );
-			boxDraw(reflectedMatrix);
+
+			inputNode.matrix = reflectedMatrix;
+
+			boxDraw(inputNode);
 
 			break;
 

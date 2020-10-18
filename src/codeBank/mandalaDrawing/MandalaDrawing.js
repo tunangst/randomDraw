@@ -19,7 +19,7 @@ let ctx2 = null;
 // console.log(inputStats);
 
 const MandalaDrawing = (forceDesignObj) => {
-	console.log(forceDesignObj);
+	// console.log(forceDesignObj);
 	const {
 		dimensions: { width, height },
 		mandalaDrawObj,
@@ -32,7 +32,7 @@ const MandalaDrawing = (forceDesignObj) => {
 	}
 	// debugger;
 
-	console.log('MandalaDrawing');
+	// console.log('MandalaDrawing');
 	//create canvas
 	[canvasDraw, ctx2] = createCanvasDraw(canvasWidth, canvasHeight);
 

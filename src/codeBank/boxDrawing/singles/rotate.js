@@ -1,7 +1,8 @@
 import { PixelNode } from '../boxDrawingUtilities.js';
-import { pixelWidth, pixelHeight } from '../BoxDrawing.js';
+// import { pixelWidth, pixelHeight } from '../BoxDrawing.js';
 
-const rotateClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
+const rotateClockwise = (boxDrawObj, xOffset = 0, yOffset = 0) => {
+	const useMatrix = boxDrawObj.matrix;
 	let xPos = xOffset;
 	let yPos = yOffset;
 	let tempMatrix = [];
@@ -15,11 +16,11 @@ const rotateClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
 			const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
 			rowArr.push(newPixel);
-			xPos += pixelWidth;
+			xPos += boxDrawObj.pixelWidth;
 		}
 		tempMatrix.push(rowArr);
 		xPos = xOffset;
-		yPos += pixelHeight;
+		yPos += boxDrawObj.pixelHeight;
 	}
 	yPos = yOffset;
 	rotatedMatrix = [...tempMatrix];
@@ -27,7 +28,8 @@ const rotateClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
 	return rotatedMatrix;
 };
 
-const rotateCounterClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
+const rotateCounterClockwise = (boxDrawObj, xOffset = 0, yOffset = 0) => {
+	const useMatrix = boxDrawObj.matrix;
 	//loop columns reverse
 	//loop over rows in order
 	let xPos = xOffset;
@@ -43,11 +45,11 @@ const rotateCounterClockwise = (useMatrix, xOffset = 0, yOffset = 0) => {
 			const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
 			rowArr.push(newPixel);
-			xPos += pixelWidth;
+			xPos += boxDrawObj.pixelWidth;
 		}
 		tempMatrix.push(rowArr);
 		xPos = xOffset;
-		yPos += pixelHeight;
+		yPos += boxDrawObj.pixelHeight;
 	}
 	yPos = yOffset;
 	rotatedMatrix = [...tempMatrix];

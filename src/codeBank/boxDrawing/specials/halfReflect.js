@@ -1,7 +1,8 @@
-import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
+// import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
 import { roll } from '../../utilities.js';
 import {
 	boxDraw,
+	InputNode,
 	combineMatrixLeftHalf,
 	combineMatrixTopHalf,
 } from '../boxDrawingUtilities.js';
@@ -11,33 +12,72 @@ import {
 	reflectHorizontalAxis,
 } from '../singles/reflect.js';
 
-const halfReflect = (matrix) => {
-	boxDraw(matrix);
+const halfReflect = (boxDrawObj) => {
+	boxDraw(boxDrawObj);
 	let clonedMatrix = [];
 	let combinedMatrix = [];
 	let reflectedMatrix = [];
+
+	let inputNode = new InputNode(
+		boxDrawObj.ctx,
+		boxDrawObj.ctx2,
+		boxDrawObj.matrix,
+		boxDrawObj.pixelWidth,
+		boxDrawObj.pixelHeight
+	);
 
 	const quadrantDice = roll(2);
 	switch (quadrantDice) {
 		case 1:
 			//horizontal reflect
-			clonedMatrix = clone(matrix, drawSectionWidth, 0);
-			boxDraw(clonedMatrix);
+			clonedMatrix = clone(boxDrawObj, boxDrawObj.drawSectionWidth, 0);
 
-			combinedMatrix = combineMatrixTopHalf(matrix, clonedMatrix);
-			reflectedMatrix = reflectHorizontalAxis(combinedMatrix, 0, 250);
-			boxDraw(reflectedMatrix);
+			inputNode.matrix = clonedMatrix;
+
+			boxDraw(inputNode);
+
+			combinedMatrix = combineMatrixTopHalf(
+				boxDrawObj.matrix,
+				clonedMatrix
+			);
+
+			inputNode.matrix = combinedMatrix;
+
+			reflectedMatrix = reflectHorizontalAxis(
+				inputNode,
+				0,
+				boxDrawObj.drawSectionHeight
+			);
+
+			inputNode.matrix = reflectedMatrix;
+
+			boxDraw(inputNode);
 
 			break;
 		case 2:
 			//vertical reflect
-			clonedMatrix = clone(matrix, 0, drawSectionHeight);
-			boxDraw(clonedMatrix);
+			clonedMatrix = clone(boxDrawObj, 0, boxDrawObj.drawSectionHeight);
 
-			combinedMatrix = combineMatrixLeftHalf(matrix, clonedMatrix);
-			reflectedMatrix = reflectVerticalAxis(combinedMatrix, 250, 0);
-			boxDraw(reflectedMatrix);
+			inputNode.matrix = clonedMatrix;
 
+			boxDraw(inputNode);
+
+			combinedMatrix = combineMatrixLeftHalf(
+				boxDrawObj.matrix,
+				clonedMatrix
+			);
+
+			inputNode.matrix = combinedMatrix;
+
+			reflectedMatrix = reflectVerticalAxis(
+				inputNode,
+				boxDrawObj.drawSectionWidth,
+				0
+			);
+
+			inputNode.matrix = reflectedMatrix;
+
+			boxDraw(inputNode);
 			break;
 		default:
 			console.log('error in halfReflect switch');

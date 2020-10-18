@@ -47,11 +47,23 @@ const createCanvasDraw = (width, height) => {
 	return [canvasDraw, ctx2];
 };
 
-const clear = (matrix, { ctx, ctx2, canvasWidth, canvasHeight }) => {
-	matrix = [];
-	ctx && ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-	ctx2 && ctx2.clearRect(0, 0, canvasWidth, canvasHeight);
-	return matrix;
+const clear = (inputObj) => {
+	inputObj.matrix = [];
+	inputObj.ctx &&
+		inputObj.ctx.clearRect(
+			0,
+			0,
+			inputObj.canvasWidth,
+			inputObj.canvasHeight
+		);
+	inputObj.ctx2 &&
+		inputObj.ctx2.clearRect(
+			0,
+			0,
+			inputObj.canvasWidth,
+			inputObj.canvasHeight
+		);
+	return inputObj.matrix;
 };
 
 const randomColor = () => {
@@ -93,6 +105,34 @@ const darkColor = (shapeCount) => {
 	}
 	return `hsl(${randomH},${randomS}%,${randomL}%)`;
 };
+
+//rotate image functions
+//rotate image functions
+//rotate image functions
+//rotate image functions
+
+// const img = new Image();
+// img.src = "https://i.stack.imgur.com/C7qq2.png?s=328&g=1";
+// img.onload = () => { requestAnimationFrame(mainLoop) } // start when loaded
+// const ctx = canvas.getContext("2d");
+
+// function drawImageRotated(img, x, y, scale, rot) {
+//   ctx.setTransform(scale, 0, 0, scale, x, y);
+//   ctx.rotate(rot);
+//   ctx.drawImage(img, -img.width / 2, -img.height / 2);
+//   ctx.setTransform(1, 0, 0, 1, 0, 0);
+// }
+
+// function mainLoop(time) {
+//   ctx.clearRect(0, 0, canvas.width, canvas.height);
+//   drawImageRotated(img,canvas.width / 2, canvas.height / 2, 0.5, time / 500);
+//   requestAnimationFrame(mainLoop);
+// }
+
+//rotate image functions
+//rotate image functions
+//rotate image functions
+//rotate image functions
 
 export {
 	roll,

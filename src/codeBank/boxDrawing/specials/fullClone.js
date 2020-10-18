@@ -1,22 +1,46 @@
-import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
-import { boxDraw } from '../boxDrawingUtilities.js';
+// import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
+// import {inputNode} from '../boxDrawingUtilities.js';
+import { boxDraw, InputNode } from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 
-const fullClone = (matrix) => {
+const fullClone = (boxDrawObj) => {
 	let cloneMatrix1 = [];
 	let cloneMatrix2 = [];
 	let cloneMatrix3 = [];
 
-	boxDraw(matrix);
+	let inputNode = new InputNode(
+		boxDrawObj.ctx,
+		boxDrawObj.ctx2,
+		boxDrawObj.matrix,
+		boxDrawObj.pixelWidth,
+		boxDrawObj.pixelHeight
+	);
 
-	cloneMatrix1 = clone(matrix, drawSectionWidth, 0);
-	boxDraw(cloneMatrix1);
+	// debugger;
 
-	cloneMatrix2 = clone(matrix, drawSectionWidth, drawSectionHeight);
-	boxDraw(cloneMatrix2);
+	boxDraw(boxDrawObj);
 
-	cloneMatrix3 = clone(matrix, 0, drawSectionHeight);
-	boxDraw(cloneMatrix3);
+	cloneMatrix1 = clone(boxDrawObj, boxDrawObj.drawSectionWidth, 0);
+
+	inputNode.matrix = cloneMatrix1;
+
+	boxDraw(inputNode);
+
+	cloneMatrix2 = clone(
+		boxDrawObj,
+		boxDrawObj.drawSectionWidth,
+		boxDrawObj.drawSectionHeight
+	);
+
+	inputNode.matrix = cloneMatrix2;
+
+	boxDraw(inputNode);
+
+	cloneMatrix3 = clone(boxDrawObj, 0, boxDrawObj.drawSectionHeight);
+
+	inputNode.matrix = cloneMatrix3;
+
+	boxDraw(inputNode);
 };
 
 export default fullClone;

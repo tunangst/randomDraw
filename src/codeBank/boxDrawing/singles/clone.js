@@ -1,10 +1,11 @@
 import { PixelNode } from '../boxDrawingUtilities.js';
-import { pixelWidth, pixelHeight } from '../BoxDrawing.js';
 
-const clone = (usingMatrix, xOffset = 0, yOffset = 0) => {
+const clone = (boxDrawObj, xOffset = 0, yOffset = 0) => {
+	const usingMatrix = boxDrawObj.matrix;
 	let xPos = xOffset;
 	let yPos = yOffset;
 	let tempMatrix = [];
+
 	for (let matrixRow = 0; matrixRow < usingMatrix.length; matrixRow++) {
 		let rowArr = [];
 		for (
@@ -16,11 +17,11 @@ const clone = (usingMatrix, xOffset = 0, yOffset = 0) => {
 			const newPixel = new PixelNode(xPos, yPos, pixel.color);
 
 			rowArr.push(newPixel);
-			xPos += pixelWidth;
+			xPos += boxDrawObj.pixelWidth;
 		}
 		tempMatrix.push(rowArr);
 		xPos = xOffset;
-		yPos += pixelHeight;
+		yPos += boxDrawObj.pixelHeight;
 	}
 	yPos = yOffset;
 

@@ -1,22 +1,44 @@
-import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
+// import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
 import { rotateClockwise } from '../singles/rotate.js';
-import { boxDraw } from '../boxDrawingUtilities.js';
+import { boxDraw, InputNode } from '../boxDrawingUtilities.js';
 
-const fullRotate = (matrix) => {
+const fullRotate = (boxDrawObj) => {
 	let rotatedMatrix1 = [];
 	let rotatedMatrix2 = [];
 	let rotatedMatrix3 = [];
 
-	boxDraw(matrix);
+	boxDraw(boxDrawObj);
 
-	rotatedMatrix1 = rotateClockwise(matrix);
-	boxDraw(rotatedMatrix1, drawSectionWidth, 0);
+	let inputNode = new InputNode(
+		boxDrawObj.ctx,
+		boxDrawObj.ctx2,
+		boxDrawObj.matrix,
+		boxDrawObj.pixelWidth,
+		boxDrawObj.pixelHeight
+	);
 
-	rotatedMatrix2 = rotateClockwise(rotatedMatrix1);
-	boxDraw(rotatedMatrix2, drawSectionWidth, drawSectionHeight);
+	rotatedMatrix1 = rotateClockwise(boxDrawObj);
 
-	rotatedMatrix3 = rotateClockwise(rotatedMatrix2);
-	boxDraw(rotatedMatrix3, 0, drawSectionHeight);
+	inputNode.matrix = rotatedMatrix1;
+	// debugger;
+
+	boxDraw(inputNode, boxDrawObj.drawSectionWidth, 0);
+
+	rotatedMatrix2 = rotateClockwise(inputNode);
+
+	inputNode.matrix = rotatedMatrix2;
+
+	boxDraw(
+		inputNode,
+		boxDrawObj.drawSectionWidth,
+		boxDrawObj.drawSectionHeight
+	);
+
+	rotatedMatrix3 = rotateClockwise(inputNode);
+
+	inputNode.matrix = rotatedMatrix3;
+
+	boxDraw(inputNode, 0, boxDrawObj.drawSectionHeight);
 };
 
 export default fullRotate;

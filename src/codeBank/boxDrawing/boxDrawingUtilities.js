@@ -1,17 +1,8 @@
 import { roll } from '../utilities.js';
-import {
-	ctx,
-	ctx2,
-	pixelWidth,
-	pixelHeight,
-	drawSectionWidth,
-	drawSectionHeight,
-	primaryColor,
-	secondaryColor,
-	backgroundColor,
-} from './BoxDrawing.js';
 
-const boxDraw = (usingMatrix, xCoord = 0, yCoord = 0) => {
+const boxDraw = (boxDrawObj, xCoord = 0, yCoord = 0) => {
+	const usingMatrix = boxDrawObj.matrix;
+
 	if (xCoord === null && yCoord === null) {
 		for (let matrixRow = 0; matrixRow < usingMatrix.length; matrixRow++) {
 			for (
@@ -23,10 +14,20 @@ const boxDraw = (usingMatrix, xCoord = 0, yCoord = 0) => {
 				const calcX = pixel.xStart + xCoord;
 				const calcY = pixel.yStart + yCoord;
 
-				ctx.fillStyle = pixel.color;
-				ctx.fillRect(calcX, calcY, pixelWidth, pixelHeight);
-				ctx.strokeStyle = `rgb(255, 255, 255)`;
-				ctx.strokeRect(calcX, calcY, pixelWidth, pixelHeight);
+				boxDrawObj.ctx.fillStyle = pixel.color;
+				boxDrawObj.ctx.fillRect(
+					calcX,
+					calcY,
+					boxDrawObj.pixelWidth,
+					boxDrawObj.pixelHeight
+				);
+				boxDrawObj.ctx.strokeStyle = `rgb(255, 255, 255)`;
+				boxDrawObj.ctx.strokeRect(
+					calcX,
+					calcY,
+					boxDrawObj.pixelWidth,
+					boxDrawObj.pixelHeight
+				);
 			}
 		}
 		return;
@@ -42,17 +43,38 @@ const boxDraw = (usingMatrix, xCoord = 0, yCoord = 0) => {
 			const calcY = pixel.yStart + yCoord;
 
 			if (xCoord === null && yCoord === null) {
-				ctx.fillStyle = pixel.color;
-				ctx.fillRect(calcX, calcY, pixelWidth, pixelHeight);
-				ctx.strokeStyle = `rgb(255, 255, 255)`;
-				ctx.strokeRect(calcX, calcY, pixelWidth, pixelHeight);
+				boxDrawObj.ctx.fillStyle = pixel.color;
+				boxDrawObj.ctx.fillRect(
+					calcX,
+					calcY,
+					boxDrawObj.pixelWidth,
+					boxDrawObj.pixelHeight
+				);
+				boxDrawObj.ctx.strokeStyle = `rgb(255, 255, 255)`;
+				boxDrawObj.ctx.strokeRect(
+					calcX,
+					calcY,
+					boxDrawObj.pixelWidth,
+					boxDrawObj.pixelHeight
+				);
 				return;
 			}
-
-			ctx2.fillStyle = pixel.color;
-			ctx2.fillRect(calcX, calcY, pixelWidth, pixelHeight);
-			ctx2.strokeStyle = `rgb(255, 255, 255)`;
-			ctx2.strokeRect(calcX, calcY, pixelWidth, pixelHeight);
+			// console.log(boxDrawObj);
+			// debugger;
+			boxDrawObj.ctx2.fillStyle = pixel.color;
+			boxDrawObj.ctx2.fillRect(
+				calcX,
+				calcY,
+				boxDrawObj.pixelWidth,
+				boxDrawObj.pixelHeight
+			);
+			boxDrawObj.ctx2.strokeStyle = `rgb(255, 255, 255)`;
+			boxDrawObj.ctx2.strokeRect(
+				calcX,
+				calcY,
+				boxDrawObj.pixelWidth,
+				boxDrawObj.pixelHeight
+			);
 		}
 	}
 	return usingMatrix;
@@ -64,19 +86,28 @@ class PixelNode {
 		this.color = color;
 	}
 }
+class InputNode {
+	constructor(ctx, ctx2, matrix, pixelWidth, pixelHeight) {
+		this.ctx = ctx;
+		this.ctx2 = ctx2;
+		this.matrix = matrix;
+		this.pixelWidth = pixelWidth;
+		this.pixelHeight = pixelHeight;
+	}
+}
 
-const whatToPlace = (xStart, yStart) => {
+const whatToPlace = (boxDrawObj, xStart, yStart) => {
 	const rollColor = roll(3);
 	let pixel = new PixelNode(xStart, yStart);
 	switch (rollColor) {
 		case 1:
-			pixel.color = backgroundColor;
+			pixel.color = boxDrawObj.backgroundColor;
 			break;
 		case 2:
-			pixel.color = primaryColor;
+			pixel.color = boxDrawObj.primaryColor;
 			break;
 		case 3:
-			pixel.color = secondaryColor;
+			pixel.color = boxDrawObj.secondaryColor;
 			break;
 		default:
 			console.log('error, sorry');
@@ -84,18 +115,28 @@ const whatToPlace = (xStart, yStart) => {
 	return pixel;
 };
 
-const createPixelMap = (matrix) => {
+const createPixelMap = (boxDrawObj) => {
+	const newMatrix = [];
 	//this will cycle through y axis on pixel height
-	for (let y = 0; y < drawSectionHeight; y += pixelHeight) {
+	for (
+		let y = 0;
+		y < boxDrawObj.drawSectionHeight;
+		y += boxDrawObj.pixelHeight
+	) {
 		let row = [];
 		//this will cycle through x axis on pixel width
-		for (let x = 0; x < drawSectionWidth; x += pixelWidth) {
+		for (
+			let x = 0;
+			x < boxDrawObj.drawSectionWidth;
+			x += boxDrawObj.pixelWidth
+		) {
 			// console.log(`${x} starting pixel draw,`);
-			const pixel = whatToPlace(x, y);
+			const pixel = whatToPlace(boxDrawObj, x, y);
 			row.push(pixel);
 		}
-		matrix.push(row);
+		newMatrix.push(row);
 	}
+	return newMatrix;
 };
 
 const combineMatrixTopHalf = (matrix1, matrix2) => {
@@ -110,7 +151,9 @@ const combineMatrixLeftHalf = (matrix1, matrix2) => {
 	return [...matrix1, ...matrix2];
 };
 
-const findQuadrantOrder = () => {
+const findQuadrantOrder = (boxDrawObj) => {
+	// console.log(boxDrawObj);
+	// debugger;
 	let order = [];
 	let quadrantArray = [];
 
@@ -124,16 +167,16 @@ const findQuadrantOrder = () => {
 					quadrant.y = 0;
 					break;
 				case 2:
-					quadrant.x = drawSectionWidth;
+					quadrant.x = boxDrawObj.drawSectionWidth;
 					quadrant.y = 0;
 					break;
 				case 3:
-					quadrant.x = drawSectionWidth;
-					quadrant.y = drawSectionHeight;
+					quadrant.x = boxDrawObj.drawSectionWidth;
+					quadrant.y = boxDrawObj.drawSectionHeight;
 					break;
 				case 4:
 					quadrant.x = 0;
-					quadrant.y = drawSectionHeight;
+					quadrant.y = boxDrawObj.drawSectionHeight;
 					break;
 				default:
 					console.log('error in findQuadrantOrder');
@@ -149,6 +192,7 @@ const findQuadrantOrder = () => {
 export {
 	boxDraw,
 	PixelNode,
+	InputNode,
 	createPixelMap,
 	combineMatrixTopHalf,
 	combineMatrixLeftHalf,
