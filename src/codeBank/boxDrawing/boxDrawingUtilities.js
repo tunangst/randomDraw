@@ -116,7 +116,6 @@ const whatToPlace = (boxDrawObj, xStart, yStart) => {
 const createPixelMap = (boxDrawObj, patternOverride) => {
 	const newMatrix = [];
 	if (patternOverride === 'noPattern') {
-		debugger;
 		//this will cycle through y axis on pixel height
 		for (
 			let y = 0;
