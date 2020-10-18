@@ -1,6 +1,7 @@
 import randomDraw from './randomDraw.js';
-import boxDrawerTemplate from './htmlTemplates/boxDrawerTemplate.js';
-import mandalaDrawerTemplate from './htmlTemplates/mandalaDrawerTemplate.js';
+import boxDrawerTemplate from './templates&functions/boxDrawerTemplate.js';
+import mandalaDrawerTemplate from './templates&functions/mandalaDrawerTemplate.js';
+import writeInputCode from './templates&functions/writeInputCode.js';
 
 let forceDesignObj = {
 	typeOfDrawer: 'random',
@@ -17,6 +18,7 @@ const boxDrawerBtn = document.querySelector('#boxDrawerBtn');
 const mandalaDrawerBtn = document.querySelector('#mandalaDrawerBtn');
 const dimensionWidth = document.querySelector('#dimensionWidth');
 const dimensionHeight = document.querySelector('#dimensionHeight');
+const codeInjection = document.querySelector('.codeInjection');
 const subControls = document.querySelector('.subControls');
 let btns = document.querySelectorAll('.btns');
 
@@ -70,6 +72,7 @@ const initBoxBtnFunctions = () => {
 	);
 	defaultPrimaryColorBtn.addEventListener('click', (event) => {
 		delete forceDesignObj.boxDrawObj.primaryToggle;
+		delete forceDesignObj.boxDrawObj.primaryColor;
 		randomDraw(forceDesignObj);
 	});
 	randomPrimaryColorBtn.addEventListener('click', (event) => {
@@ -91,6 +94,7 @@ const initBoxBtnFunctions = () => {
 	);
 	defaultSecondaryColorBtn.addEventListener('click', (event) => {
 		delete forceDesignObj.boxDrawObj.secondaryToggle;
+		delete forceDesignObj.boxDrawObj.secondaryColor;
 		randomDraw(forceDesignObj);
 	});
 	chooseSecondaryColorBtn.addEventListener('click', (event) => {
@@ -112,10 +116,12 @@ const initBoxBtnFunctions = () => {
 	);
 	defaultBackgroundColorBtn.addEventListener('click', (event) => {
 		delete forceDesignObj.boxDrawObj.backgroundToggle;
+		delete forceDesignObj.boxDrawObj.backgroundColor;
 		randomDraw(forceDesignObj);
 	});
 	randomBackgroundColorBtn.addEventListener('click', (event) => {
 		forceDesignObj.boxDrawObj.backgroundToggle = 'random';
+		forceDesignObj.boxDrawObj.backgroundColor = 'random';
 		randomDraw(forceDesignObj);
 	});
 	chooseBackgroundColorBtn.addEventListener('click', (event) => {
@@ -183,6 +189,8 @@ boxDrawerBtn.addEventListener('click', (event) => {
 	initBoxDrawChoiceListeners();
 	//get img
 	randomDraw(forceDesignObj);
+	//get input code html
+	codeInjection.innerHTML = writeInputCode(forceDesignObj.boxDrawObj);
 });
 //Box Draw listener and switch
 //Mandala Draw listener and switch
@@ -215,6 +223,7 @@ console.log('bug: draws on init 3 times');
 console.log('bug: draws on init 3 times');
 console.log('bug: draws on init 3 times');
 console.log('bug: draws on init 3 times');
+//this also ruins the randomDraw input code writing by reposting primaryColor etc
 console.log('bug: draws on init 3 times');
 console.log('bug: draws on init 3 times');
 console.log('bug: draws on init 3 times');
