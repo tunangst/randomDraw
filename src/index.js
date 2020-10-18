@@ -8,10 +8,8 @@ let forceDesignObj = {
 		width: 500,
 		height: 500,
 	},
-	boxDrawObj: {
-		boxCount: 10,
-	},
-	mandalaDraw: {},
+	boxDrawObj: {},
+	mandalaDrawObj: {},
 };
 
 const randomDrawerBtn = document.querySelector('#randomDrawerBtn');
@@ -47,6 +45,7 @@ const initBtnActiveListeners = () => {
 	});
 };
 const initBoxBtnFunctions = () => {
+	//place default count
 	//boxCount
 	const boxCount = document.querySelector('#boxCount');
 	boxCount.addEventListener('change', (event) => {
@@ -70,7 +69,7 @@ const initBoxBtnFunctions = () => {
 		'#choosePrimaryColorBtn'
 	);
 	defaultPrimaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.primaryToggle = 'default';
+		delete forceDesignObj.boxDrawObj.primaryToggle;
 		randomDraw(forceDesignObj);
 	});
 	randomPrimaryColorBtn.addEventListener('click', (event) => {
@@ -87,20 +86,13 @@ const initBoxBtnFunctions = () => {
 	const defaultSecondaryColorBtn = document.querySelector(
 		'#defaultSecondaryColorBtn'
 	);
-	// const randomSecondaryColorBtn = document.querySelector(
-	// 	'#randomSecondaryColorBtn'
-	// );
 	const chooseSecondaryColorBtn = document.querySelector(
 		'#chooseSecondaryColorBtn'
 	);
 	defaultSecondaryColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.secondaryToggle = 'default';
+		delete forceDesignObj.boxDrawObj.secondaryToggle;
 		randomDraw(forceDesignObj);
 	});
-	// randomSecondaryColorBtn.addEventListener('click', (event) => {
-	// 	forceDesignObj.boxDrawObj.secondaryToggle = 'random';
-	// 	randomDraw(forceDesignObj);
-	// });
 	chooseSecondaryColorBtn.addEventListener('click', (event) => {
 		forceDesignObj.boxDrawObj.secondaryToggle = 'choose';
 		forceDesignObj.boxDrawObj.secondaryColor =
@@ -119,7 +111,7 @@ const initBoxBtnFunctions = () => {
 		'#chooseBackgroundColorBtn'
 	);
 	defaultBackgroundColorBtn.addEventListener('click', (event) => {
-		forceDesignObj.boxDrawObj.backgroundToggle = 'default';
+		delete forceDesignObj.boxDrawObj.backgroundToggle;
 		randomDraw(forceDesignObj);
 	});
 	randomBackgroundColorBtn.addEventListener('click', (event) => {
@@ -184,13 +176,13 @@ boxDrawerBtn.addEventListener('click', (event) => {
 		subControls.innerHTML = subControls.innerHTML + boxDrawerTemplate();
 		showBoxDrawFunctions = true;
 	}
-	//get img
-	randomDraw(forceDesignObj);
 	//activate new activebtn listeners
 	initBtnActiveListeners();
 	//activate new functional listeners
 	initBoxBtnFunctions();
 	initBoxDrawChoiceListeners();
+	//get img
+	randomDraw(forceDesignObj);
 });
 //Box Draw listener and switch
 //Mandala Draw listener and switch
@@ -218,3 +210,13 @@ mandalaDrawerBtn.addEventListener('click', (event) => {
 //Mandala Draw listener and switch
 
 randomDraw(forceDesignObj);
+
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');
+console.log('bug: draws on init 3 times');

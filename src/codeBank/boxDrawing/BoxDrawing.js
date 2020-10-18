@@ -15,10 +15,15 @@ const BoxDrawing = (forceDesignObj) => {
 	const canvasWidth = width || 500;
 	const canvasHeight = height || 500;
 	const matrix = [];
-	const pixelWidth = canvasWidth / boxDrawObj.boxCount || 250;
-	const pixelHeight = canvasHeight / boxDrawObj.boxCount || 250;
+	const boxCount = boxDrawObj.boxCount || 10;
+	const pixelWidth = canvasWidth / boxCount || 250;
+	const pixelHeight = canvasHeight / boxCount || 250;
 	const drawSectionWidth = Math.floor(canvasWidth / 2);
 	const drawSectionHeight = Math.floor(canvasHeight / 2);
+
+	const primaryToggle = boxDrawObj.primaryToggle || 'default';
+	const secondaryToggle = boxDrawObj.secondaryToggle || 'default';
+	const backgroundToggle = boxDrawObj.backgroundToggle || 'default';
 
 	const [canvasTemplate, ctx] = createCanvasTemplate(
 		drawSectionWidth,
@@ -26,11 +31,7 @@ const BoxDrawing = (forceDesignObj) => {
 	);
 	const [canvasDraw, ctx2] = createCanvasDraw(canvasWidth, canvasHeight);
 
-	if (!boxDrawObj.primaryToggle) boxDrawObj.primaryToggle = 'default';
-	if (!boxDrawObj.secondaryToggle) boxDrawObj.secondaryToggle = 'default';
-	if (!boxDrawObj.backgroundToggle) boxDrawObj.backgroundToggle = 'default';
-
-	switch (boxDrawObj.primaryToggle) {
+	switch (primaryToggle) {
 		case 'default':
 			boxDrawObj.primaryColor = '#000000';
 			break;
@@ -46,7 +47,7 @@ const BoxDrawing = (forceDesignObj) => {
 			break;
 	}
 
-	switch (boxDrawObj.secondaryToggle) {
+	switch (secondaryToggle) {
 		case 'default':
 		case 'random':
 			boxDrawObj.secondaryColor = randomColor(); //new color seed on refresh;
@@ -60,7 +61,7 @@ const BoxDrawing = (forceDesignObj) => {
 			break;
 	}
 
-	switch (boxDrawObj.backgroundToggle) {
+	switch (backgroundToggle) {
 		case 'default':
 			boxDrawObj.backgroundColor = '#ffffff00';
 			break;
@@ -81,6 +82,7 @@ const BoxDrawing = (forceDesignObj) => {
 		canvasWidth,
 		canvasHeight,
 		matrix,
+		boxCount,
 		pixelWidth,
 		pixelHeight,
 		drawSectionWidth,
