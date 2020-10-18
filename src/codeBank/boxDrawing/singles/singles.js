@@ -40,12 +40,12 @@ const singles = (boxDrawObj) => {
 
 				directionDiceReflect === 1
 					? (adjustedMatrix = reflectVerticalAxis(
-							boxDrawObj.matrix,
+							boxDrawObj,
 							xPos,
 							yPos
 					  ))
 					: (adjustedMatrix = reflectHorizontalAxis(
-							boxDrawObj.matrix,
+							boxDrawObj,
 							xPos,
 							yPos
 					  ));
@@ -59,13 +59,9 @@ const singles = (boxDrawObj) => {
 				const directionDiceRotate = roll(2); // 1 = clockwise rotate. 2 = counter clockwise rotate
 
 				directionDiceRotate === 1
-					? (adjustedMatrix = rotateClockwise(
-							boxDrawObj.matrix,
-							xPos,
-							yPos
-					  ))
+					? (adjustedMatrix = rotateClockwise(boxDrawObj, xPos, yPos))
 					: (adjustedMatrix = rotateCounterClockwise(
-							boxDrawObj.matrix,
+							boxDrawObj,
 							xPos,
 							yPos
 					  ));

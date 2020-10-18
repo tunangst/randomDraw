@@ -5,31 +5,6 @@ import { roll, clear, randomColor } from '../utilities.js';
 import { boxDraw, createPixelMap } from './boxDrawingUtilities.js';
 
 import { createCanvasTemplate, createCanvasDraw } from '../utilities.js';
-import getBackgroundStats from '../mandalaDrawing/functionPool/_getBackgroundLoopStats.js';
-
-// let typeOfStyle = 'random';
-
-// let canvasWidth = 500;
-// let canvasHeight = 500;
-// let boxCount = 10;
-// let pixelWidth = canvasWidth / boxCount; //draw section divided by how many pixels across
-// let pixelHeight = canvasHeight / boxCount; //draw section divided by how many pixels across
-// let drawSectionWidth = canvasWidth / 2;
-// let drawSectionHeight = canvasHeight / 2;
-// let primaryToggle = 'default';
-// let primaryColor = '#000000';
-// let secondaryColor = randomColor();
-// let secondaryToggle = 'default';
-// let backgroundColor = '#ffffff00';
-// let backgroundToggle = 'default';
-
-// let canvasTemplate = null;
-// let canvasDraw = null;
-// // let canvasPreview = document.querySelector('#preview');
-// // let canvasDraw = document.querySelector('#draw');
-// let ctx = null;
-// let ctx2 = null;
-// let matrix = [];
 
 const BoxDrawing = (forceDesignObj) => {
 	let {
@@ -124,11 +99,9 @@ const BoxDrawing = (forceDesignObj) => {
 
 		boxDraw(boxDrawObj); // draw on ctx not ctx2
 
-		// switch ('random') {
 		switch (boxDrawObj.drawStyle || 'random') {
 			case 'random':
-				let dice = 3;
-				// let dice = roll(3);
+				let dice = roll(3);
 				switch (dice) {
 					case 1:
 						specials(boxDrawObj);
@@ -146,7 +119,6 @@ const BoxDrawing = (forceDesignObj) => {
 				break;
 			default:
 				specials(boxDrawObj);
-				console.log('not random or error in boxdrawing switch');
 				break;
 		}
 	} else {

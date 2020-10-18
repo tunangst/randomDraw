@@ -13,7 +13,6 @@ let forceDesignObj = {
 	},
 	mandalaDraw: {},
 };
-randomDraw(forceDesignObj);
 
 const randomDrawerBtn = document.querySelector('#randomDrawerBtn');
 const boxDrawerBtn = document.querySelector('#boxDrawerBtn');
@@ -180,12 +179,13 @@ boxDrawerBtn.addEventListener('click', (event) => {
 		height: dimensionHeight.value,
 	};
 	//draw with stats
-	randomDraw(forceDesignObj);
 	//show options
 	if (!showBoxDrawFunctions) {
 		subControls.innerHTML = subControls.innerHTML + boxDrawerTemplate();
 		showBoxDrawFunctions = true;
 	}
+	//get img
+	randomDraw(forceDesignObj);
 	//activate new activebtn listeners
 	initBtnActiveListeners();
 	//activate new functional listeners
@@ -216,3 +216,5 @@ mandalaDrawerBtn.addEventListener('click', (event) => {
 	randomDraw(forceDesignObj);
 });
 //Mandala Draw listener and switch
+
+randomDraw(forceDesignObj);

@@ -115,26 +115,49 @@ const whatToPlace = (boxDrawObj, xStart, yStart) => {
 	return pixel;
 };
 
-const createPixelMap = (boxDrawObj) => {
+const createPixelMap = (boxDrawObj, patternOverride) => {
 	const newMatrix = [];
-	//this will cycle through y axis on pixel height
-	for (
-		let y = 0;
-		y < boxDrawObj.drawSectionHeight;
-		y += boxDrawObj.pixelHeight
-	) {
-		let row = [];
-		//this will cycle through x axis on pixel width
+	if (patternOverride === 'noPattern') {
+		debugger;
+		//this will cycle through y axis on pixel height
 		for (
-			let x = 0;
-			x < boxDrawObj.drawSectionWidth;
-			x += boxDrawObj.pixelWidth
+			let y = 0;
+			y < boxDrawObj.canvasHeight;
+			y += boxDrawObj.pixelHeight
 		) {
-			// console.log(`${x} starting pixel draw,`);
-			const pixel = whatToPlace(boxDrawObj, x, y);
-			row.push(pixel);
+			let row = [];
+			//this will cycle through x axis on pixel width
+			for (
+				let x = 0;
+				x < boxDrawObj.canvasWidth;
+				x += boxDrawObj.pixelWidth
+			) {
+				// console.log(`${x} starting pixel draw,`);
+				const pixel = whatToPlace(boxDrawObj, x, y);
+				row.push(pixel);
+			}
+			newMatrix.push(row);
 		}
-		newMatrix.push(row);
+	} else {
+		//this will cycle through y axis on pixel height
+		for (
+			let y = 0;
+			y < boxDrawObj.drawSectionHeight;
+			y += boxDrawObj.pixelHeight
+		) {
+			let row = [];
+			//this will cycle through x axis on pixel width
+			for (
+				let x = 0;
+				x < boxDrawObj.drawSectionWidth;
+				x += boxDrawObj.pixelWidth
+			) {
+				// console.log(`${x} starting pixel draw,`);
+				const pixel = whatToPlace(boxDrawObj, x, y);
+				row.push(pixel);
+			}
+			newMatrix.push(row);
+		}
 	}
 	return newMatrix;
 };
