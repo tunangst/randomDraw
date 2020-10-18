@@ -4,7 +4,7 @@ const boxDrawerTemplate = () => {
 	html += `<div class='separatorContainer'>`;
 	html += `<div class='separators'>`;
 	html += `<p>Box Count:`;
-	html += `<input id='boxCount' class='inputField' type="number" value=10 />`;
+	html += `<input id='boxCount' class='inputField' type="number" value=10 min="2" step="2" />`;
 	html += `</p>`;
 	html += `</div>`;
 	html += `<div class='separators'>`;

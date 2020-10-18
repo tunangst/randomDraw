@@ -1,5 +1,4 @@
 import randomDraw from './randomDraw.js';
-// import { initBoxBtns } from './helperFunctions/helperFunctions.js';
 import boxDrawerTemplate from './htmlTemplates/boxDrawerTemplate.js';
 import mandalaDrawerTemplate from './htmlTemplates/mandalaDrawerTemplate.js';
 
@@ -16,8 +15,6 @@ let forceDesignObj = {
 };
 randomDraw(forceDesignObj);
 
-// const form = document.querySelector('form');
-const typeOfDrawerElement = document.querySelector('#typeOfDrawer');
 const randomDrawerBtn = document.querySelector('#randomDrawerBtn');
 const boxDrawerBtn = document.querySelector('#boxDrawerBtn');
 const mandalaDrawerBtn = document.querySelector('#mandalaDrawerBtn');
@@ -32,10 +29,34 @@ dimensionWidth.addEventListener('change', (event) => {
 dimensionHeight.addEventListener('change', (event) => {
 	forceDesignObj.dimensions.height = event.target.value;
 });
+
+const initBtnActiveListeners = () => {
+	btns = document.querySelectorAll('.btns');
+	btns.forEach((btn) => {
+		btn.addEventListener('click', (event) => {
+			const siblings = event.target.parentElement.children;
+			//remove active class
+			for (let i = 0; i < siblings.length; i++) {
+				// siblings[i].removeClass('active');
+				if (siblings[i].classList.contains('active')) {
+					siblings[i].classList.remove('active');
+				}
+			}
+			//issue active class
+			event.target.classList.add('active');
+		});
+	});
+};
 const initBoxBtnFunctions = () => {
 	//boxCount
 	const boxCount = document.querySelector('#boxCount');
 	boxCount.addEventListener('change', (event) => {
+		let correctedValue = event.target.value;
+		if (correctedValue % 2 !== 0) {
+			correctedValue++;
+			boxCount.value = correctedValue;
+		}
+
 		forceDesignObj.boxDrawObj.boxCount = event.target.value;
 	});
 	//boxCount
@@ -116,40 +137,25 @@ const initBoxBtnFunctions = () => {
 };
 const initBoxDrawChoiceListeners = () => {
 	const boxPatternBtns = document.querySelectorAll('.boxPatternBtns');
-	boxPatternBtns.forEach((boxPatternBtn) => {
-		boxPatternBtn.addEventListener('click', (event) => {
-			let convertedWord;
-			const word = event.target.innerText;
-			convertedWord =
-				word.charAt(0).toLowerCase() + word.replace(/\s/g, '').slice(1);
+	if (boxPatternBtns.length > 1) {
+		boxPatternBtns.forEach((boxPatternBtn) => {
+			boxPatternBtn.addEventListener('click', (event) => {
+				let convertedWord;
+				const word = event.target.innerText;
+				convertedWord =
+					word.charAt(0).toLowerCase() +
+					word.replace(/\s/g, '').slice(1);
 
-			forceDesignObj.boxDrawObj.drawStyle = convertedWord;
-			randomDraw(forceDesignObj);
+				forceDesignObj.boxDrawObj.drawStyle = convertedWord;
+				randomDraw(forceDesignObj);
+			});
 		});
-	});
+	}
 };
 
-const initBtnActiveListeners = () => {
-	btns = document.querySelectorAll('.btns');
-	btns.forEach((btn) => {
-		btn.addEventListener('click', (event) => {
-			const siblings = event.target.parentElement.children;
-			//remove active class
-			for (let i = 0; i < siblings.length; i++) {
-				// siblings[i].removeClass('active');
-				if (siblings[i].classList.contains('active')) {
-					siblings[i].classList.remove('active');
-				}
-			}
-
-			//issue active class
-			event.target.classList.add('active');
-		});
-	});
-	initBoxDrawChoiceListeners();
-};
+//place these listeners on starting 3 btns
 initBtnActiveListeners();
-
+//Random Draw listener
 randomDrawerBtn.addEventListener('click', (event) => {
 	forceDesignObj.typeOfDrawer = 'randomDraw';
 	forceDesignObj.dimensions = {
@@ -158,6 +164,8 @@ randomDrawerBtn.addEventListener('click', (event) => {
 	};
 	randomDraw(forceDesignObj);
 });
+//Random Draw listener
+//Box Draw listener and switch
 let showBoxDrawFunctions = false;
 boxDrawerBtn.addEventListener('click', (event) => {
 	//clear options
@@ -182,7 +190,10 @@ boxDrawerBtn.addEventListener('click', (event) => {
 	initBtnActiveListeners();
 	//activate new functional listeners
 	initBoxBtnFunctions();
+	initBoxDrawChoiceListeners();
 });
+//Box Draw listener and switch
+//Mandala Draw listener and switch
 let showMandalaDrawFunctions = false;
 mandalaDrawerBtn.addEventListener('click', (event) => {
 	//clear options
@@ -204,67 +215,4 @@ mandalaDrawerBtn.addEventListener('click', (event) => {
 
 	randomDraw(forceDesignObj);
 });
-
-// const typeOfStyle = form.typeOfStyle.value;
-// const boxCount = form.boxCount.value;
-
-// const primaryToggle = form.primaryToggle.value;
-// const primaryColor = form.primaryColor.value;
-
-// const secondaryToggle = form.secondaryToggle.value;
-// const secondaryColor = form.secondaryColor.value;
-
-// const backgroundToggle = form.backgroundToggle.value;
-// const backgroundColor = form.backgroundColor.value;
-
-// typeOfDrawerElement.addEventListener('change', (event) => {
-//     const drawer = event.target.value;
-//     switch (drawer) {
-//         case 'Box Drawing':
-//             form.innerHTML = form.innerHTML + boxDrawerTemplate();
-//             break;
-//         case 'Mandala Drawing':
-//             form.innerHTML = form.innerHTML + boxDrawerTemplate();
-//             break;
-
-//         default:
-//             console.log('error in index type of drawing');
-//             break;
-//     }
-// });
-
-// form.addEventListener('submit', (event) => {
-//     event.preventDefault();
-//     console.log('form submit');
-//     const form = event.target.elements;
-
-//     //get info here
-//     let setObj = {
-//         typeOfDrawer,
-//         dimentions, //{width: x, height: y}
-//     };
-//     boxCount,
-//     primaryToggle,
-//     primaryColor,
-//     secondaryToggle,
-//     secondaryColor,
-//     backgroundToggle,
-//     backgroundColor,
-// };
-// let setObj = {
-//     typeOfStyle,
-//     canvasSize,
-//     boxCount,
-//     primaryToggle,
-//     primaryColor,
-//     secondaryToggle,
-//     secondaryColor,
-//     backgroundToggle,
-//     backgroundColor,
-// };
-// if (typeOfDrawing === 'random') randomDrawing(setObj);
-// if (typeOfDrawing === 'Box Drawing') BoxDrawing(setObj);
-// if (typeOfDrawing === 'Mandala Drawing') MandalaDrawing(setObj);
-// });
-
-// randomDraw();
+//Mandala Draw listener and switch
