@@ -1,5 +1,4 @@
 import { PixelNode } from '../boxDrawingUtilities.js';
-// import { pixelWidth, pixelHeight } from '../BoxDrawing.js';
 
 const rotateClockwise = (boxDrawObj, xOffset = 0, yOffset = 0) => {
 	const useMatrix = boxDrawObj.matrix;

@@ -6,8 +6,6 @@ import halfReflect from './halfReflect.js';
 import noPattern from './noPattern.js';
 
 const specials = (boxDrawObj) => {
-	//      specials
-	//          type (full clone, full rotate, full reflect, half reflect)
 	if (!boxDrawObj.drawStyle || boxDrawObj.drawStyle === 'random') {
 		const dice = roll(5);
 		switch (dice) {

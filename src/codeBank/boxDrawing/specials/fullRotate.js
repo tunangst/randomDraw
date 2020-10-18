@@ -1,4 +1,3 @@
-// import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
 import { rotateClockwise } from '../singles/rotate.js';
 import { boxDraw, InputNode } from '../boxDrawingUtilities.js';
 
@@ -20,7 +19,6 @@ const fullRotate = (boxDrawObj) => {
 	rotatedMatrix1 = rotateClockwise(boxDrawObj);
 
 	inputNode.matrix = rotatedMatrix1;
-	// debugger;
 
 	boxDraw(inputNode, boxDrawObj.drawSectionWidth, 0);
 

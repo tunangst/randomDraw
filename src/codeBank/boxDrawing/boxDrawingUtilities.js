@@ -59,8 +59,6 @@ const boxDraw = (boxDrawObj, xCoord = 0, yCoord = 0) => {
 				);
 				return;
 			}
-			// console.log(boxDrawObj);
-			// debugger;
 			boxDrawObj.ctx2.fillStyle = pixel.color;
 			boxDrawObj.ctx2.fillRect(
 				calcX,
@@ -176,7 +174,6 @@ const combineMatrixLeftHalf = (matrix1, matrix2) => {
 
 const findQuadrantOrder = (boxDrawObj) => {
 	// console.log(boxDrawObj);
-	// debugger;
 	let order = [];
 	let quadrantArray = [];
 

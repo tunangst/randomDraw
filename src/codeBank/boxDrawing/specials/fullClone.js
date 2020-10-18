@@ -1,5 +1,3 @@
-// import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
-// import {inputNode} from '../boxDrawingUtilities.js';
 import { boxDraw, InputNode } from '../boxDrawingUtilities.js';
 import clone from '../singles/clone.js';
 
@@ -15,8 +13,6 @@ const fullClone = (boxDrawObj) => {
 		boxDrawObj.pixelWidth,
 		boxDrawObj.pixelHeight
 	);
-
-	// debugger;
 
 	boxDraw(boxDrawObj);
 

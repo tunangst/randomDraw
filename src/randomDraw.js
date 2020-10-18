@@ -17,12 +17,6 @@ const randomDraw = (forceDesignObj = {}) => {
 			RandomDrawing(forceDesignObj);
 			return;
 	}
-	// if (typeOfDrawer === 'randomDraw') RandomDrawing(forceDesignObj);
-	// if (typeOfDrawer === 'boxDraw') BoxDrawing(forceDesignObj);
-	// if (typeOfDrawer === 'mandalaDraw') MandalaDrawing(forceDesignObj);
-	// for (let key in forceDesignObj) {
-	//     console.log(key, forceDesignObj[key]);
-	// }
 };
 
 export default randomDraw;

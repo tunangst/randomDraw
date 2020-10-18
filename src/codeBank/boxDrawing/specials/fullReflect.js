@@ -1,4 +1,3 @@
-// import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
 import {
 	reflectVerticalAxis,
 	reflectHorizontalAxis,

@@ -1,4 +1,3 @@
-// import { drawSectionWidth, drawSectionHeight } from '../BoxDrawing.js';
 import { roll } from '../../utilities.js';
 import {
 	boxDraw,
