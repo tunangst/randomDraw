@@ -40,14 +40,7 @@ const getDrawType = (inputs, forceType) => {
 		loopCycle('strokeColor');
 		loopCycle('strokeWidth');
 	};
-	const testThis = () => {
-		// loopCycle('clear');
-		inputs.clearIndividual = true;
-		inputs.strokeAll = true;
-		inputs.strokeColorRandomLoops = true;
-		// loopCycle('strokeColor');
-		loopCycle('strokeWidth');
-	};
+	const custom = () => {};
 	const fillOnly = () => {
 		inputs.fillSwitch = true;
 		inputs.clearAll = true;
@@ -79,7 +72,6 @@ const getDrawType = (inputs, forceType) => {
 		inputs.customBackgroundColor = '#fff';
 		inputs.customStrokeColor = '#000';
 		inputs.blendMode = 'source-over';
-		// debugger;
 		inputs.maxShapeCount = 50;
 		inputs.customShape = 'noLine';
 
@@ -100,7 +92,6 @@ const getDrawType = (inputs, forceType) => {
 		switch (dice) {
 			case 1:
 				strokeOnly();
-				// testThis();
 				break;
 			case 2:
 				fillOnly();
@@ -114,6 +105,12 @@ const getDrawType = (inputs, forceType) => {
 			case 5:
 				chaos();
 				break;
+			// case 6:
+			// 	outline();
+			// 	break;
+			// case 7:
+			// 	custom();
+			// 	break;
 			default:
 				console.log('error in getDrawType');
 				break;

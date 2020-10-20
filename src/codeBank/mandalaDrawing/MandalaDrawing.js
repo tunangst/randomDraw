@@ -1,42 +1,30 @@
 import { createCanvasDraw } from '../utilities.js';
 import initMandalaDraw from './initMandalaDraw.js';
 import getInputStats from './functionPool/_getInputStats.js';
-// import { PointNode, mandalaDraw } from './mandalaDrawingUtilities.js';
-//looks like ctx.moveTo(x,y) is very powerful here
-
-// let typeOfStyle = 'random';
-
-// let canvasPreview = document.querySelector('#preview');
-// let canvasDraw = document.querySelector('#draw');
-// let ctx = canvasPreview.getContext('2d');
-// let ctx2 = canvasDraw.getContext('2d');
-
-let canvasWidth = 500;
-let canvasHeight = 500;
-let canvasDraw = null;
-let ctx2 = null;
-
-// console.log(inputStats);
+import getDrawType from './functionPool/_getDrawType.js';
 
 const MandalaDrawing = (forceDesignObj) => {
-	// console.log(forceDesignObj);
-	const {
+	let {
 		dimensions: { width, height },
 		mandalaDrawObj,
 	} = forceDesignObj;
-	if (width) {
-		canvasWidth = width;
-	}
-	if (height) {
-		canvasHeight = height;
-	}
-	// debugger;
 
-	// console.log('MandalaDrawing');
-	//create canvas
-	[canvasDraw, ctx2] = createCanvasDraw(canvasWidth, canvasHeight);
+	const canvasWidth = width || 500;
+	const canvasHeight = height || 500;
+	const [canvasDraw, ctx2] = createCanvasDraw(canvasWidth, canvasHeight);
 
-	let inputStats = getInputStats(canvasWidth, canvasHeight, canvasDraw, ctx2);
+	mandalaDrawObj = {
+		...mandalaDrawObj,
+		canvasWidth,
+		canvasHeight,
+		canvasDraw,
+		ctx2,
+	};
+	//get and place stats
+	let inputStats = getInputStats(mandalaDrawObj);
+	//build arr
+	inputStats = getDrawType(inputStats);
+
 	initMandalaDraw(inputStats);
 };
 

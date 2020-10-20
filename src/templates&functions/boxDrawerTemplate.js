@@ -43,11 +43,11 @@ const boxDrawerTemplate = () => {
 	html += `<div class="styleContainer btnContainer">`;
 	html += `<p>Styles</p>`;
 	html += `<div class='btnContainer'>`;
-	html += `<button id='randomBtn' class='btns boxPatternBtns'>Random</button>`;
+	html += `<button id='randomBtn' class='btns boxPatternBtns active'>Random</button>`;
 	html += `<button id='fullCloneBtn' class='btns boxPatternBtns'>Full Clone</button>`;
 	html += `<button id='fullReflectBtn' class='btns boxPatternBtns'>Full Reflect</button>`;
 	html += `<button id='fullRotateBtn' class='btns boxPatternBtns'>Full Rotate</button>`;
-	html += `<button id='halfReflectBtn' class='btns boxPatternBtns'>Full Reflect</button>`;
+	html += `<button id='halfReflectBtn' class='btns boxPatternBtns'>Half Reflect</button>`;
 	html += `<button id='noPatternBtn' class='btns boxPatternBtns'>No Pattern</button>`;
 	html += `</div>`;
 	html += `</div>`;

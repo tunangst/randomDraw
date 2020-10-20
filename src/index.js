@@ -2,6 +2,7 @@ import randomDraw from './randomDraw.js';
 import boxDrawerTemplate from './templates&functions/boxDrawerTemplate.js';
 import mandalaDrawerTemplate from './templates&functions/mandalaDrawerTemplate.js';
 import writeInputCode from './templates&functions/writeInputCode.js';
+import cloneObj from './templates&functions/cloneObj.js';
 
 let forceDesignObj = {
 	typeOfDrawer: 'random',
@@ -12,6 +13,7 @@ let forceDesignObj = {
 	boxDrawObj: {},
 	mandalaDrawObj: {},
 };
+// let forceDesignObj = {};
 
 const randomDrawerBtn = document.querySelector('#randomDrawerBtn');
 const boxDrawerBtn = document.querySelector('#boxDrawerBtn');
@@ -73,16 +75,25 @@ const initBoxBtnFunctions = () => {
 	defaultPrimaryColorBtn.addEventListener('click', (event) => {
 		delete forceDesignObj.boxDrawObj.primaryToggle;
 		delete forceDesignObj.boxDrawObj.primaryColor;
-		randomDraw(forceDesignObj);
+		//clone designObj
+		const newDesignObj = cloneObj(forceDesignObj);
+		//get img
+		randomDraw(newDesignObj);
 	});
 	randomPrimaryColorBtn.addEventListener('click', (event) => {
 		forceDesignObj.boxDrawObj.primaryToggle = 'random';
-		randomDraw(forceDesignObj);
+		//clone designObj
+		const newDesignObj = cloneObj(forceDesignObj);
+		//get img
+		randomDraw(newDesignObj);
 	});
 	choosePrimaryColorBtn.addEventListener('click', (event) => {
 		forceDesignObj.boxDrawObj.primaryToggle = 'choose';
 		forceDesignObj.boxDrawObj.primaryColor = event.target.children[0].value;
-		randomDraw(forceDesignObj);
+		//clone designObj
+		const newDesignObj = cloneObj(forceDesignObj);
+		//get img
+		randomDraw(newDesignObj);
 	});
 	//primaryColor
 	//secondaryColor
@@ -95,13 +106,19 @@ const initBoxBtnFunctions = () => {
 	defaultSecondaryColorBtn.addEventListener('click', (event) => {
 		delete forceDesignObj.boxDrawObj.secondaryToggle;
 		delete forceDesignObj.boxDrawObj.secondaryColor;
-		randomDraw(forceDesignObj);
+		//clone designObj
+		const newDesignObj = cloneObj(forceDesignObj);
+		//get img
+		randomDraw(newDesignObj);
 	});
 	chooseSecondaryColorBtn.addEventListener('click', (event) => {
 		forceDesignObj.boxDrawObj.secondaryToggle = 'choose';
 		forceDesignObj.boxDrawObj.secondaryColor =
 			event.target.children[0].value;
-		randomDraw(forceDesignObj);
+		//clone designObj
+		const newDesignObj = cloneObj(forceDesignObj);
+		//get img
+		randomDraw(newDesignObj);
 	});
 	//secondaryColor
 	//backgroundColor
@@ -117,7 +134,10 @@ const initBoxBtnFunctions = () => {
 	defaultBackgroundColorBtn.addEventListener('click', (event) => {
 		delete forceDesignObj.boxDrawObj.backgroundToggle;
 		delete forceDesignObj.boxDrawObj.backgroundColor;
-		randomDraw(forceDesignObj);
+		//clone designObj
+		const newDesignObj = cloneObj(forceDesignObj);
+		//get img
+		randomDraw(newDesignObj);
 	});
 	randomBackgroundColorBtn.addEventListener('click', (event) => {
 		forceDesignObj.boxDrawObj.backgroundToggle = 'random';
@@ -128,7 +148,10 @@ const initBoxBtnFunctions = () => {
 		forceDesignObj.boxDrawObj.backgroundToggle = 'choose';
 		forceDesignObj.boxDrawObj.backgroundColor =
 			event.target.children[0].value;
-		randomDraw(forceDesignObj);
+		//clone designObj
+		const newDesignObj = cloneObj(forceDesignObj);
+		//get img
+		randomDraw(newDesignObj);
 	});
 	//backgroundColor
 };
@@ -144,7 +167,10 @@ const initBoxDrawChoiceListeners = () => {
 					word.replace(/\s/g, '').slice(1);
 
 				forceDesignObj.boxDrawObj.drawStyle = convertedWord;
-				randomDraw(forceDesignObj);
+				//clone designObj
+				const newDesignObj = cloneObj(forceDesignObj);
+				//get img
+				randomDraw(newDesignObj);
 			});
 		});
 	}
@@ -159,7 +185,11 @@ randomDrawerBtn.addEventListener('click', (event) => {
 		width: dimensionWidth.value,
 		height: dimensionHeight.value,
 	};
-	randomDraw(forceDesignObj);
+
+	//clone designObj
+	const newDesignObj = cloneObj(forceDesignObj);
+	//get img
+	randomDraw(newDesignObj);
 });
 //Random Draw listener
 //Box Draw listener and switch
@@ -187,10 +217,12 @@ boxDrawerBtn.addEventListener('click', (event) => {
 	//activate new functional listeners
 	initBoxBtnFunctions();
 	initBoxDrawChoiceListeners();
-	//get img
-	randomDraw(forceDesignObj);
 	//get input code html
-	codeInjection.innerHTML = writeInputCode(forceDesignObj.boxDrawObj);
+	codeInjection.innerHTML = writeInputCode(forceDesignObj);
+	//clone designObj
+	const newDesignObj = cloneObj(forceDesignObj);
+	//get img
+	randomDraw(newDesignObj);
 });
 //Box Draw listener and switch
 //Mandala Draw listener and switch
@@ -213,19 +245,26 @@ mandalaDrawerBtn.addEventListener('click', (event) => {
 		showMandalaDrawFunctions = true;
 	}
 
-	randomDraw(forceDesignObj);
+	//clone designObj
+	const newDesignObj = cloneObj(forceDesignObj);
+	//get img
+	randomDraw(newDesignObj);
 });
 //Mandala Draw listener and switch
 
-randomDraw(forceDesignObj);
+//clone designObj
+const newDesignObj = cloneObj(forceDesignObj);
+//get img
+window.onload = randomDraw(newDesignObj);
+// randomDraw(newDesignObj);
 
-console.log('bug: draws on init 3 times');
-console.log('bug: draws on init 3 times');
-console.log('bug: draws on init 3 times');
-console.log('bug: draws on init 3 times');
-//this also ruins the randomDraw input code writing by reposting primaryColor etc
-console.log('bug: draws on init 3 times');
-console.log('bug: draws on init 3 times');
-console.log('bug: draws on init 3 times');
-console.log('bug: draws on init 3 times');
-console.log('bug: draws on init 3 times');
+//check for Navigation Timing API support
+if (window.performance) {
+	console.info('window.performance works fine on this browser');
+}
+console.info(performance.navigation.type);
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+	console.info('This page is reloaded');
+} else {
+	console.info('This page is not reloaded');
+}

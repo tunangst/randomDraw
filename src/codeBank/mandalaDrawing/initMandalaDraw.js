@@ -5,9 +5,9 @@ import getBackgroundLoopStats from './functionPool/_getBackgroundLoopStats.js';
 // import getInitLoopStats from '../functionPool/_getInitLoopStats.js';
 import getFollowingLoopStats from './functionPool/_getFollowingLoopStats.js';
 import getShapeArr from './functionPool/_getShapeArr.js';
-import getDrawType from './functionPool/_getDrawType.js';
+// import getDrawType from './functionPool/_getDrawType.js';
 import checkBackgroundSwitches from './functionPool/_checkBackgroundSwitches.js';
-import getBlendMode from './functionPool/_getBlendMode.js';
+// import getBlendMode from './functionPool/_getBlendMode.js';
 
 const initMandalaDraw = (inputStats) => {
 	// clear canvas
@@ -19,12 +19,12 @@ const initMandalaDraw = (inputStats) => {
 	// let inputStats = getInputStats();
 
 	//'strokeOnly','fillOnly','fillAndStroke','individual','chaos','outline'
-	inputStats = getBlendMode(inputStats);
+	// inputStats = getBlendMode(inputStats);
 	//overrides
 	// inputStats = getDrawType(inputStats, 'outline');
-	inputStats = getDrawType(inputStats);
+	// inputStats = getDrawType(inputStats);
 	//build arr
-	inputStats.shapeArr = getShapeArr(inputStats);
+	// inputStats.shapeArr = getShapeArr(inputStats);
 
 	//start looping
 	for (
