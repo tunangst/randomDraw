@@ -6,7 +6,7 @@ import getShapeArr from './_getShapeArr.js';
 
 const getInputStats = (mandalaDrawObj) => {
 	//|||||||||||||||||||||||||||||||||stats|||||||||||||||||||
-	console.log(mandalaDrawObj);
+	// console.log(mandalaDrawObj);
 	const { canvasWidth, canvasHeight } = mandalaDrawObj;
 	let inputObj = {
 		width: canvasWidth || 500,
@@ -81,7 +81,7 @@ const getInputStats = (mandalaDrawObj) => {
 	);
 	inputObj.shapeArr = getShapeArr(inputObj.loopCount, inputObj.customShape);
 
-	console.log(inputObj.shapeArr);
+	// console.log(inputObj.shapeArr);
 	// debugger;
 	return inputObj;
 };

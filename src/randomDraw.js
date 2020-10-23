@@ -4,7 +4,9 @@ const BoxDrawing = randomInterface.BoxDrawing;
 const MandalaDrawing = randomInterface.MandalaDrawing;
 const RandomDrawing = randomInterface.RandomDrawing;
 
+let arr = [];
 const randomDraw = (forceDesignObj = {}) => {
+	console.log(arr);
 	const { typeOfDrawer } = forceDesignObj;
 	if (!forceDesignObj.boxDrawObj) {
 		forceDesignObj.boxDrawObj = {};
@@ -14,13 +16,13 @@ const randomDraw = (forceDesignObj = {}) => {
 	}
 	switch (typeOfDrawer) {
 		case 'boxDraw':
-			BoxDrawing(forceDesignObj);
+			arr.push(BoxDrawing(forceDesignObj));
 			return;
 		case 'mandalaDraw':
-			MandalaDrawing(forceDesignObj);
+			arr.push(MandalaDrawing(forceDesignObj));
 			return;
 		default:
-			RandomDrawing(forceDesignObj);
+			arr.push(RandomDrawing(forceDesignObj));
 			return;
 	}
 };

@@ -129,6 +129,12 @@ const BoxDrawing = (forceDesignObj) => {
 	} else {
 		alert('You need Safari or Firefox 1.5+ to see this demo.');
 	}
+	//convert canvas to an image
+	//return image
+	// return ctx2;
+
+	const dataURL = boxDrawObj.canvasDraw.toDataURL('image/png');
+	return dataURL;
 };
 
 export { BoxDrawing };
