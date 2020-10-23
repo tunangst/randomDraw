@@ -28,6 +28,12 @@ const MandalaDrawing = (forceDesignObj) => {
 	inputStats = getDrawType(inputStats);
 
 	initMandalaDraw(inputStats);
+
+	//convert canvas to an image
+	//return image
+	// return ctx2;
+	const dataURL = mandalaDrawObj.canvasDraw.toDataURL('image/png');
+	return dataURL;
 };
 
 export { MandalaDrawing };

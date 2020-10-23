@@ -33,6 +33,11 @@ header {
 	justify-content: center;
 	align-items: center;
 }
+#randomDrawSequence {
+	height: 100%;
+	width: 50px;
+	background-color: peachpuff;
+}
 .codeInjectionContainer {
 	position: fixed;
 	z-index: 2;

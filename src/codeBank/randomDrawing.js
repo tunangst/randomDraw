@@ -16,7 +16,7 @@ const RandomDrawing = (forceDesignObj) => {
 			console.log('error in randomDraw random dice');
 			break;
 	}
-	returnRandomDrawing(forceDesignObj);
+	return returnRandomDrawing(forceDesignObj);
 };
 
 export default RandomDrawing;

@@ -28,7 +28,7 @@ const writeInputCode = (obj) => {
 
 	const tab = `  `;
 	let html = `randomDraw(${JSON.stringify(obj, null, tab)});`;
-	console.log(html);
+	// console.log(html);
 
 	return html;
 };

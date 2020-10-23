@@ -1,4 +1,4 @@
-import randomDraw from './randomDraw.js';
+import { randomDraw, getSequence } from './randomDraw.js';
 import boxDrawerTemplate from './templates&functions/boxDrawerTemplate.js';
 import mandalaDrawerTemplate from './templates&functions/mandalaDrawerTemplate.js';
 // import writeInputCode from './templates&functions/writeInputCode.js';
@@ -7,23 +7,25 @@ import {
 	writeInputCode,
 } from './templates&functions/helperFunctions.js';
 
-let forceDesignObj = {
-	// typeOfDrawer: 'random',
-	// dimensions: {
-	// 	width: null,
-	// 	height: null,
-	// },
-	// testStr: '',
-	// boxDrawObj: {},
-	// mandalaDrawObj: {},
-};
-// let forceDesignObj = {};
+// let forceDesignObj = {
+// 		typeOfDrawer: 'random',
+// 			dimensions: {
+// 				width: null,
+// 				height: null,
+// 			},
+// 		testStr: '',
+// 		boxDrawObj: {},
+// 		mandalaDrawObj: {},
+// };
+let forceDesignObj = {};
 
 const randomDrawerBtn = document.querySelector('#randomDrawerBtn');
 const boxDrawerBtn = document.querySelector('#boxDrawerBtn');
 const mandalaDrawerBtn = document.querySelector('#mandalaDrawerBtn');
 const dimensionWidth = document.querySelector('#dimensionWidth');
 const dimensionHeight = document.querySelector('#dimensionHeight');
+const sequence = document.querySelector('#sequence');
+const sequenceDisplay = document.querySelector('#randomDrawSequence');
 const codeInjection = document.querySelector('.codeInjection');
 const subControls = document.querySelector('.subControls');
 let btns = document.querySelectorAll('.btns');
@@ -81,7 +83,6 @@ const handleBtnClick = (event) => {
 };
 const initBtnActiveListeners = () => {
 	btns = document.querySelectorAll('.btns');
-	console.log(btns);
 	btns.forEach((btn) => {
 		btn.removeEventListener('click', handleBtnClick);
 		btn.addEventListener('click', handleBtnClick);
@@ -264,7 +265,6 @@ const initBoxDrawChoiceListeners = () => {
 	if (boxPatternBtns.length > 1) {
 		boxPatternBtns.forEach((boxPatternBtn) => {
 			boxPatternBtn.addEventListener('click', (event) => {
-				event.preventDefault();
 				let convertedWord;
 				const word = event.target.innerText;
 				convertedWord =
@@ -374,9 +374,9 @@ mandalaDrawerBtn.addEventListener('click', (event) => {
 //Mandala Draw listener and switch
 
 //clone designObj
-const newDesignObj = cloneObj(forceDesignObj);
 //get img
 window.onload = () => {
+	const newDesignObj = cloneObj(forceDesignObj);
 	randomDraw(newDesignObj);
 	codeInjection.innerHTML = writeInputCode(forceDesignObj);
 };
@@ -393,3 +393,12 @@ if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
 }
 
 console.log('the same listener on btns are being applied multiple times');
+
+sequence.addEventListener('click', (event) => {
+	event.preventDefault();
+	const sequenceImg = getSequence();
+	sequenceDisplay.style.backgroundImage = sequenceImg;
+	sequenceDisplay.src = sequenceImg;
+	console.log(sequenceDisplay);
+	debugger;
+});
