@@ -14,6 +14,7 @@ const BoxDrawing = (forceDesignObj) => {
 		width = dimensions.width;
 		height = dimensions.height;
 	}
+	debugger;
 
 	const canvasWidth = width ? width : 500;
 	const canvasHeight = height ? height : 500;
@@ -46,7 +47,7 @@ const BoxDrawing = (forceDesignObj) => {
 			break;
 		default:
 			console.log('error in primarytoggle');
-			primaryColor = '#000000';
+			boxDrawObj.primaryColor = '#000000';
 			break;
 	}
 

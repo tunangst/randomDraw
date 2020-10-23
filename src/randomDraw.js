@@ -1,4 +1,3 @@
-import Queue from './templates&functions/Queue.js';
 import randomInterface from './codeBank/randomInterface.js';
 
 const BoxDrawing = randomInterface.BoxDrawing;

@@ -30,7 +30,7 @@ const getShapeFunction = (customShape, forceNumber) => {
 					console.log('error in getShapeFunction ellipse');
 					break;
 			}
-			return drawCircle;
+		// return drawCircle;
 		case 2: // draw square
 			let squareDice = roll(2);
 			switch (squareDice) {
