@@ -6,7 +6,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "3.4.4"
@@ -14,7 +13,6 @@
   "scripts": {
     "start": "react-scripts start",
     "predeploy": "npm run build",
-    "watch": "node scripts/watch.js",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -36,6 +34,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.4"
   }
 }
