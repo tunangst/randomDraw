@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	/* border: 1px solid greenyellow; */
+	border: 1px solid greenyellow;
 }
 :root {
 	--outerContainerColor: hsl(203, 90%, 75%);
@@ -18,9 +18,37 @@ body {
 body {
 	background-color: white;
 	font-family: Georgia, 'Times New Roman', Times, serif;
-	padding: 20px;
+	/* padding: 20px; */
+	/* display: flex; */
+}
+header {
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.codeInjectionContainer {
+	position: fixed;
+	z-index: 2;
+	bottom: 0;
+	left: 0;
+	/* height: auto; */
+	background-color: #ddddddcc;
+	padding: 10px;
+	overflow: auto;
+}
+.codeInjectionContainer pre {
 	display: flex;
 }
+
+main {
+	display: flex;
+	margin-bottom: 300px;
+}
+
+.controlsBox {
+}
+
 p {
 	margin: 5px;
 }
@@ -60,11 +88,6 @@ p {
 	width: 50px;
 }
 
-.codeInjectionContainer {
-	height: 200px;
-	background-color: #ccc;
-	padding: 10px;
-}
 .separatorContainer {
 	background-color: var(--innerContainerColor);
 	margin: 0 10px;

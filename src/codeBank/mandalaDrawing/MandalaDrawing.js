@@ -4,13 +4,15 @@ import getInputStats from './functionPool/_getInputStats.js';
 import getDrawType from './functionPool/_getDrawType.js';
 
 const MandalaDrawing = (forceDesignObj) => {
-	let {
-		dimensions: { width, height },
-		mandalaDrawObj,
-	} = forceDesignObj;
+	let { dimensions, mandalaDrawObj } = forceDesignObj;
+	let width, height;
+	if (dimensions) {
+		width = dimensions.width;
+		height = dimensions.height;
+	}
 
-	const canvasWidth = width || 500;
-	const canvasHeight = height || 500;
+	const canvasWidth = width ? width : 500;
+	const canvasHeight = height ? height : 500;
 	const [canvasDraw, ctx2] = createCanvasDraw(canvasWidth, canvasHeight);
 
 	mandalaDrawObj = {

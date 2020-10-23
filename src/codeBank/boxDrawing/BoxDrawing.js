@@ -7,13 +7,16 @@ import { boxDraw, createPixelMap } from './boxDrawingUtilities.js';
 import { createCanvasTemplate, createCanvasDraw } from '../utilities.js';
 
 const BoxDrawing = (forceDesignObj) => {
-	let {
-		dimensions: { width, height },
-		boxDrawObj,
-	} = forceDesignObj;
+	// if(forceDesignObj)
+	let { dimensions, boxDrawObj } = forceDesignObj;
+	let width, height;
+	if (dimensions) {
+		width = dimensions.width;
+		height = dimensions.height;
+	}
 
-	const canvasWidth = width || 500;
-	const canvasHeight = height || 500;
+	const canvasWidth = width ? width : 500;
+	const canvasHeight = height ? height : 500;
 	const matrix = [];
 	const boxCount = boxDrawObj.boxCount || 10;
 	const pixelWidth = canvasWidth / boxCount || 250;

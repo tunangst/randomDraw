@@ -6,6 +6,12 @@ const RandomDrawing = randomInterface.RandomDrawing;
 
 const randomDraw = (forceDesignObj = {}) => {
 	const { typeOfDrawer } = forceDesignObj;
+	if (!forceDesignObj.boxDrawObj) {
+		forceDesignObj.boxDrawObj = {};
+	}
+	if (!forceDesignObj.mandalaDrawObj) {
+		forceDesignObj.mandalaDrawObj = {};
+	}
 	switch (typeOfDrawer) {
 		case 'boxDraw':
 			BoxDrawing(forceDesignObj);
