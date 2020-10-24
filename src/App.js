@@ -5,6 +5,7 @@ import Controls from './components/Controls';
 import MainDisplay from './components/MainDisplay';
 
 import { randomDraw } from './randomDraw.js';
+import { cloneObj, resetDefaults } from './functions/functions.js';
 
 function App() {
 	// let forceDesignObj = {
@@ -21,44 +22,47 @@ function App() {
 	const [designState, setDesignState] = useState({});
 
 	useEffect(() => {
-		//reset default values
-		if (designState.dimensions) {
-			if (designState.dimensions.width === 500) {
-				setDesignState({
-					...designState,
-					dimensions: {
-						...designState.dimensions,
-						width: null,
-					},
-				});
-			}
-			if (designState.dimensions.height === 500) {
-				setDesignState({
-					...designState,
-					dimensions: {
-						...designState.dimensions,
-						height: null,
-					},
-				});
-			}
-		}
+		//reset defaults
+		resetDefaults(
+			designState,
+			adjustState,
+			adjustDimensions,
+			adjustBoxState
+		);
+
+		//clone state
+		const inputObj = cloneObj(designState);
+		//draw
+		randomDraw(inputObj);
 	}, [designState]);
 
-	const adjustState = (key, value) => {
+	const adjustState = (obj) => {
 		setDesignState({
 			...designState,
-			[key]: value,
+			...obj,
 		});
 	};
 
-	const adjustDimensions = (key, value) => {
+	const adjustDimensions = (obj) => {
 		setDesignState({
 			...designState,
 			dimensions: {
 				...designState.dimensions,
-				[key]: value,
+				...obj,
 			},
 		});
+	};
+	const adjustBoxState = (obj) => {
+		// 	debugger;
+		// 	console.log(designState);
+		setDesignState({
+			...designState,
+			boxDrawObj: {
+				...designState.boxDrawObj,
+				...obj,
+			},
+		});
+		// 	console.log(designState);
 	};
 
 	const draw = () => {
@@ -75,6 +79,7 @@ function App() {
 					state={designState}
 					adjustState={adjustState}
 					adjustDimensions={adjustDimensions}
+					adjustBoxState={adjustBoxState}
 				/>
 				<MainDisplay />
 			</main>
@@ -83,3 +88,6 @@ function App() {
 }
 
 export default App;
+
+//maybe add fractals
+//maybe add pixel trails

@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import DropDownMarkUp from './DropDownMarkUp';
+import BoxDropDownMarkUp from './BoxDropDownMarkUp';
 // import { randomDraw } from '../../randomDraw';
 
 const initialInputState = {
@@ -7,8 +7,15 @@ const initialInputState = {
 	height: 500,
 };
 
-const Controls = ({ draw, state, adjustState, adjustDimensions }) => {
+const Controls = ({
+	draw,
+	state,
+	adjustState,
+	adjustDimensions,
+	adjustBoxState,
+}) => {
 	const [input, setInput] = useState(initialInputState);
+	const [active, setActive] = useState('randomDrawerBtn');
 	const [dropDown, setDropDown] = useState(false);
 	const [whichDropDown, setWhichDropDown] = useState(''); //'draw', 'mandala'
 
@@ -16,16 +23,20 @@ const Controls = ({ draw, state, adjustState, adjustDimensions }) => {
 		let id = event.target.id;
 		switch (id) {
 			case 'boxDrawerBtn':
-				adjustState('typeOfDrawer', 'boxDraw');
+				setActive(id);
+				adjustState({ typeOfDrawer: 'boxDraw' });
 				setDropDown(true);
 				setWhichDropDown('box');
 				break;
 			case 'mandalaDrawerBtn':
-				adjustState('typeOfDrawer', 'mandalaDraw');
+				setActive(id);
+				adjustState({ typeOfDrawer: 'mandalaDraw' });
 				setDropDown(true);
 				setWhichDropDown('mandala');
 				break;
 			default:
+				setActive('randomDrawerBtn');
+				adjustState({ typeOfDrawer: 'random' });
 				setDropDown(false);
 				console.log('error in handleBtnClick', id);
 				break;
@@ -36,13 +47,15 @@ const Controls = ({ draw, state, adjustState, adjustDimensions }) => {
 			...input,
 			[event.target.name]: event.target.value,
 		});
-		adjustDimensions([event.target.name], Number(event.target.value));
+		adjustDimensions({ [event.target.name]: Number(event.target.value) });
 	};
 
 	let dropDownMarkUp;
 	switch (whichDropDown) {
 		case 'box':
-			dropDownMarkUp = <DropDownMarkUp />;
+			dropDownMarkUp = (
+				<BoxDropDownMarkUp adjustBoxState={adjustBoxState} />
+			);
 			break;
 		case 'mandala':
 			// dropDownMarkUp = <DropDownMarkUp />;
@@ -58,14 +71,18 @@ const Controls = ({ draw, state, adjustState, adjustDimensions }) => {
 				<div className='drawerContainer btnContainer'>
 					<button
 						id='randomDrawerBtn'
-						className='btns'
+						className={`btns ${
+							active === 'randomDrawerBtn' ? 'active' : ''
+						}`}
 						onClick={handleBtnClick}
 					>
 						Random Draw
 					</button>
 					<button
 						id='boxDrawerBtn'
-						className='btns'
+						className={`btns ${
+							active === 'boxDrawerBtn' ? 'active' : ''
+						}`}
 						onClick={handleBtnClick}
 					>
 						Box Draw

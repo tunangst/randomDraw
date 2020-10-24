@@ -14,7 +14,6 @@ const BoxDrawing = (forceDesignObj) => {
 		width = dimensions.width;
 		height = dimensions.height;
 	}
-	debugger;
 
 	const canvasWidth = width ? width : 500;
 	const canvasHeight = height ? height : 500;
@@ -43,7 +42,13 @@ const BoxDrawing = (forceDesignObj) => {
 			boxDrawObj.primaryColor = randomColor();
 			break;
 		case 'choose':
-			//keep input
+			let inputColor;
+			if (!boxDrawObj.primaryColor) {
+				inputColor = '#000000';
+			} else {
+				inputColor = boxDrawObj.primaryColor;
+			}
+			boxDrawObj.primaryColor = inputColor;
 			break;
 		default:
 			console.log('error in primarytoggle');
@@ -57,7 +62,13 @@ const BoxDrawing = (forceDesignObj) => {
 			boxDrawObj.secondaryColor = randomColor(); //new color seed on refresh;
 			break;
 		case 'choose':
-			//keep input
+			let inputColor;
+			if (!boxDrawObj.secondaryColor) {
+				inputColor = '#8C00FF';
+			} else {
+				inputColor = boxDrawObj.secondaryColor;
+			}
+			boxDrawObj.secondaryColor = inputColor;
 			break;
 		default:
 			console.log('error in secondaryToggle');
@@ -73,7 +84,13 @@ const BoxDrawing = (forceDesignObj) => {
 			boxDrawObj.backgroundColor = randomColor();
 			break;
 		case 'choose':
-			//keep input
+			let inputColor;
+			if (!boxDrawObj.backgroundColor) {
+				inputColor = '#ffffff00';
+			} else {
+				inputColor = boxDrawObj.backgroundColor;
+			}
+			boxDrawObj.backgroundColor = inputColor;
 			break;
 		default:
 			console.log('error in backgroundToggle');
