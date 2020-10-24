@@ -12,11 +12,31 @@ const getShapeFunction = (customShape, forceNumber) => {
 			forceNumber = forceNumber - diceRange;
 		}
 		dice = forceNumber;
-	} else if (customShape === 'noLine') {
-		dice = roll(2);
+	} else if (customShape) {
+		switch (customShape) {
+			case 'circle':
+				return circle;
+			case 'oval':
+				return oval;
+			case 'square':
+				return square;
+			case 'diamond':
+				return diamond;
+			case 'starburst':
+				return starburst;
+			case 'slant':
+				return slant;
+			case 'no-line':
+				dice = roll(2);
+				break;
+			default:
+				console.log('default in customshape, get shapefunction');
+				break;
+		}
 	} else {
 		dice = roll(3);
 	}
+
 	switch (dice) {
 		case 1: // draw ellipse
 			const ellipseDice = roll(2);

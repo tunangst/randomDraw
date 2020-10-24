@@ -27,7 +27,8 @@ function App() {
 			designState,
 			adjustState,
 			adjustDimensions,
-			adjustBoxState
+			adjustBoxState,
+			adjustMandalaState
 		);
 
 		//clone state
@@ -53,8 +54,6 @@ function App() {
 		});
 	};
 	const adjustBoxState = (obj) => {
-		// 	debugger;
-		// 	console.log(designState);
 		setDesignState({
 			...designState,
 			boxDrawObj: {
@@ -62,7 +61,15 @@ function App() {
 				...obj,
 			},
 		});
-		// 	console.log(designState);
+	};
+	const adjustMandalaState = (obj) => {
+		setDesignState({
+			...designState,
+			mandalaDrawObj: {
+				...designState.mandalaDrawObj,
+				...obj,
+			},
+		});
 	};
 
 	const draw = () => {
@@ -80,6 +87,7 @@ function App() {
 					adjustState={adjustState}
 					adjustDimensions={adjustDimensions}
 					adjustBoxState={adjustBoxState}
+					adjustMandalaState={adjustMandalaState}
 				/>
 				<MainDisplay />
 			</main>

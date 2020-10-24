@@ -33,8 +33,11 @@ const resetDefaults = (
 	state,
 	adjustState,
 	adjustDimensions,
-	adjustBoxState
+	adjustBoxState,
+	adjustMandalaState
 ) => {
+	console.log('in resetDefaults');
+	console.log('testing for infinite loop');
 	// ======= dimensions adjustments
 	// ~~~~~~~~~~~~~~~ reset default values of typeOfDrawer
 	if (state.typeOfDrawer && state.typeOfDrawer === 'random') {
@@ -127,6 +130,53 @@ const resetDefaults = (
 		}
 
 		// ======= boxDrawObj adjustments
+	}
+	// ======= mandalaDrawObj adjustments
+	if (state.mandalaDrawObj) {
+		// ~~~~~~~~~~~~~~~ reset drawType
+		if (state.mandalaDrawObj.drawType) {
+			if (state.mandalaDrawObj.drawType === 'random') {
+				adjustMandalaState({ drawType: null });
+			}
+			if (state.mandalaDrawObj.drawType !== 'custom') {
+				//delete all mods in <MandalaCustomDrawOptions />
+				state.mandalaDrawObj.loopCount &&
+					adjustMandalaState({ loopCount: null });
+				state.mandalaDrawObj.minShapeSize &&
+					adjustMandalaState({ minShapeSize: null });
+				state.mandalaDrawObj.maxShapeSize &&
+					adjustMandalaState({ maxShapeSize: null });
+				state.mandalaDrawObj.minShapeCount &&
+					adjustMandalaState({ minShapeCount: null });
+				state.mandalaDrawObj.maxShapeCount &&
+					adjustMandalaState({ maxShapeCount: null });
+				state.mandalaDrawObj.minPathRadius &&
+					adjustMandalaState({ minPathRadius: null });
+				state.mandalaDrawObj.maxPathRadius &&
+					adjustMandalaState({ maxPathRadius: null });
+				state.mandalaDrawObj.blendMode &&
+					adjustMandalaState({ blendMode: null });
+				state.mandalaDrawObj.customBackgroundSwitch &&
+					adjustMandalaState({ customBackgroundSwitch: null });
+				state.mandalaDrawObj.chooseBackgroundColor &&
+					adjustMandalaState({ chooseBackgroundColor: null });
+			}
+			// ~~~~~~~~~~~~~~~ reset drawType
+			// ~~~~~~~~~~~~~~~ reset drawType insides
+			if (state.mandalaDrawObj.drawType === 'custom') {
+				if (state.mandalaDrawObj.customBackgroundSwitch === false) {
+					adjustMandalaState({
+						customBackgroundSwitch: null,
+						chooseBackgroundColor: null,
+					});
+				}
+			}
+			// ~~~~~~~~~~~~~~~ reset drawType insides
+		}
+
+		// ~~~~~~~~~~~~~~~ reset loopCount
+
+		// ======= mandalaDrawObj adjustments
 	}
 };
 

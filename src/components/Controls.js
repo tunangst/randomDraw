@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import BoxDropDownMarkUp from './BoxDropDownMarkUp';
+import MandalaDropDownMarkUp from './MandalaDropDownMarkUp';
 // import { randomDraw } from '../../randomDraw';
 
 const initialInputState = {
@@ -13,6 +14,7 @@ const Controls = ({
 	adjustState,
 	adjustDimensions,
 	adjustBoxState,
+	adjustMandalaState,
 }) => {
 	const [input, setInput] = useState(initialInputState);
 	const [active, setActive] = useState('randomDrawerBtn');
@@ -58,7 +60,11 @@ const Controls = ({
 			);
 			break;
 		case 'mandala':
-			// dropDownMarkUp = <DropDownMarkUp />;
+			dropDownMarkUp = (
+				<MandalaDropDownMarkUp
+					adjustMandalaState={adjustMandalaState}
+				/>
+			);
 			break;
 		default:
 			dropDownMarkUp = null;

@@ -20,10 +20,10 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 	);
 	const [activeStyle, setActiveStyle] = useState('random');
 
-	useEffect(() => {
-		console.log('refresh dropdown');
-		//prevent input state refreshing component,
-	}, []);
+	// useEffect(() => {
+	// 	console.log('refresh dropdown');
+	// 	//prevent input state refreshing component,
+	// }, []);
 
 	const handleChange = (event) => {
 		// debugger;
