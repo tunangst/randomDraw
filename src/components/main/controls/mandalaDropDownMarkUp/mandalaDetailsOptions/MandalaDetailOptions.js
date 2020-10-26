@@ -21,7 +21,6 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	// 	//prevent input state refreshing component,
 	// }, []);
 	const handleReset = (event) => {
-		debugger;
 		setInput({
 			...initialState,
 		});
