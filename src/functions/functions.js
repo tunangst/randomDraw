@@ -59,6 +59,9 @@ const resetDefaults = (
 	// ======= dimensions adjustments
 	// ======= boxDrawObj adjustments
 	if (state.boxDrawObj) {
+		if (state.boxDrawObj.boxCount && state.boxDrawObj.boxCount === 10) {
+			adjustBoxState({ boxCount: null });
+		}
 		// ~~~~~~~~~~~~~~~ off 'choose' toggle remove color value
 		if (state.boxDrawObj.primaryToggle) {
 			if (

@@ -4,32 +4,32 @@ const initialState = {
 	clear: {
 		clearAll: false,
 		clearRandomLoops: false,
-		clearIndividualLoops: false,
+		clearIndividual: false,
 	},
 	fill: {
 		fillAll: false,
 		fillRandomLoops: false,
-		fillIndividualLoops: false,
+		fillIndividual: false,
 	},
 	fillColor: {
 		fillColorAll: false,
 		fillColorRandomLoops: false,
-		fillColorIndividualLoops: false,
+		fillColorIndividual: false,
 	},
 	stroke: {
 		strokeAll: false,
 		strokeRandomLoops: false,
-		strokeIndividualLoops: false,
+		strokeIndividual: false,
 	},
 	strokeColor: {
 		strokeColorAll: false,
 		strokeColorRandomLoops: false,
-		strokeColorIndividualLoops: false,
+		strokeColorIndividual: false,
 	},
 	strokeWidth: {
 		strokeWidthAll: false,
 		strokeWidthRandomLoops: false,
-		strokeWidthIndividualLoops: false,
+		strokeWidthIndividual: false,
 	},
 };
 
@@ -60,16 +60,25 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 		event.stopPropagation();
 		let id = event.target.id;
 		let name = event.target.name;
-		// let value = event.target.value;
 
-		// //update this state
-		setInput({
-			...input,
-			[name]: {
-				...initialState[name],
-				[id]: true,
-			},
-		});
+		if (event.target.checked && input[name][id]) {
+			event.target.checked = false;
+			setInput({
+				...input,
+				[name]: {
+					...initialState[name],
+				},
+			});
+		} else {
+			// //update this state
+			setInput({
+				...input,
+				[name]: {
+					...initialState[name],
+					[id]: true,
+				},
+			});
+		}
 	};
 
 	return (
@@ -82,7 +91,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='clear'
 						type='radio'
 						value='all'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -91,7 +100,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='clear'
 						type='radio'
 						value='random'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -100,7 +109,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='clear'
 						type='radio'
 						value='individual'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 				</div>
 				<div>
@@ -110,7 +119,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='fill'
 						type='radio'
 						value='all'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -119,7 +128,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='fill'
 						type='radio'
 						value='random'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -128,7 +137,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='fill'
 						type='radio'
 						value='individual'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 				</div>
 				<div>
@@ -138,7 +147,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='fillColor'
 						type='radio'
 						value='all'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -147,7 +156,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='fillColor'
 						type='radio'
 						value='random'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -156,7 +165,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='fillColor'
 						type='radio'
 						value='individual'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 				</div>
 				<div>
@@ -166,7 +175,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='stroke'
 						type='radio'
 						value='all'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -175,7 +184,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='stroke'
 						type='radio'
 						value='random'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -184,7 +193,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='stroke'
 						type='radio'
 						value='individual'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 				</div>
 				<div>
@@ -194,7 +203,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='strokeColor'
 						type='radio'
 						value='all'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -203,7 +212,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='strokeColor'
 						type='radio'
 						value='random'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -212,7 +221,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='strokeColor'
 						type='radio'
 						value='individual'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 				</div>
 				<div>
@@ -222,7 +231,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='strokeWidth'
 						type='radio'
 						value='all'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -231,7 +240,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='strokeWidth'
 						type='radio'
 						value='random'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 
 					<input
@@ -240,7 +249,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 						name='strokeWidth'
 						type='radio'
 						value='individual'
-						onChange={handleChange}
+						onClick={handleChange}
 					/>
 				</div>
 			</section>

@@ -15,23 +15,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 	// useEffect(() => {
 	// 	console.log('mandalaDropDownMarkUp useEffect');
 	// }, [input]);
-	const handleSelectionChange = (event) => {
-		const name = event.target.name;
-		const selection = event.target.selectedOptions[0].value;
 
-		//see if I need to show custom options
-		if (name === 'drawType' && selection === 'custom') {
-			setShowDrawOptions(true);
-		} else {
-			setShowDrawOptions(false);
-		}
-		setInput({
-			...input,
-			[name]: selection === 'random' ? null : selection,
-		});
-		//send obj to app
-		adjustMandalaState({ [name]: selection });
-	};
 	const handleBtns = (event) => {
 		// adjustBoxState([event.target.name], event.target.value);
 		const id = event.target.id;
@@ -53,15 +37,23 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 				break;
 		}
 	};
-	const handleStyleBtns = (event) => {
-		// const word = event.target.innerText;
-		// // let colorInput = null;
-		// const convertedWord =
-		// 	word.charAt(0).toLowerCase() + word.replace(/\s/g, '').slice(1);
+	const handleTypeBtns = (event) => {
+		const name = event.target.name;
 		let id = event.target.id;
+
+		if (name === 'drawType' && id === 'mandalaCustom') {
+			id = 'custom';
+			setShowDrawOptions(true);
+		} else {
+			setShowDrawOptions(false);
+		}
+		if (id === 'random') id = null;
+		setInput({
+			...input,
+			drawType: id === 'random' ? null : id,
+		});
 		setActiveStyle(id);
 		//place as default;
-		if (id === 'random') id = null;
 		adjustMandalaState({ drawType: id });
 	};
 
@@ -78,73 +70,81 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 					<div className='btnContainer'>
 						<button
 							id='random'
+							name='drawType'
 							className={`btns boxPatternBtns ${
 								activeStyle === 'random' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							Random
 						</button>
 						<button
 							id='strokeOnly'
+							name='drawType'
 							className={`btns ${
 								activeStyle === 'strokeOnly' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							Stroke Only
 						</button>
 						<button
 							id='fillOnly'
+							name='drawType'
 							className={`btns ${
 								activeStyle === 'fillOnly' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							Fill Only
 						</button>
 						<button
 							id='fillAndStroke'
+							name='drawType'
 							className={`btns ${
 								activeStyle === 'fillAndStroke' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							Fill and Stroke
 						</button>
 						<button
 							id='individual'
+							name='drawType'
 							className={`btns ${
 								activeStyle === 'individual' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							Individual
 						</button>
 						<button
 							id='chaos'
+							name='drawType'
 							className={`btns ${
 								activeStyle === 'chaos' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							Chaos
 						</button>
 						<button
 							id='outline'
+							name='drawType'
 							className={`btns ${
 								activeStyle === 'outline' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							Outline
 						</button>
 						<button
-							id='custom'
+							id='mandalaCustom'
+							name='drawType'
 							className={`btns custom ${
 								activeStyle === 'custom' ? 'active' : ''
 							}`}
-							onClick={handleStyleBtns}
+							onClick={handleTypeBtns}
 						>
 							<p>Custom</p>
 						</button>

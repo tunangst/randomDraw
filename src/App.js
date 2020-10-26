@@ -29,6 +29,8 @@ function App() {
 	useEffect(() => {
 		console.log(designState);
 		//reset defaults
+		// debugger;
+
 		//updates the state then runs again
 		resetDefaults(
 			designState,
