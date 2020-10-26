@@ -65,7 +65,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 						adjustMandalaState={adjustMandalaState}
 					/>
 				</div>
-				<div className='separators'>
+				<div className='separators drawTypeSeparator'>
 					<p>Draw Type:</p>
 					<div className='btnContainer'>
 						<button
@@ -150,7 +150,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 						</button>
 					</div>
 				</div>
-				<div className='separators'>
+				<div className='separators  customSeparator'>
 					{showDrawOptions ? (
 						<MandalaCustomDrawOptions
 							adjustMandalaState={adjustMandalaState}

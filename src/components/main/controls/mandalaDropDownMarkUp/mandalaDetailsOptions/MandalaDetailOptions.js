@@ -3,11 +3,11 @@ import React, { Fragment, useState, useEffect } from 'react';
 const initialState = {
 	loopCount: 5,
 	minShapeSize: 20,
-	maxShapeSize: 200,
+	maxShapeSize: null,
 	minShapeCount: 4,
 	maxShapeCount: 200,
 	minPathRadius: 20,
-	maxPathRadius: 500,
+	maxPathRadius: null,
 	blendMode: 'default',
 	chooseBackgroundColor: '#ffffff',
 };
@@ -20,7 +20,13 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	// 	console.log('refresh dropdown');
 	// 	//prevent input state refreshing component,
 	// }, []);
-
+	const handleReset = (event) => {
+		debugger;
+		setInput({
+			...initialState,
+		});
+		adjustMandalaState(initialState);
+	};
 	const handleChange = (event) => {
 		let keyName = event.target.id;
 		let value = event.target.value;
@@ -88,6 +94,7 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 						type='number'
 						value={input.maxShapeSize}
 						min='2'
+						placeholder='200'
 						onChange={handleChange}
 					/>
 					<input
@@ -124,6 +131,7 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 						type='number'
 						value={input.maxPathRadius}
 						min='2'
+						placeholder='500'
 						onChange={handleChange}
 					/>
 					<div>
@@ -153,6 +161,11 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 					<label htmlFor='minPathRadius'>Min Path Radius</label>
 					<label htmlFor='maxPathRadius'>Max Path Radius</label>
 					<label htmlFor='backgroundColor'>Background Color</label>
+				</section>
+				<section className='detailsReset'>
+					<button className='resetBtn' onClick={handleReset}>
+						Reset
+					</button>
 				</section>
 			</div>
 		</section>
