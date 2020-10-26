@@ -2,3 +2,7 @@ $outerContainerColor: hsl(273, 20%, 50%);
 $innerContainerColor: hsl(273, 20%, 80%);
 $btnDefaultColor: hsl(273, 20%, 30%);
 $btnHoverColor: hsl(273, 20%, 40%);
+
+$stripe1: $btnDefaultColor;
+$stripe2: $innerContainerColor;
+$stripe1Hover: $btnHoverColor;

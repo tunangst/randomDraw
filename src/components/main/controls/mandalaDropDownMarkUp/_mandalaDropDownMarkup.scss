@@ -1,10 +1,96 @@
 #mandalaSubControls {
 	.separatorContainer {
+		background-color: $innerContainerColor;
+
 		.separators {
+			padding: 10px;
+			margin: 0;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			padding-bottom: 0;
+			p {
+				align-self: flex-start;
+			}
+			.btnContainer {
+				.custom {
+					position: relative;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					z-index: 2;
+					font-weight: bolder;
+					background-image: repeating-linear-gradient(
+						-45deg,
+						$stripe1,
+						$stripe1 20px,
+						$stripe2 20px,
+						$stripe2 40px
+					);
+					transition: 0.25s ease-out;
+
+					p {
+						color: $innerContainerColor;
+						align-self: initial;
+						padding: 5px 10px;
+						border-radius: 5px;
+						background-color: $btnDefaultColor;
+						pointer-events: none;
+					}
+					&:hover {
+						background-image: repeating-linear-gradient(
+							-45deg,
+							$stripe1Hover,
+							$stripe1Hover 20px,
+							$stripe2 20px,
+							$stripe2 40px
+						);
+					}
+				}
+				.active {
+					background: #fff;
+					outline: none;
+					box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+					transition: 0.25s ease-out;
+					p {
+						color: $btnDefaultColor;
+						background: #fff;
+						transition: 0.25s ease-out;
+						pointer-events: none;
+					}
+
+					&:hover {
+						background: #eee;
+						color: $btnHoverColor;
+					}
+					&:hover p {
+						background-color: #eee;
+					}
+				}
+			}
+			#boxCount {
+			}
+			input {
+			}
+
 			p {
 			}
 			.mandalaInputs {
 			}
+		}
+	}
+	.closingSeparator {
+		padding: 10px;
+		background-color: #826699;
+		border-radius: 0 0 5px 5px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		p {
+			align-self: center;
 		}
 	}
 }

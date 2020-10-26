@@ -103,7 +103,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 	return (
 		<section id='boxSubControls'>
 			<div className='separatorContainer'>
-				<div className='separators'>
+				<div className='separators boxCountSeparator'>
 					<p>Box Count:</p>
 					<input
 						id='boxCount'

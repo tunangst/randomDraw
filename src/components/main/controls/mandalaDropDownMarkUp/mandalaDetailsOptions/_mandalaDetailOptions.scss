@@ -1,12 +1,21 @@
 #detailsContainer {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 
 	header {
+		padding: 5px 0;
+		align-self: flex-start;
+
+		span {
+			opacity: 0.6;
+		}
 	}
 	.container {
 		display: flex;
 		justify-content: flex-start;
+
+		margin-bottom: 5px;
 
 		.detailsInputs,
 		.detailsLabels {

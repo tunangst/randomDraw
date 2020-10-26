@@ -50,7 +50,9 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 
 	return (
 		<section id='detailsContainer'>
-			<header>Details: (some of these values are calculated)</header>
+			<header>
+				Details: <span>(some of these values are calculated)</span>
+			</header>
 			<div className='container'>
 				<section className='detailsInputs'>
 					<input

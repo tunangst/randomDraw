@@ -8,7 +8,6 @@ const initialState = {
 const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 	const [input, setInput] = useState({});
 	const [showDrawOptions, setShowDrawOptions] = useState(false);
-
 	const [activeStyle, setActiveStyle] = useState('random');
 
 	const [activeShapeType, setActiveShapeType] = useState('shapeTypeRandom');
@@ -54,31 +53,102 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 				break;
 		}
 	};
+	const handleStyleBtns = (event) => {
+		// const word = event.target.innerText;
+		// // let colorInput = null;
+		// const convertedWord =
+		// 	word.charAt(0).toLowerCase() + word.replace(/\s/g, '').slice(1);
+		let id = event.target.id;
+		setActiveStyle(id);
+		//place as default;
+		if (id === 'random') id = null;
+		adjustMandalaState({ drawType: id });
+	};
 
 	return (
 		<section id='mandalaSubControls'>
 			<div className='separatorContainer'>
 				<div className='separators'>
-					<p>
-						Draw Type:
-						<select
-							id='drawType'
-							className='mandalaInputs'
-							name='drawType'
-							onChange={handleSelectionChange}
+					<MandalaDetailOptions
+						adjustMandalaState={adjustMandalaState}
+					/>
+				</div>
+				<div className='separators'>
+					<p>Draw Type:</p>
+					<div className='btnContainer'>
+						<button
+							id='random'
+							className={`btns boxPatternBtns ${
+								activeStyle === 'random' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
 						>
-							<option value='random'>Random</option>
-							<option value='strokeOnly'>Stroke Only</option>
-							<option value='fillOnly'>Fill Only</option>
-							<option value='fillAndStroke'>
-								Fill And Stroke
-							</option>
-							<option value='individual'>Individual</option>
-							<option value='chaos'>Chaos</option>
-							<option value='outline'>Outline</option>
-							<option value='custom'>Custom</option>
-						</select>
-					</p>
+							Random
+						</button>
+						<button
+							id='strokeOnly'
+							className={`btns ${
+								activeStyle === 'strokeOnly' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
+						>
+							Stroke Only
+						</button>
+						<button
+							id='fillOnly'
+							className={`btns ${
+								activeStyle === 'fillOnly' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
+						>
+							Fill Only
+						</button>
+						<button
+							id='fillAndStroke'
+							className={`btns ${
+								activeStyle === 'fillAndStroke' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
+						>
+							Fill and Stroke
+						</button>
+						<button
+							id='individual'
+							className={`btns ${
+								activeStyle === 'individual' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
+						>
+							Individual
+						</button>
+						<button
+							id='chaos'
+							className={`btns ${
+								activeStyle === 'chaos' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
+						>
+							Chaos
+						</button>
+						<button
+							id='outline'
+							className={`btns ${
+								activeStyle === 'outline' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
+						>
+							Outline
+						</button>
+						<button
+							id='custom'
+							className={`btns custom ${
+								activeStyle === 'custom' ? 'active' : ''
+							}`}
+							onClick={handleStyleBtns}
+						>
+							<p>Custom</p>
+						</button>
+					</div>
 				</div>
 				<div className='separators'>
 					{showDrawOptions ? (
@@ -87,50 +157,43 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 						/>
 					) : null}
 				</div>
-				<div className='separators'>
-					<p>Shape Type:</p>
-					<div className='shapeType btnContainer'>
-						<button
-							id='shapeTypeRandom'
-							className={`btns ${
-								activeShapeType === 'shapeTypeRandom'
-									? 'active'
-									: ''
-							}`}
-							onClick={handleBtns}
-						>
-							Random
-						</button>
+			</div>
+			<div className='separators closingSeparator'>
+				<p>Shape Type:</p>
+				<div className='shapeType btnContainer'>
+					<button
+						id='shapeTypeRandom'
+						className={`btns ${
+							activeShapeType === 'shapeTypeRandom'
+								? 'active'
+								: ''
+						}`}
+						onClick={handleBtns}
+					>
+						Random
+					</button>
 
-						<button
-							id='shapeTypeSame'
-							className={`btns ${
-								activeShapeType === 'shapeTypeSame'
-									? 'active'
-									: ''
-							}`}
-							onClick={handleBtns}
-						>
-							Same
-						</button>
+					<button
+						id='shapeTypeSame'
+						className={`btns ${
+							activeShapeType === 'shapeTypeSame' ? 'active' : ''
+						}`}
+						onClick={handleBtns}
+					>
+						Same
+					</button>
 
-						<button
-							id='shapeTypeIncrement'
-							className={`btns ${
-								activeShapeType === 'shapeTypeIncrement'
-									? 'active'
-									: ''
-							}`}
-							onClick={handleBtns}
-						>
-							Increment
-						</button>
-					</div>
-				</div>
-				<div className='separators'>
-					<MandalaDetailOptions
-						adjustMandalaState={adjustMandalaState}
-					/>
+					<button
+						id='shapeTypeIncrement'
+						className={`btns ${
+							activeShapeType === 'shapeTypeIncrement'
+								? 'active'
+								: ''
+						}`}
+						onClick={handleBtns}
+					>
+						Increment
+					</button>
 				</div>
 			</div>
 		</section>
@@ -138,147 +201,27 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 };
 
 export default MandalaDropDownMarkUp;
+// <div className='separators'>
+// 	<p>
+// 		Draw Type:
+// 		<select
+// 			id='drawType'
+// 			className='mandalaInputs'
+// 			name='drawType'
+// 			onChange={handleSelectionChange}
+// 		>
+// 			<option value='random'>Random</option>
+// 			<option value='strokeOnly'>Stroke Only</option>
+// 			<option value='fillOnly'>Fill Only</option>
+// 			<option value='fillAndStroke'>Fill And Stroke</option>
+// 			<option value='individual'>Individual</option>
+// 			<option value='chaos'>Chaos</option>
+// 			<option value='outline'>Outline</option>
+// 			<option value='custom'>Custom</option>
+// 		</select>
+// 	</p>
+// </div>;
 
-// <Fragment>
-// <div className='separatorContainer'>
-// 	<div className='separators'>
-// 		<p>
-// 			Box Count:
-// 			<input
-// 				id='boxCount'
-// 				className='inputField'
-// 				name='boxCount'
-// 				type='number'
-// 				value={input.boxCount}
-// 				min='2'
-// 				step='2'
-// 				onChange={handleChange}
-// 			/>
-// 		</p>
-// 	</div>
-// 	<div className='separators'>
-// 		<p>Primary Color:</p>
-// 		<div className='primaryColorContainer btnContainer'>
-// 			<button
-// 				id='defaultPrimaryColorBtn'
-// 				className={`btns ${
-// 					activePrimary === 'defaultPrimaryColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Default
-// 			</button>
-// 			<button
-// 				id='randomPrimaryColorBtn'
-// 				className={`btns ${
-// 					activePrimary === 'randomPrimaryColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Random
-// 			</button>
-// 			<button
-// 				id='choosePrimaryColorBtn'
-// 				className={`btns ${
-// 					activePrimary === 'choosePrimaryColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Choose
-// 				<input
-// 					id='choosePrimaryColor'
-// 					name='choosePrimaryColor'
-// 					type='color'
-// 					value={input.choosePrimaryColor}
-// 					onChange={handleChange}
-// 				/>
-// 			</button>
-// 		</div>
-// 	</div>
-// 	<div className='separators'>
-// 		<p>Secondary Color:</p>
-// 		<div className='secondaryColorContainer btnContainer'>
-// 			<button
-// 				id='defaultSecondaryColorBtn'
-// 				className={`btns ${
-// 					activeSecondary === 'defaultSecondaryColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Default Random
-// 			</button>
-// 			<button
-// 				id='chooseSecondaryColorBtn'
-// 				className={`btns ${
-// 					activeSecondary === 'chooseSecondaryColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Choose
-// 				<input
-// 					id='chooseSecondaryColor'
-// 					type='color'
-// 					value={input.chooseSecondaryColor}
-// 					onChange={handleChange}
-// 				/>
-// 			</button>
-// 		</div>
-// 	</div>
-// 	<div className='separators'>
-// 		<p>Background Color:</p>
-// 		<div className='backgroundColorContainer btnContainer'>
-// 			<button
-// 				id='defaultBackgroundColorBtn'
-// 				className={`btns ${
-// 					activeBackground === 'defaultBackgroundColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Default
-// 			</button>
-// 			<button
-// 				id='randomBackgroundColorBtn'
-// 				className={`btns ${
-// 					activeBackground === 'randomBackgroundColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Random
-// 			</button>
-// 			<button
-// 				id='chooseBackgroundColorBtn'
-// 				className={`btns ${
-// 					activeBackground === 'chooseBackgroundColorBtn'
-// 						? 'active'
-// 						: ''
-// 				}`}
-// 				onClick={handleBtns}
-// 			>
-// 				Choose
-// 				<input
-// 					id='chooseBackgroundColor'
-// 					type='color'
-// 					value={input.chooseBackgroundColor}
-// 					onChange={handleChange}
-// 				/>
-// 			</button>
-// 		</div>
-// 	</div>
-// </div>
 // <div className='styleContainer btnContainer'>
 // 	<p>Styles</p>
 // 	<div className='btnContainer'>
@@ -337,5 +280,4 @@ export default MandalaDropDownMarkUp;
 // 			No Pattern
 // 		</button>
 // 	</div>
-// </div>
-// </Fragment>
+// </div>;
