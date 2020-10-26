@@ -1,0 +1,38 @@
+#customContainer {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+
+	.customInputs,
+	.customLabels {
+		display: flex;
+		flex-direction: column;
+
+		div:nth-child(even) {
+			background-color: rgba(0, 0, 0, 0.1);
+		}
+		div {
+			display: flex;
+			flex-direction: column;
+			label,
+			input {
+				height: 20px;
+			}
+		}
+	}
+	.customInputs {
+		div {
+			input {
+				margin: 0 20px;
+			}
+		}
+	}
+	.customLabels {
+		flex: 1;
+		div {
+			label {
+				align-self: flex-start;
+			}
+		}
+	}
+}

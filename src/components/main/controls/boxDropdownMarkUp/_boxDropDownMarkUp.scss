@@ -1,0 +1,38 @@
+#boxSubControls {
+	.separatorContainer {
+		background-color: $innerContainerColor;
+
+		.separators {
+			padding: 10px;
+			margin: 0;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			padding-bottom: 0;
+			p {
+				align-self: flex-start;
+			}
+			#boxCount {
+			}
+			input {
+			}
+		}
+	}
+	.styleContainer {
+		padding: 10px;
+		background-color: $outerContainerColor;
+		border-radius: 0 0 5px 5px;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		p {
+		}
+		.btnContainer {
+			button {
+			}
+		}
+	}
+}

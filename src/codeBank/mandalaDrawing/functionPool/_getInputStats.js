@@ -70,6 +70,8 @@ const getInputStats = (mandalaDrawObj) => {
 		shapeSize: null, //default, shape size needs to be adjusted based on path
 		shapeArr: null,
 
+		shapeType: null,
+		shapeNumber: null,
 		blendMode: getBlendMode(), // have to find in loop
 
 		...mandalaDrawObj, // override input stats
@@ -79,7 +81,7 @@ const getInputStats = (mandalaDrawObj) => {
 		inputObj.halfWidth,
 		inputObj.halfHeight
 	);
-	inputObj.shapeArr = getShapeArr(inputObj.loopCount, inputObj.customShape);
+	inputObj.shapeArr = getShapeArr(inputObj);
 
 	// console.log(inputObj.shapeArr);
 	// debugger;

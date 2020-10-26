@@ -1,0 +1,49 @@
+#detailsContainer {
+	display: flex;
+	width: 100%;
+
+	header {
+	}
+	.container {
+		display: flex;
+		justify-content: flex-start;
+
+		.detailsInputs,
+		.detailsLabels {
+			display: flex;
+			flex-direction: column;
+			label,
+			input {
+				height: 20px;
+			}
+		}
+
+		.detailsInputs {
+			div {
+				display: flex;
+				input[type='checkbox'] {
+					margin-left: 5px;
+					margin-right: 20px;
+				}
+				input[type='color'] {
+					margin-left: 20px;
+					width: 50px;
+				}
+			}
+			> input {
+				margin: 0 20px;
+				width: 70px;
+				align-self: flex-end;
+				display: flex;
+				justify-content: center;
+			}
+		}
+		.detailsLabels {
+			flex: 1;
+
+			label {
+				align-self: flex-start;
+			}
+		}
+	}
+}

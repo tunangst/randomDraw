@@ -1,6 +1,7 @@
 import { roll, coinFlip } from '../../utilities.js';
 
-const getDrawType = (inputs, forceType) => {
+const getDrawType = (inputs) => {
+	const forceType = inputs.drawType ? inputs.drawType : null;
 	const loopCycle = (word) => {
 		eval(`inputs.${word}All = ${coinFlip()}`);
 
@@ -77,15 +78,15 @@ const getDrawType = (inputs, forceType) => {
 
 		inputs.strokeSwitch = true;
 		inputs.fillSwitch = false;
+		inputs.fillAll = true;
 		inputs.strokeAll = true;
 		inputs.clearAll = true;
 		// inputs.clearRandomLoops = true;
 		inputs.strokeColorAll = true;
 		inputs.strokeWidthAll = true;
 	};
-
-	// debugger;
-	if (forceType) {
+	if (forceType && forceType !== 'random') {
+		if (forceType === 'custom') return inputs;
 		eval(`${forceType}()`);
 	} else {
 		const dice = roll(5);

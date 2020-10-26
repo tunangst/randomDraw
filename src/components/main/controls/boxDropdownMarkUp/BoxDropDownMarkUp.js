@@ -101,22 +101,20 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 	};
 
 	return (
-		<Fragment>
+		<section id='boxSubControls'>
 			<div className='separatorContainer'>
 				<div className='separators'>
-					<p>
-						Box Count:
-						<input
-							id='boxCount'
-							className='inputField'
-							name='boxCount'
-							type='number'
-							value={input.boxCount}
-							min='2'
-							step='2'
-							onChange={handleChange}
-						/>
-					</p>
+					<p>Box Count:</p>
+					<input
+						id='boxCount'
+						className='inputField'
+						name='boxCount'
+						type='number'
+						value={input.boxCount}
+						min='2'
+						step='2'
+						onChange={handleChange}
+					/>
 				</div>
 				<div className='separators'>
 					<p>Primary Color:</p>
@@ -156,6 +154,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 							<input
 								id='choosePrimaryColor'
 								name='choosePrimaryColor'
+								className='colorInput'
 								type='color'
 								value={input.choosePrimaryColor}
 								onChange={handleChange}
@@ -189,6 +188,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 							Choose
 							<input
 								id='chooseSecondaryColor'
+								className='colorInput'
 								type='color'
 								value={input.chooseSecondaryColor}
 								onChange={handleChange}
@@ -233,6 +233,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 							Choose
 							<input
 								id='chooseBackgroundColor'
+								className='colorInput'
 								type='color'
 								value={input.chooseBackgroundColor}
 								onChange={handleChange}
@@ -300,7 +301,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 					</button>
 				</div>
 			</div>
-		</Fragment>
+		</section>
 	);
 };
 

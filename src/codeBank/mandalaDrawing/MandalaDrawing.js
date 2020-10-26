@@ -1,5 +1,5 @@
 import { createCanvasDraw } from '../utilities.js';
-import initMandalaDraw from './initMandalaDraw.js';
+import runMandalaDraw from './runMandalaDraw.js';
 import getInputStats from './functionPool/_getInputStats.js';
 import getDrawType from './functionPool/_getDrawType.js';
 
@@ -10,12 +10,12 @@ const MandalaDrawing = (forceDesignObj) => {
 		width = dimensions.width;
 		height = dimensions.height;
 	}
+	console.log(mandalaDrawObj);
 
 	const canvasWidth = width ? width : 500;
 	const canvasHeight = height ? height : 500;
 	const [canvasDraw, ctx2] = createCanvasDraw(canvasWidth, canvasHeight);
-
-	mandalaDrawObj = {
+	let mandalaInput = {
 		...mandalaDrawObj,
 		canvasWidth,
 		canvasHeight,
@@ -23,16 +23,16 @@ const MandalaDrawing = (forceDesignObj) => {
 		ctx2,
 	};
 	//get and place stats
-	let inputStats = getInputStats(mandalaDrawObj);
-	//build arr
-	inputStats = getDrawType(inputStats);
+	mandalaInput = getInputStats(mandalaInput);
+	// debugger;
+	mandalaInput = getDrawType(mandalaInput);
 
-	initMandalaDraw(inputStats);
+	runMandalaDraw(mandalaInput);
 
 	//convert canvas to an image
 	//return image
 	// return ctx2;
-	const dataURL = mandalaDrawObj.canvasDraw.toDataURL('image/png');
+	const dataURL = mandalaInput.canvasDraw.toDataURL('image/png');
 	return dataURL;
 };
 

@@ -1,0 +1,17 @@
+#codeInjectionContainer {
+	position: fixed;
+	z-index: 2;
+	bottom: 0;
+	background-color: #ddddddcc;
+	padding: 10px;
+	overflow: auto;
+
+	pre {
+		display: flex;
+		justify-content: flex-start;
+
+		.codeInjection {
+			text-align: left;
+		}
+	}
+}

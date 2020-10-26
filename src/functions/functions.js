@@ -8,6 +8,7 @@ const clearEmpties = (obj) => {
 			if (
 				obj[key] === undefined ||
 				obj[key] === null ||
+				obj[key] === false ||
 				obj[key] === ''
 			) {
 				delete obj[key];
@@ -36,6 +37,7 @@ const resetDefaults = (
 	adjustBoxState,
 	adjustMandalaState
 ) => {
+	// const state = cloneObj(inputState);
 	console.log('in resetDefaults');
 	console.log('testing for infinite loop');
 	// ======= dimensions adjustments
@@ -128,7 +130,6 @@ const resetDefaults = (
 		if (state.boxDrawObj.drawStyle === 'random') {
 			adjustBoxState({ drawStyle: null });
 		}
-
 		// ======= boxDrawObj adjustments
 	}
 	// ======= mandalaDrawObj adjustments
@@ -137,33 +138,47 @@ const resetDefaults = (
 		if (state.mandalaDrawObj.drawType) {
 			if (state.mandalaDrawObj.drawType === 'random') {
 				adjustMandalaState({ drawType: null });
-			}
-			if (state.mandalaDrawObj.drawType !== 'custom') {
+			} else if (state.mandalaDrawObj.drawType !== 'custom') {
 				//delete all mods in <MandalaCustomDrawOptions />
-				state.mandalaDrawObj.loopCount &&
-					adjustMandalaState({ loopCount: null });
-				state.mandalaDrawObj.minShapeSize &&
-					adjustMandalaState({ minShapeSize: null });
-				state.mandalaDrawObj.maxShapeSize &&
-					adjustMandalaState({ maxShapeSize: null });
-				state.mandalaDrawObj.minShapeCount &&
-					adjustMandalaState({ minShapeCount: null });
-				state.mandalaDrawObj.maxShapeCount &&
-					adjustMandalaState({ maxShapeCount: null });
-				state.mandalaDrawObj.minPathRadius &&
-					adjustMandalaState({ minPathRadius: null });
-				state.mandalaDrawObj.maxPathRadius &&
-					adjustMandalaState({ maxPathRadius: null });
-				state.mandalaDrawObj.blendMode &&
-					adjustMandalaState({ blendMode: null });
-				state.mandalaDrawObj.customBackgroundSwitch &&
-					adjustMandalaState({ customBackgroundSwitch: null });
-				state.mandalaDrawObj.chooseBackgroundColor &&
-					adjustMandalaState({ chooseBackgroundColor: null });
-			}
-			// ~~~~~~~~~~~~~~~ reset drawType
-			// ~~~~~~~~~~~~~~~ reset drawType insides
-			if (state.mandalaDrawObj.drawType === 'custom') {
+				state.mandalaDrawObj.clearAll &&
+					adjustMandalaState({ clearAll: false });
+				state.mandalaDrawObj.clearRandomLoops &&
+					adjustMandalaState({ clearRandomLoops: false });
+				state.mandalaDrawObj.clearIndividualLoops &&
+					adjustMandalaState({ clearIndividualLoops: false });
+				state.mandalaDrawObj.fillAll &&
+					adjustMandalaState({ fillAll: false });
+				state.mandalaDrawObj.fillRandomLoops &&
+					adjustMandalaState({ fillRandomLoops: false });
+				state.mandalaDrawObj.fillIndividualLoops &&
+					adjustMandalaState({ fillIndividualLoops: false });
+				state.mandalaDrawObj.fillColorAll &&
+					adjustMandalaState({ fillColorAll: false });
+				state.mandalaDrawObj.fillColorRandomLoops &&
+					adjustMandalaState({ fillColorRandomLoops: false });
+				state.mandalaDrawObj.fillColorIndividualLoops &&
+					adjustMandalaState({ fillColorIndividualLoops: false });
+				state.mandalaDrawObj.strokeAll &&
+					adjustMandalaState({ strokeAll: false });
+				state.mandalaDrawObj.strokeRandomLoops &&
+					adjustMandalaState({ strokeRandomLoops: false });
+				state.mandalaDrawObj.strokeIndividualLoops &&
+					adjustMandalaState({ strokeIndividualLoops: false });
+				state.mandalaDrawObj.strokeColorAll &&
+					adjustMandalaState({ strokeColorAll: false });
+				state.mandalaDrawObj.strokeColorRandomLoops &&
+					adjustMandalaState({ strokeColorRandomLoops: false });
+				state.mandalaDrawObj.strokeColorIndividualLoops &&
+					adjustMandalaState({ strokeColorIndividualLoops: false });
+				state.mandalaDrawObj.strokeWidthAll &&
+					adjustMandalaState({ strokeWidthAll: false });
+				state.mandalaDrawObj.strokeWidthRandomLoops &&
+					adjustMandalaState({ strokeWidthRandomLoops: false });
+				state.mandalaDrawObj.strokeWidthIndividualLoops &&
+					adjustMandalaState({ strokeWidthIndividualLoops: false });
+				// ~~~~~~~~~~~~~~~ reset drawType
+				// ~~~~~~~~~~~~~~~ reset drawType insides
+			} else if (state.mandalaDrawObj.drawType === 'custom') {
 				if (state.mandalaDrawObj.customBackgroundSwitch === false) {
 					adjustMandalaState({
 						customBackgroundSwitch: null,
@@ -173,11 +188,87 @@ const resetDefaults = (
 			}
 			// ~~~~~~~~~~~~~~~ reset drawType insides
 		}
+		if (
+			state.mandalaDrawObj.shapeType &&
+			state.mandalaDrawObj.shapeType === 'random'
+		) {
+			adjustMandalaState({ shapeType: null });
+		}
+		if (
+			state.mandalaDrawObj.blendMode &&
+			state.mandalaDrawObj.blendMode === 'default'
+		) {
+			adjustMandalaState({ blendMode: null });
+		}
+		if (
+			state.mandalaDrawObj.loopCount &&
+			state.mandalaDrawObj.loopCount === 5
+		) {
+			adjustMandalaState({ loopCount: null });
+		}
+		if (
+			state.mandalaDrawObj.minShapeSize &&
+			state.mandalaDrawObj.minShapeSize === 20
+		) {
+			adjustMandalaState({ minShapeSize: null });
+		}
+		// if (
+		// 	state.mandalaDrawObj.maxShapeSize &&
+		// 	state.mandalaDrawObj.maxShapeSize === 200
+		// ) {
+		// 	adjustMandalaState({ maxShapeSize: null });
+		// }
+		if (
+			state.mandalaDrawObj.minShapeCount &&
+			state.mandalaDrawObj.minShapeCount === 4
+		) {
+			adjustMandalaState({ minShapeCount: null });
+		}
+		if (
+			state.mandalaDrawObj.maxShapeCount &&
+			state.mandalaDrawObj.maxShapeCount === 200
+		) {
+			adjustMandalaState({ maxShapeCount: null });
+		}
+		if (
+			state.mandalaDrawObj.minPathRadius &&
+			state.mandalaDrawObj.minPathRadius === 20
+		) {
+			adjustMandalaState({ minPathRadius: null });
+		}
+		// if (
+		// 	state.mandalaDrawObj.maxPathRadius &&
+		// 	state.mandalaDrawObj.maxPathRadius === 200
+		// ) {
+		// 	adjustMandalaState({ maxPathRadius: null });
+		// }
 
 		// ~~~~~~~~~~~~~~~ reset loopCount
 
 		// ======= mandalaDrawObj adjustments
 	}
+	// return state;
 };
 
 export { cloneObj, clearEmpties, writeInputCode, resetDefaults };
+
+// state.mandalaDrawObj.loopCount &&
+// 					adjustMandalaState({ loopCount: null });
+// 				state.mandalaDrawObj.minShapeSize &&
+// 					adjustMandalaState({ minShapeSize: null });
+// 				state.mandalaDrawObj.maxShapeSize &&
+// 					adjustMandalaState({ maxShapeSize: null });
+// 				state.mandalaDrawObj.minShapeCount &&
+// 					adjustMandalaState({ minShapeCount: null });
+// 				state.mandalaDrawObj.maxShapeCount &&
+// 					adjustMandalaState({ maxShapeCount: null });
+// 				state.mandalaDrawObj.minPathRadius &&
+// 					adjustMandalaState({ minPathRadius: null });
+// 				state.mandalaDrawObj.maxPathRadius &&
+// 					adjustMandalaState({ maxPathRadius: null });
+// 				state.mandalaDrawObj.blendMode &&
+// 					adjustMandalaState({ blendMode: null });
+// 				state.mandalaDrawObj.customBackgroundSwitch &&
+// 					adjustMandalaState({ customBackgroundSwitch: null });
+// 				state.mandalaDrawObj.chooseBackgroundColor &&
+// 					adjustMandalaState({ chooseBackgroundColor: null });

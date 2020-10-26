@@ -1,0 +1,18 @@
+@import './core/coreIndex';
+@import './init/initIndex';
+
+@import '../components/componentsIndex';
+
+.App {
+	text-align: center;
+	height: 100%;
+	background-color: #333;
+	width: 100%;
+
+	main {
+		display: flex;
+		margin-bottom: 300px;
+		margin-top: 50px;
+		height: 100%;
+	}
+}

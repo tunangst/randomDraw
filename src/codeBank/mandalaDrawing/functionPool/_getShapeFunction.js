@@ -3,17 +3,18 @@ import { slant, starburst } from './draw/drawLine.js';
 import { square, diamond } from './draw/drawSquare.js';
 import { circle, oval } from './draw/drawEllipse.js';
 
-const getShapeFunction = (customShape, forceNumber) => {
+const getShapeFunction = (inputs) => {
 	const diceRange = 3; // length of cases when ready
 	let dice;
 	//forceNumber should increment, lets the invoke call the case
-	if (forceNumber) {
-		while (forceNumber && forceNumber > diceRange) {
-			forceNumber = forceNumber - diceRange;
+	if (inputs.shapeNumber) {
+		while (inputs.shapeNumber && inputs.shapeNumber > diceRange) {
+			inputs.shapeNumber = inputs.shapeNumber - diceRange;
 		}
-		dice = forceNumber;
-	} else if (customShape) {
-		switch (customShape) {
+		dice = inputs.shapeNumber;
+	} else if (inputs.customShape) {
+		// debugger;
+		switch (inputs.customShape) {
 			case 'circle':
 				return circle;
 			case 'oval':
@@ -26,7 +27,7 @@ const getShapeFunction = (customShape, forceNumber) => {
 				return starburst;
 			case 'slant':
 				return slant;
-			case 'no-line':
+			case 'noLine':
 				dice = roll(2);
 				break;
 			default:

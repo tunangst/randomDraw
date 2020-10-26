@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
-import BoxDropDownMarkUp from './BoxDropDownMarkUp';
-import MandalaDropDownMarkUp from './MandalaDropDownMarkUp';
+import BoxDropDownMarkUp from './boxDropdownMarkUp/BoxDropDownMarkUp';
+import MandalaDropDownMarkUp from './mandalaDropDownMarkUp/MandalaDropDownMarkUp';
 // import { randomDraw } from '../../randomDraw';
 
 const initialInputState = {
@@ -72,8 +72,8 @@ const Controls = ({
 	}
 
 	return (
-		<section className='controls'>
-			<div className='mainControls'>
+		<section id='controls'>
+			<section className='mainControls'>
 				<div className='drawerContainer btnContainer'>
 					<button
 						id='randomDrawerBtn'
@@ -125,10 +125,8 @@ const Controls = ({
 						onChange={handleChange}
 					/>
 				</p>
-			</div>
-			<div className='subControls'>
-				{dropDown ? dropDownMarkUp : null}
-			</div>
+			</section>
+			{dropDown ? dropDownMarkUp : null}
 		</section>
 	);
 };

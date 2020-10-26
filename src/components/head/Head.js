@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Nav = () => {
+const Head = () => {
 	return (
-		<header>
+		<header id='head'>
 			<h1>randomDraw</h1>
 			<button id='sequence' className='btn'>
 				sequence
@@ -12,4 +12,4 @@ const Nav = () => {
 	);
 };
 
-export default Nav;
+export default Head;

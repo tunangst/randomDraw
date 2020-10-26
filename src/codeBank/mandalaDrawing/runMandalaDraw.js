@@ -9,7 +9,7 @@ import getShapeArr from './functionPool/_getShapeArr.js';
 import checkBackgroundSwitches from './functionPool/_checkBackgroundSwitches.js';
 // import getBlendMode from './functionPool/_getBlendMode.js';
 
-const initMandalaDraw = (inputStats) => {
+const runMandalaDraw = (inputStats) => {
 	// clear canvas
 	clearDrawingArea(inputStats);
 	// clear canvas
@@ -58,4 +58,4 @@ const initMandalaDraw = (inputStats) => {
 	}
 };
 
-export default initMandalaDraw;
+export default runMandalaDraw;

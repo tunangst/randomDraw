@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import Nav from './components/Nav';
-import CodeInjector from './components/CodeInjector';
-import Controls from './components/Controls';
-import MainDisplay from './components/MainDisplay';
+import Head from './components/head/Head';
+import CodeInjector from './components/codeInjector/CodeInjector';
+import Controls from './components/main/controls/Controls';
+import MainDisplay from './components/main/mainDisplay/MainDisplay';
 
 import { randomDraw } from './randomDraw.js';
-import { cloneObj, resetDefaults } from './functions/functions.js';
+import {
+	cloneObj,
+	writeInputCode,
+	resetDefaults,
+	clearEmpties,
+} from './functions/functions.js';
 
 function App() {
 	// let forceDesignObj = {
@@ -22,7 +27,9 @@ function App() {
 	const [designState, setDesignState] = useState({});
 
 	useEffect(() => {
+		console.log(designState);
 		//reset defaults
+		//updates the state then runs again
 		resetDefaults(
 			designState,
 			adjustState,
@@ -30,9 +37,9 @@ function App() {
 			adjustBoxState,
 			adjustMandalaState
 		);
+		//clear clone state and clear empty regions
+		let inputObj = clearEmpties(cloneObj(designState));
 
-		//clone state
-		const inputObj = cloneObj(designState);
 		//draw
 		randomDraw(inputObj);
 	}, [designState]);
@@ -78,7 +85,7 @@ function App() {
 
 	return (
 		<div className='App'>
-			<Nav />
+			<Head />
 			<CodeInjector state={designState} />
 			<main>
 				<Controls

@@ -1,0 +1,27 @@
+#controls {
+	overflow: auto;
+	width: 400px;
+	min-width: 400px;
+
+	display: flex;
+	flex-direction: column;
+
+	.mainControls {
+		background-color: $outerContainerColor;
+		padding: 10px;
+		border-radius: 5px 5px 0 0;
+
+		p {
+			// margin: 20px;
+			margin: 0 5px 5px 5px;
+		}
+
+		.drawerContainer {
+			button {
+			}
+		}
+		// .btnContainer{}
+	}
+	.subControls {
+	}
+}
