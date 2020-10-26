@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/randomDraw/static/css/main.abb5a7a2.chunk.css",
-    "main.js": "/randomDraw/static/js/main.012174a7.chunk.js",
-    "main.js.map": "/randomDraw/static/js/main.012174a7.chunk.js.map",
+    "main.js": "/randomDraw/static/js/main.570b6f6b.chunk.js",
+    "main.js.map": "/randomDraw/static/js/main.570b6f6b.chunk.js.map",
     "runtime-main.js": "/randomDraw/static/js/runtime-main.657f96f8.js",
     "runtime-main.js.map": "/randomDraw/static/js/runtime-main.657f96f8.js.map",
     "static/js/2.99fe0abd.chunk.js": "/randomDraw/static/js/2.99fe0abd.chunk.js",
     "static/js/2.99fe0abd.chunk.js.map": "/randomDraw/static/js/2.99fe0abd.chunk.js.map",
     "index.html": "/randomDraw/index.html",
-    "precache-manifest.e80bf7b2e5fe06b10621581e3b43106e.js": "/randomDraw/precache-manifest.e80bf7b2e5fe06b10621581e3b43106e.js",
+    "precache-manifest.cb009be0678a44355067ea754c7165ff.js": "/randomDraw/precache-manifest.cb009be0678a44355067ea754c7165ff.js",
     "service-worker.js": "/randomDraw/service-worker.js",
     "static/css/main.abb5a7a2.chunk.css.map": "/randomDraw/static/css/main.abb5a7a2.chunk.css.map",
     "static/js/2.99fe0abd.chunk.js.LICENSE.txt": "/randomDraw/static/js/2.99fe0abd.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.657f96f8.js",
     "static/js/2.99fe0abd.chunk.js",
     "static/css/main.abb5a7a2.chunk.css",
-    "static/js/main.012174a7.chunk.js"
+    "static/js/main.570b6f6b.chunk.js"
   ]
 }
