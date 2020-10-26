@@ -24,7 +24,17 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 		setInput({
 			...initialState,
 		});
-		adjustMandalaState(initialState);
+		adjustMandalaState({
+			loopCount: null,
+			minShapeSize: null,
+			maxShapeSize: null,
+			minShapeCount: null,
+			maxShapeCount: null,
+			minPathRadius: null,
+			maxPathRadius: null,
+			blendMode: null,
+			chooseBackgroundColor: null,
+		});
 	};
 	const handleChange = (event) => {
 		let keyName = event.target.id;
