@@ -71,7 +71,13 @@
 		border-radius: 5px;
 	}
 }
-
+.mandalaInputs {
+	margin: 0 20px;
+	width: 85px;
+	align-self: flex-end;
+	display: flex;
+	justify-content: center;
+}
 //active needs to be last to override
 .active {
 	background-color: #fff;

@@ -8,18 +8,14 @@ const initialState = {
 	maxShapeCount: 200,
 	minPathRadius: 20,
 	maxPathRadius: null,
-	blendMode: 'default',
-	chooseBackgroundColor: '#ffffff',
+	blendMode: 'random',
+	chooseBackgroundColor: '#8C00FF',
 };
 
 const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	const [input, setInput] = useState(initialState);
 	const [showBackgroundOptions, setShowBackgroundOptions] = useState(false);
 
-	// useEffect(() => {
-	// 	console.log('refresh dropdown');
-	// 	//prevent input state refreshing component,
-	// }, []);
 	const handleReset = (event) => {
 		setInput({
 			...initialState,
@@ -39,7 +35,16 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	const handleChange = (event) => {
 		let keyName = event.target.id;
 		let value = event.target.value;
+		//defaults
 
+		if (initialState[keyName] === value) {
+			adjustMandalaState({ [keyName]: null });
+			setInput({
+				...input,
+				[keyName]: value,
+			});
+			return;
+		}
 		//custom
 		if (keyName === 'customBackgroundSwitch') {
 			const checked = event.target.checked;
@@ -70,14 +75,17 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 			</header>
 			<div className='container'>
 				<section className='detailsInputs'>
-					<input
+					<select
+						name='blendMode'
 						id='blendMode'
 						className='mandalaInputs'
-						name='blendMode'
-						type='string'
-						value={input.blendMode}
 						onChange={handleChange}
-					/>
+					>
+						<option value='random'>random</option>
+						<option value='difference'>difference</option>
+						<option value='screen'>screen</option>
+						<option value='multiply'>multiply</option>
+					</select>
 					<input
 						id='loopCount'
 						className='mandalaInputs'
@@ -182,117 +190,3 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 };
 
 export default MandalaDetailOptions;
-// <Fragment>
-// 	<p>
-// 		Loop Count:
-// 		<input
-// 			id='loopCount'
-// 			className='mandalaInputs'
-// 			name='loopCount'
-// 			type='number'
-// 			value={input.loopCount}
-// 			min='2'
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Min Shape Size:
-// 		<input
-// 			id='minShapeSize'
-// 			className='mandalaInputs'
-// 			name='minShapeSize'
-// 			type='number'
-// 			value={input.minShapeSize}
-// 			min='2'
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Max Shape Size:
-// 		<input
-// 			id='maxShapeSize'
-// 			className='mandalaInputs'
-// 			name='maxShapeSize'
-// 			type='number'
-// 			value={input.maxShapeSize}
-// 			min='2'
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Min Shape Count:
-// 		<input
-// 			id='minShapeCount'
-// 			className='mandalaInputs'
-// 			name='minShapeCount'
-// 			type='number'
-// 			value={input.minShapeCount}
-// 			min='2'
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Max Shape Count:
-// 		<input
-// 			id='maxShapeCount'
-// 			className='mandalaInputs'
-// 			name='maxShapeCount'
-// 			type='number'
-// 			value={input.maxShapeCount}
-// 			min='2'
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Min Path Radius:
-// 		<input
-// 			id='minPathRadius'
-// 			className='mandalaInputs'
-// 			name='minPathRadius'
-// 			type='number'
-// 			value={input.minPathRadius}
-// 			min='2'
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Max Path Radius:
-// 		<input
-// 			id='maxPathRadius'
-// 			className='mandalaInputs'
-// 			name='maxPathRadius'
-// 			type='number'
-// 			value={input.maxPathRadius}
-// 			min='2'
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Blend Mode:
-// 		<input
-// 			id='blendMode'
-// 			className='mandalaInputs'
-// 			name='blendMode'
-// 			type='string'
-// 			value={input.blendMode}
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// 	<p>
-// 		Background Color:
-// 		<input
-// 			id='customBackgroundSwitch'
-// 			className='mandalaInputs'
-// 			name='customBackgroundSwitch'
-// 			type='checkbox'
-// 			onChange={handleChange}
-// 		/>
-// 		<input
-// 			id='chooseBackgroundColor'
-// 			name='chooseBackgroundColor'
-// 			type='color'
-// 			value={input.chooseBackgroundColor}
-// 			onChange={handleChange}
-// 		/>
-// 	</p>
-// </Fragment>;

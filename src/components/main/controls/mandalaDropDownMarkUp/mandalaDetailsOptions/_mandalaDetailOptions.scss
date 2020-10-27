@@ -21,8 +21,9 @@
 		.detailsLabels {
 			display: flex;
 			flex-direction: column;
+			align-items: flex-start;
 			label,
-			input {
+			.mandalaInputs {
 				height: 20px;
 			}
 		}
@@ -30,21 +31,31 @@
 		.detailsInputs {
 			div {
 				display: flex;
-				input[type='checkbox'] {
+				align-self: center;
+				#customBackgroundColor {
+					height: 100%;
+					width: 20%;
+					right: 0;
+					background-color: transparent;
+
+					-webkit-appearance: none;
+					border: none;
+
+					&::-webkit-color-swatch-wrapper {
+						padding: 0;
+					}
+					&::-webkit-color-swatch {
+						border: none;
+						border: 1px solid black;
+						border-radius: 5px;
+					}
+				}
+				#customBackgroundSwitch {
 					margin-left: 5px;
 					margin-right: 20px;
+					width: auto;
+					height: 100%;
 				}
-				input[type='color'] {
-					margin-left: 20px;
-					width: 50px;
-				}
-			}
-			> input {
-				margin: 0 20px;
-				width: 70px;
-				align-self: flex-end;
-				display: flex;
-				justify-content: center;
 			}
 		}
 		.detailsLabels {
