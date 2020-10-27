@@ -4,12 +4,23 @@ const BoxDrawing = randomInterface.BoxDrawing;
 const MandalaDrawing = randomInterface.MandalaDrawing;
 const RandomDrawing = randomInterface.RandomDrawing;
 
+let max = 20;
 let sequence = [];
 
-const getSequence = (length) => {
-	if (sequence.length > length) {
+const pushSequence = (design) => {
+	sequence.push(design);
+	while (sequence.length > max) {
 		sequence.shift();
 	}
+};
+const getSequence = (suggestMax) => {
+	max = suggestMax;
+	while (sequence.length > max) {
+		sequence.shift();
+	}
+	return sequence;
+};
+const getImage = () => {
 	const image = sequence[sequence.length - 1];
 	console.log(image);
 	return image;
@@ -26,15 +37,15 @@ const randomDraw = (forceDesignObj = {}) => {
 	switch (typeOfDrawer) {
 		case 'boxDraw':
 			const box = BoxDrawing(forceDesignObj);
-			sequence.push(box);
+			pushSequence(box);
 			return;
 		case 'mandalaDraw':
 			const mandala = MandalaDrawing(forceDesignObj);
-			sequence.push(mandala);
+			pushSequence(mandala);
 			return;
 		default:
 			const random = RandomDrawing(forceDesignObj);
-			sequence.push(random);
+			pushSequence(random);
 			return;
 	}
 };

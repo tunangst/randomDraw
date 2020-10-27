@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from './components/head/Head';
+import Sequence from './components/head/sequence/Sequence';
 import CodeInjector from './components/codeInjector/CodeInjector';
 import Controls from './components/main/controls/Controls';
 import MainDisplay from './components/main/mainDisplay/MainDisplay';

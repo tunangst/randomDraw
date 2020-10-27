@@ -1,21 +1,27 @@
 #head {
-	position: fixed;
-	height: 50px;
+	// position: fixed;
+	// height: 50px;
 	top: 0;
 	width: 100%;
 	background-color: #ffffff99;
-	padding: 10px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding: 5px;
+	// display: flex;
+	// justify-content: center;
+	// align-items: center;
 
-	h1 {
-	}
-	#sequence {
-	}
-	#randomDrawSequence {
-		height: 100%;
-		width: 50px;
-		background-color: peachpuff;
+	.headContainer {
+		display: flex;
+		align-items: center;
+		h1 {
+			flex: 1;
+		}
+		.toggleSequence {
+			margin: 0;
+		}
+		#randomDrawSequence {
+			height: 100%;
+			width: 50px;
+			background-color: peachpuff;
+		}
 	}
 }
