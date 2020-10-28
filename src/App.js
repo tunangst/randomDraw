@@ -12,6 +12,7 @@ import {
 	resetDefaults,
 	clearEmpties,
 	checkSequenceSize,
+	changeFavicon,
 } from './functions/functions.js';
 
 function App() {
@@ -30,10 +31,7 @@ function App() {
 	const [sequence, setSequence] = useState([]);
 
 	useEffect(() => {
-		console.log(designState);
 		//reset defaults
-		// debugger;
-
 		//updates the state then runs again
 		resetDefaults(
 			designState,
@@ -47,12 +45,15 @@ function App() {
 
 		//draw
 		randomDraw(inputObj);
-
+		// make sure arr isnt over max (default 20)
+		checkSequenceSize(sequence, setSequence, null);
 		//getImg
-		checkSequenceSize(sequence, setSequence);
-		const grabImg = getImage();
-		// debugger;
-		setSequence([...sequence, grabImg]);
+		let grabImg = getImage();
+		//update sequence
+		grabImg && setSequence([grabImg, ...sequence]);
+		//also update faviocon
+		grabImg && changeFavicon(grabImg);
+		// }
 	}, [designState]);
 
 	const adjustState = (obj) => {

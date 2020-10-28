@@ -23,10 +23,18 @@ const getSequence = (suggestMax) => {
 };
 const getImage = () => {
 	let image;
-	if (sequence.length > 0) image = sequence[sequence.length - 1];
+	// second to last
+	// if (sequence.length > 1) {
+	// 	image = sequence[sequence.length - 2];
+	// 	return image;
+	// }
+	// last
+	if (sequence.length > 0) {
+		image = sequence[sequence.length - 1];
+		return image;
+	}
 	// const image = sequence[sequence.length - 1];
-	console.log(image);
-	return image;
+	return null;
 };
 
 const randomDraw = (forceDesignObj = {}) => {

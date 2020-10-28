@@ -254,11 +254,17 @@ const resetDefaults = (
 };
 
 const checkSequenceSize = (sequence, setSequence, maxSize = 20) => {
+	if (maxSize === null) maxSize = 20;
 	if (sequence.length > maxSize - 1) {
 		const adjustedArr = [...sequence];
-		sequence.shift();
+		sequence.pop();
 		setSequence([...adjustedArr]);
 	}
+};
+
+const changeFavicon = (imgURI) => {
+	const favicon = document.querySelector('#favicon');
+	favicon.href = imgURI;
 };
 export {
 	cloneObj,
@@ -266,4 +272,5 @@ export {
 	writeInputCode,
 	resetDefaults,
 	checkSequenceSize,
+	changeFavicon,
 };

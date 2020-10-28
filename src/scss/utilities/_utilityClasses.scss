@@ -9,7 +9,7 @@
 .inputField {
 	width: 50px;
 	text-align: center;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: $whiteText;
 	margin-left: 5px;
 }
 
@@ -20,8 +20,8 @@
 	border-radius: 5px;
 	margin-bottom: 10px;
 	background-color: $btnDefaultColor;
-	color: #eee;
-	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+	color: $whiteText;
+	box-shadow: 3px 3px 5px $shadow;
 	border: none;
 
 	display: flex;
@@ -39,15 +39,15 @@
 .resetBtn {
 	padding: 5px 10px;
 	background-color: $resetColor;
-	color: #eee;
+	color: $whiteText;
 	border-radius: 5px;
 	border: none;
-	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 3px 3px 5px $shadow;
 	transition: 0.25s ease-out;
 
 	&:hover {
 		background-color: $resetColorHover;
-		box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+		box-shadow: 1px 1px 3px $shadow;
 		outline: none;
 	}
 }
@@ -82,11 +82,11 @@
 .active {
 	background-color: #fff;
 	outline: none;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+	box-shadow: 1px 1px 3px $shadow;
 	color: $btnDefaultColor;
 
 	&:hover {
-		background-color: #eee;
+		background-color: $whiteText;
 		color: $btnHoverColor;
 	}
 }

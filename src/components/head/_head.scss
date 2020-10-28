@@ -1,8 +1,8 @@
 #head {
 	width: 100%;
-	padding: 0 5px 5px 5px;
+	padding: 5px;
 	background-color: $btnDefaultColor;
-	color: #eee;
+	color: $whiteText;
 
 	.headContainer {
 		display: flex;
@@ -14,10 +14,9 @@
 		.toggleSequence {
 			margin: 0;
 		}
-		#randomDrawSequence {
-			height: 100%;
-			width: 50px;
-			background-color: peachpuff;
+		#icon {
+			height: 40px;
+			width: 40px;
 		}
 	}
 }

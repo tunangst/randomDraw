@@ -2,15 +2,40 @@ import React, { useState, useEffect } from 'react';
 import Card from './card/Card';
 
 const Sequence = ({ sequence }) => {
+	let intervalId;
+
+	const scroll = (target, direction) => {
+		console.log('scrolling');
+		switch (direction) {
+			case 'left':
+				target.scrollLeft -= 10;
+				break;
+			case 'right':
+				target.scrollLeft += 10;
+				break;
+			default:
+				console.log('direction in sequence default');
+				break;
+		}
+	};
 	const handleMouseEnter = (event) => {
-		console.log(event.relatedTarget);
-		console.log(event);
+		event.preventDefault();
 		const id = event.target.id;
+
+		let target;
 		switch (id) {
 			case 'sequenceLeft':
+				target = event.target.nextElementSibling;
+				intervalId = setInterval(() => scroll(target, 'left'), 10);
+				console.log(target, 'target');
+
 				console.log('sequence left, mouse enter');
 				break;
 			case 'sequenceRight':
+				target = event.target.previousElementSibling;
+				intervalId = setInterval(() => scroll(target, 'right'), 10);
+				console.log(target, 'target');
+
 				console.log('sequence right, mouse enter');
 				break;
 			default:
@@ -23,9 +48,11 @@ const Sequence = ({ sequence }) => {
 		const id = event.target.id;
 		switch (id) {
 			case 'sequenceLeft':
+				clearInterval(intervalId);
 				console.log('sequence left, mouse leave');
 				break;
 			case 'sequenceRight':
+				clearInterval(intervalId);
 				console.log('sequence right, mouse leave');
 				break;
 			default:
@@ -34,13 +61,13 @@ const Sequence = ({ sequence }) => {
 		}
 		console.log();
 	};
-	// const handleLeftHover = (event) => {
-	// 	console.log('leftHover');
-	// };
-	// const handleRightHover = (event) => {
-	// 	console.log('rightHover');
-	// };
-
+	let cardDeck;
+	if (sequence.length <= 1) {
+		cardDeck = null;
+	} else {
+		cardDeck = [...sequence];
+		cardDeck.shift();
+	}
 	return (
 		<section id='sequence'>
 			<div
@@ -52,9 +79,10 @@ const Sequence = ({ sequence }) => {
 				<span className='arrow'></span>
 			</div>
 			<div className='cardContainer'>
-				{sequence.map((card, index) => (
-					<Card key={`card${index}`} image={card} />
-				))}
+				{cardDeck &&
+					cardDeck.map((card, index) => (
+						<Card key={`card${index}`} image={card} />
+					))}
 			</div>
 			<div
 				id='sequenceRight'

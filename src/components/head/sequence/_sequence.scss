@@ -2,18 +2,25 @@
 	z-index: 10;
 	background-color: $outerContainerColor;
 	position: relative;
-	// overflow: hidden;
+	overflow: hidden;
+	// display: flex;
+	// align-items: center;
+	// justify-content: flex-end;
+	// height: 215px;
 
 	.cardContainer {
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-		perspective: 1000px;
+		direction: rtl;
+		white-space: nowrap;
+		overflow: hidden;
+		padding: 10px 0;
 		border-radius: 5px;
-		// background-color: green;
-		width: auto;
-		// height: 210px;
-		// overflow: hidden;
+
+		display: grid;
+		grid-gap: 10px;
+		grid-template-columns: repeat(auto-fill, 200px);
+		grid-auto-columns: 200px;
+		grid-auto-flow: column;
+		grid-template-rows: 200px;
 	}
 
 	.sequenceScrolls {
@@ -37,6 +44,7 @@
 			border-bottom: 20px solid transparent;
 
 			border-right: 20px solid $btnDefaultColor;
+			filter: drop-shadow(0 0 4px $innerContainerColor);
 		}
 	}
 	#sequenceRight {
@@ -52,6 +60,7 @@
 			border-bottom: 20px solid transparent;
 
 			border-left: 20px solid $btnDefaultColor;
+			filter: drop-shadow(0 0 4px $innerContainerColor);
 		}
 	}
 }
