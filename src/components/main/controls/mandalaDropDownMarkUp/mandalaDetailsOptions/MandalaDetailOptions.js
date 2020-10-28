@@ -3,11 +3,11 @@ import React, { Fragment, useState, useEffect } from 'react';
 const initialState = {
 	loopCount: 5,
 	minShapeSize: 20,
-	maxShapeSize: null,
+	maxShapeSize: '',
 	minShapeCount: 4,
 	maxShapeCount: 200,
 	minPathRadius: 20,
-	maxPathRadius: null,
+	maxPathRadius: '',
 	blendMode: 'random',
 	chooseBackgroundColor: '#8C00FF',
 };
@@ -21,15 +21,15 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 			...initialState,
 		});
 		adjustMandalaState({
-			loopCount: null,
-			minShapeSize: null,
-			maxShapeSize: null,
-			minShapeCount: null,
-			maxShapeCount: null,
-			minPathRadius: null,
-			maxPathRadius: null,
-			blendMode: null,
-			chooseBackgroundColor: null,
+			loopCount: '',
+			minShapeSize: '',
+			maxShapeSize: '',
+			minShapeCount: '',
+			maxShapeCount: '',
+			minPathRadius: '',
+			maxPathRadius: '',
+			blendMode: '',
+			chooseBackgroundColor: '',
 		});
 	};
 	const handleChange = (event) => {

@@ -6,9 +6,9 @@ const Card = ({ image }) => {
 		//open modal with large image
 	};
 	return (
-		<section className='card' onClick={handleClick}>
+		<figure className='card' onClick={handleClick}>
 			<img src={image} alt='generated design image' />
-		</section>
+		</figure>
 	);
 };
 

@@ -1,10 +1,57 @@
 #sequence {
-	// position: relative;
 	z-index: 10;
-	height: 300px;
-	background-color: rgba(255, 255, 255, 0.4);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	perspective: 1000px;
+	background-color: $outerContainerColor;
+	position: relative;
+	// overflow: hidden;
+
+	.cardContainer {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		perspective: 1000px;
+		border-radius: 5px;
+		// background-color: green;
+		width: auto;
+		// height: 210px;
+		// overflow: hidden;
+	}
+
+	.sequenceScrolls {
+		z-index: 3;
+		position: absolute;
+		top: 0;
+		height: 100%;
+		width: 50px;
+		background-color: rgba($innerContainerColor, 0.3);
+	}
+	#sequenceLeft {
+		left: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		.arrow {
+			width: 0;
+			height: 0;
+			border-top: 20px solid transparent;
+			border-bottom: 20px solid transparent;
+
+			border-right: 20px solid $btnDefaultColor;
+		}
+	}
+	#sequenceRight {
+		right: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		.arrow {
+			width: 0;
+			height: 0;
+			border-top: 20px solid transparent;
+			border-bottom: 20px solid transparent;
+
+			border-left: 20px solid $btnDefaultColor;
+		}
+	}
 }

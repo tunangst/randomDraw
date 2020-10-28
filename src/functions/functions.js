@@ -253,25 +253,17 @@ const resetDefaults = (
 	// return state;
 };
 
-export { cloneObj, clearEmpties, writeInputCode, resetDefaults };
-
-// state.mandalaDrawObj.loopCount &&
-// 					adjustMandalaState({ loopCount: null });
-// 				state.mandalaDrawObj.minShapeSize &&
-// 					adjustMandalaState({ minShapeSize: null });
-// 				state.mandalaDrawObj.maxShapeSize &&
-// 					adjustMandalaState({ maxShapeSize: null });
-// 				state.mandalaDrawObj.minShapeCount &&
-// 					adjustMandalaState({ minShapeCount: null });
-// 				state.mandalaDrawObj.maxShapeCount &&
-// 					adjustMandalaState({ maxShapeCount: null });
-// 				state.mandalaDrawObj.minPathRadius &&
-// 					adjustMandalaState({ minPathRadius: null });
-// 				state.mandalaDrawObj.maxPathRadius &&
-// 					adjustMandalaState({ maxPathRadius: null });
-// 				state.mandalaDrawObj.blendMode &&
-// 					adjustMandalaState({ blendMode: null });
-// 				state.mandalaDrawObj.customBackgroundSwitch &&
-// 					adjustMandalaState({ customBackgroundSwitch: null });
-// 				state.mandalaDrawObj.chooseBackgroundColor &&
-// 					adjustMandalaState({ chooseBackgroundColor: null });
+const checkSequenceSize = (sequence, setSequence, maxSize = 20) => {
+	if (sequence.length > maxSize - 1) {
+		const adjustedArr = [...sequence];
+		sequence.shift();
+		setSequence([...adjustedArr]);
+	}
+};
+export {
+	cloneObj,
+	clearEmpties,
+	writeInputCode,
+	resetDefaults,
+	checkSequenceSize,
+};

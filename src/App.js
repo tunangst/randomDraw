@@ -5,12 +5,13 @@ import CodeInjector from './components/codeInjector/CodeInjector';
 import Controls from './components/main/controls/Controls';
 import MainDisplay from './components/main/mainDisplay/MainDisplay';
 
-import { randomDraw } from './randomDraw.js';
+import { randomDraw, getImage } from './randomDraw.js';
 import {
 	cloneObj,
 	writeInputCode,
 	resetDefaults,
 	clearEmpties,
+	checkSequenceSize,
 } from './functions/functions.js';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 	// };
 	// let forceDesignObj = {};
 	const [designState, setDesignState] = useState({});
+	const [sequence, setSequence] = useState([]);
 
 	useEffect(() => {
 		console.log(designState);
@@ -45,6 +47,12 @@ function App() {
 
 		//draw
 		randomDraw(inputObj);
+
+		//getImg
+		checkSequenceSize(sequence, setSequence);
+		const grabImg = getImage();
+		// debugger;
+		setSequence([...sequence, grabImg]);
 	}, [designState]);
 
 	const adjustState = (obj) => {
@@ -88,7 +96,7 @@ function App() {
 
 	return (
 		<div className='App'>
-			<Head />
+			<Head sequence={sequence} />
 			<CodeInjector state={designState} />
 			<main>
 				<Controls

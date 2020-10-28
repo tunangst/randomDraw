@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sequence from './sequence/Sequence';
 
-const Head = () => {
+const Head = ({ sequence }) => {
 	const [showSequence, setShowSequence] = useState(false);
 
 	const handleSequence = (event) => {
@@ -19,7 +19,7 @@ const Head = () => {
 				</button>
 				<img id='randomDrawSequence' />
 			</section>
-			{showSequence && <Sequence />}
+			{showSequence && <Sequence sequence={sequence} />}
 		</header>
 	);
 };

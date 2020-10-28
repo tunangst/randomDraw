@@ -10,7 +10,6 @@ const MandalaDrawing = (forceDesignObj) => {
 		width = dimensions.width;
 		height = dimensions.height;
 	}
-	console.log(mandalaDrawObj);
 
 	const canvasWidth = width ? width : 500;
 	const canvasHeight = height ? height : 500;

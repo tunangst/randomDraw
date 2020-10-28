@@ -14,6 +14,7 @@ const pushSequence = (design) => {
 	}
 };
 const getSequence = (suggestMax) => {
+	// debugger;
 	max = suggestMax;
 	while (sequence.length > max) {
 		sequence.shift();
@@ -21,7 +22,9 @@ const getSequence = (suggestMax) => {
 	return sequence;
 };
 const getImage = () => {
-	const image = sequence[sequence.length - 1];
+	let image;
+	if (sequence.length > 0) image = sequence[sequence.length - 1];
+	// const image = sequence[sequence.length - 1];
 	console.log(image);
 	return image;
 };
@@ -50,4 +53,4 @@ const randomDraw = (forceDesignObj = {}) => {
 	}
 };
 
-export { randomDraw, getSequence };
+export { randomDraw, getSequence, getImage };
