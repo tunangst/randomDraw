@@ -5,7 +5,6 @@ const Sequence = ({ sequence }) => {
 	let intervalId;
 
 	const scroll = (target, direction) => {
-		console.log('scrolling');
 		switch (direction) {
 			case 'left':
 				target.scrollLeft -= 10;

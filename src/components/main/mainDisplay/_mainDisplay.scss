@@ -1,9 +1,17 @@
 #randomDraw {
 	flex: 1;
 	min-height: 100%;
-	margin-left: 20px;
+	width: 100%;
+
+	padding: 20px;
+	// pointer-events: none;
+	cursor: grab;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	canvas {
+		pointer-events: none;
+	}
 }

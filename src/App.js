@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Head from './components/head/Head';
 import Sequence from './components/head/sequence/Sequence';
 import CodeInjector from './components/codeInjector/CodeInjector';
+import Main from './components/main/Main';
 import Controls from './components/main/controls/Controls';
 import MainDisplay from './components/main/mainDisplay/MainDisplay';
 
@@ -99,7 +100,7 @@ function App() {
 		<div className='App'>
 			<Head sequence={sequence} />
 			<CodeInjector state={designState} />
-			<main>
+			<Main>
 				<Controls
 					draw={draw}
 					state={designState}
@@ -109,12 +110,23 @@ function App() {
 					adjustMandalaState={adjustMandalaState}
 				/>
 				<MainDisplay />
-			</main>
+			</Main>
 		</div>
 	);
 }
 
 export default App;
 
+// <main>
+// 	<Controls
+// 		draw={draw}
+// 		state={designState}
+// 		adjustState={adjustState}
+// 		adjustDimensions={adjustDimensions}
+// 		adjustBoxState={adjustBoxState}
+// 		adjustMandalaState={adjustMandalaState}
+// 	/>
+// 	<MainDisplay />
+// </main>
 //maybe add fractals
 //maybe add pixel trails

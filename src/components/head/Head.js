@@ -15,6 +15,13 @@ const Head = ({ sequence }) => {
 		setShowSequence(!showSequence);
 	};
 
+	let sequenceArrow;
+	if (showSequence) {
+		sequenceArrow = '↑ sequence ↑';
+	} else {
+		sequenceArrow = '↓ sequence ↓';
+	}
+
 	return (
 		<header id='head'>
 			<section className='headContainer'>
@@ -24,7 +31,7 @@ const Head = ({ sequence }) => {
 					className='btns toggleSequence'
 					onClick={handleSequence}
 				>
-					sequence
+					{sequenceArrow}
 				</button>
 			</section>
 			{showSequence && <Sequence sequence={sequence} />}
