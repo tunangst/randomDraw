@@ -21,18 +21,20 @@
 	}
 
 	.sequenceScrolls {
-		z-index: 3;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		position: absolute;
+		z-index: 3;
 		top: 0;
 		height: 100%;
 		width: 50px;
 		background-color: rgba($innerContainerColor, 0.3);
+		box-shadow: 0 0 10px $btnDefaultColor;
 	}
 	#sequenceLeft {
 		left: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+
 		cursor: pointer;
 		.arrow {
 			width: 0;
@@ -46,9 +48,7 @@
 	}
 	#sequenceRight {
 		right: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+
 		cursor: pointer;
 		.arrow {
 			width: 0;

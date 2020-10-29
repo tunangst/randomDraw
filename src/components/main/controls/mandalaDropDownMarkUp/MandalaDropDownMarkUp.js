@@ -3,13 +3,12 @@ import MandalaCustomDrawOptions from './mandalaCustomDrawOptions/MandalaCustomDr
 import MandalaDetailOptions from './mandalaDetailsOptions/MandalaDetailOptions';
 
 const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
-	const [input, setInput] = useState({});
 	const [showDrawOptions, setShowDrawOptions] = useState(false);
-	const [activeStyle, setActiveStyle] = useState('random');
 
+	const [activeDrawType, setActiveDrawType] = useState('random');
 	const [activeShapeType, setActiveShapeType] = useState('shapeTypeRandom');
 
-	const handleBtns = (event) => {
+	const handleShapeTypeBtns = (event) => {
 		const id = event.target.id;
 		switch (id) {
 			case 'shapeTypeRandom':
@@ -28,24 +27,33 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 				break;
 		}
 	};
-	const handleTypeBtns = (event) => {
-		const name = event.target.name;
+	const handleDrawTypeBtns = (event) => {
 		let id = event.target.id;
-
-		if (name === 'drawType' && id === 'mandalaCustom') {
-			id = 'custom';
-			setShowDrawOptions(true);
-		} else {
-			setShowDrawOptions(false);
+		switch (id) {
+			case 'random':
+				setShowDrawOptions(false);
+				setActiveDrawType(id);
+				adjustMandalaState({ drawType: null });
+				break;
+			case 'mandalaCustom':
+				setShowDrawOptions(true);
+				setActiveDrawType('custom');
+				adjustMandalaState({ drawType: 'custom' });
+				break;
+			case 'strokeOnly':
+			case 'fillOnly':
+			case 'fillAndStroke':
+			case 'individual':
+			case 'chaos':
+			case 'outline':
+				setShowDrawOptions(false);
+				setActiveDrawType(id);
+				adjustMandalaState({ drawType: id });
+			default:
+				setShowDrawOptions(false);
+				console.log('in default of mandala dropdown markup');
+				break;
 		}
-		if (id === 'random') id = null;
-		setInput({
-			...input,
-			drawType: id === 'random' ? null : id,
-		});
-		setActiveStyle(id);
-		//place as default;
-		adjustMandalaState({ drawType: id });
 	};
 
 	return (
@@ -63,9 +71,9 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='random'
 							name='drawType'
 							className={`btns boxPatternBtns ${
-								activeStyle === 'random' ? 'active' : ''
+								activeDrawType === 'random' ? 'active' : ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							Random
 						</button>
@@ -73,9 +81,9 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='strokeOnly'
 							name='drawType'
 							className={`btns ${
-								activeStyle === 'strokeOnly' ? 'active' : ''
+								activeDrawType === 'strokeOnly' ? 'active' : ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							Stroke Only
 						</button>
@@ -83,9 +91,9 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='fillOnly'
 							name='drawType'
 							className={`btns ${
-								activeStyle === 'fillOnly' ? 'active' : ''
+								activeDrawType === 'fillOnly' ? 'active' : ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							Fill Only
 						</button>
@@ -93,9 +101,11 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='fillAndStroke'
 							name='drawType'
 							className={`btns ${
-								activeStyle === 'fillAndStroke' ? 'active' : ''
+								activeDrawType === 'fillAndStroke'
+									? 'active'
+									: ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							Fill and Stroke
 						</button>
@@ -103,9 +113,9 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='individual'
 							name='drawType'
 							className={`btns ${
-								activeStyle === 'individual' ? 'active' : ''
+								activeDrawType === 'individual' ? 'active' : ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							Individual
 						</button>
@@ -113,9 +123,9 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='chaos'
 							name='drawType'
 							className={`btns ${
-								activeStyle === 'chaos' ? 'active' : ''
+								activeDrawType === 'chaos' ? 'active' : ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							Chaos
 						</button>
@@ -123,9 +133,9 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='outline'
 							name='drawType'
 							className={`btns ${
-								activeStyle === 'outline' ? 'active' : ''
+								activeDrawType === 'outline' ? 'active' : ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							Outline
 						</button>
@@ -133,9 +143,9 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 							id='mandalaCustom'
 							name='drawType'
 							className={`btns custom ${
-								activeStyle === 'custom' ? 'active' : ''
+								activeDrawType === 'custom' ? 'active' : ''
 							}`}
-							onClick={handleTypeBtns}
+							onClick={handleDrawTypeBtns}
 						>
 							<p>Custom</p>
 						</button>
@@ -159,7 +169,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 								? 'active'
 								: ''
 						}`}
-						onClick={handleBtns}
+						onClick={handleShapeTypeBtns}
 					>
 						Random
 					</button>
@@ -169,7 +179,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 						className={`btns ${
 							activeShapeType === 'shapeTypeSame' ? 'active' : ''
 						}`}
-						onClick={handleBtns}
+						onClick={handleShapeTypeBtns}
 					>
 						Same
 					</button>
@@ -181,7 +191,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 								? 'active'
 								: ''
 						}`}
-						onClick={handleBtns}
+						onClick={handleShapeTypeBtns}
 					>
 						Increment
 					</button>
