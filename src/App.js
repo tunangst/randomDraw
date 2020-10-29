@@ -117,16 +117,5 @@ function App() {
 
 export default App;
 
-// <main>
-// 	<Controls
-// 		draw={draw}
-// 		state={designState}
-// 		adjustState={adjustState}
-// 		adjustDimensions={adjustDimensions}
-// 		adjustBoxState={adjustBoxState}
-// 		adjustMandalaState={adjustMandalaState}
-// 	/>
-// 	<MainDisplay />
-// </main>
 //maybe add fractals
 //maybe add pixel trails

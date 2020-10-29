@@ -40,9 +40,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 	};
 
 	const handleBtns = (event) => {
-		// adjustBoxState([event.target.name], event.target.value);
 		const id = event.target.id;
-		// let colorInput = null;
 		switch (id) {
 			case 'defaultPrimaryColorBtn':
 				setActivePrimary(id);
@@ -93,7 +91,6 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 
 	const handleStyleBtns = (event) => {
 		const word = event.target.innerText;
-		// let colorInput = null;
 		const convertedWord =
 			word.charAt(0).toLowerCase() + word.replace(/\s/g, '').slice(1);
 		setActiveStyle(convertedWord);

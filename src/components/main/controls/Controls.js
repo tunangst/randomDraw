@@ -1,7 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import BoxDropDownMarkUp from './boxDropdownMarkUp/BoxDropDownMarkUp';
 import MandalaDropDownMarkUp from './mandalaDropDownMarkUp/MandalaDropDownMarkUp';
-// import { randomDraw } from '../../randomDraw';
 
 const initialInputState = {
 	width: 500,
@@ -9,8 +8,6 @@ const initialInputState = {
 };
 
 const Controls = ({
-	draw,
-	state,
 	adjustState,
 	adjustDimensions,
 	adjustBoxState,

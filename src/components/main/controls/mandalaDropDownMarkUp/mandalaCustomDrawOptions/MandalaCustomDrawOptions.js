@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const initialState = {
 	clear: {
@@ -49,9 +49,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 		let collapsedState = {};
 		for (let lvl1Key in state) {
 			for (let lvl2Key in state[lvl1Key]) {
-				// if (state[lvl1Key][lvl2Key]) {
 				collapsedState[lvl2Key] = state[lvl1Key][lvl2Key];
-				// }
 			}
 		}
 		return collapsedState;

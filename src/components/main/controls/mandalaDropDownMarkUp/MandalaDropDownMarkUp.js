@@ -1,9 +1,6 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MandalaCustomDrawOptions from './mandalaCustomDrawOptions/MandalaCustomDrawOptions';
 import MandalaDetailOptions from './mandalaDetailsOptions/MandalaDetailOptions';
-const initialState = {
-	drawType: 'random',
-};
 
 const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 	const [input, setInput] = useState({});
@@ -12,14 +9,8 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 
 	const [activeShapeType, setActiveShapeType] = useState('shapeTypeRandom');
 
-	// useEffect(() => {
-	// 	console.log('mandalaDropDownMarkUp useEffect');
-	// }, [input]);
-
 	const handleBtns = (event) => {
-		// adjustBoxState([event.target.name], event.target.value);
 		const id = event.target.id;
-		// let colorInput = null;
 		switch (id) {
 			case 'shapeTypeRandom':
 				setActiveShapeType(id);
@@ -201,83 +192,3 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 };
 
 export default MandalaDropDownMarkUp;
-// <div className='separators'>
-// 	<p>
-// 		Draw Type:
-// 		<select
-// 			id='drawType'
-// 			className='mandalaInputs'
-// 			name='drawType'
-// 			onChange={handleSelectionChange}
-// 		>
-// 			<option value='random'>Random</option>
-// 			<option value='strokeOnly'>Stroke Only</option>
-// 			<option value='fillOnly'>Fill Only</option>
-// 			<option value='fillAndStroke'>Fill And Stroke</option>
-// 			<option value='individual'>Individual</option>
-// 			<option value='chaos'>Chaos</option>
-// 			<option value='outline'>Outline</option>
-// 			<option value='custom'>Custom</option>
-// 		</select>
-// 	</p>
-// </div>;
-
-// <div className='styleContainer btnContainer'>
-// 	<p>Styles</p>
-// 	<div className='btnContainer'>
-// 		<button
-// 			id='randomBtn'
-// 			className={`btns boxPatternBtns ${
-// 				activeStyle === 'random' ? 'active' : ''
-// 			}`}
-// 			onClick={handleStyleBtns}
-// 		>
-// 			Random
-// 		</button>
-// 		<button
-// 			id='fullCloneBtn'
-// 			className={`btns boxPatternBtns ${
-// 				activeStyle === 'fullClone' ? 'active' : ''
-// 			}`}
-// 			onClick={handleStyleBtns}
-// 		>
-// 			Full Clone
-// 		</button>
-// 		<button
-// 			id='fullReflectBtn'
-// 			className={`btns boxPatternBtns ${
-// 				activeStyle === 'fullReflect' ? 'active' : ''
-// 			}`}
-// 			onClick={handleStyleBtns}
-// 		>
-// 			Full Reflect
-// 		</button>
-// 		<button
-// 			id='fullRotateBtn'
-// 			className={`btns boxPatternBtns ${
-// 				activeStyle === 'fullRotate' ? 'active' : ''
-// 			}`}
-// 			onClick={handleStyleBtns}
-// 		>
-// 			Full Rotate
-// 		</button>
-// 		<button
-// 			id='halfReflectBtn'
-// 			className={`btns boxPatternBtns ${
-// 				activeStyle === 'halfReflect' ? 'active' : ''
-// 			}`}
-// 			onClick={handleStyleBtns}
-// 		>
-// 			Half Reflect
-// 		</button>
-// 		<button
-// 			id='noPatternBtn'
-// 			className={`btns boxPatternBtns ${
-// 				activeStyle === 'noPattern' ? 'active' : ''
-// 			}`}
-// 			onClick={handleStyleBtns}
-// 		>
-// 			No Pattern
-// 		</button>
-// 	</div>
-// </div>;

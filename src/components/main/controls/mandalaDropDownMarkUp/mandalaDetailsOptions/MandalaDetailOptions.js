@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const initialState = {
 	loopCount: 5,
@@ -14,7 +14,6 @@ const initialState = {
 
 const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	const [input, setInput] = useState(initialState);
-	const [showBackgroundOptions, setShowBackgroundOptions] = useState(false);
 
 	const handleReset = (event) => {
 		setInput({
