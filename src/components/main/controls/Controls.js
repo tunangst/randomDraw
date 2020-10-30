@@ -22,31 +22,40 @@ const Controls = ({
 		let id = event.target.id;
 		switch (id) {
 			case 'boxDrawerBtn':
-				setActive(id);
-				adjustState({ typeOfDrawer: 'boxDraw' });
 				setDropDown(true);
 				setWhichDropDown('box');
+				setActive(id);
+				adjustState({ typeOfDrawer: 'boxDraw' });
 				break;
 			case 'mandalaDrawerBtn':
-				setActive(id);
-				adjustState({ typeOfDrawer: 'mandalaDraw' });
 				setDropDown(true);
 				setWhichDropDown('mandala');
+				setActive(id);
+				adjustState({ typeOfDrawer: 'mandalaDraw' });
+				break;
+			case 'randomDrawerBtn':
+				setDropDown(false);
+				setActive('randomDrawerBtn');
+				adjustState({ typeOfDrawer: null });
 				break;
 			default:
-				setActive('randomDrawerBtn');
-				adjustState({ typeOfDrawer: 'random' });
-				setDropDown(false);
-				console.log('error in handleBtnClick', id);
+				console.log('error in handlebtnclick in controls');
 				break;
 		}
 	};
 	const handleChange = (event) => {
+		const name = event.target.name;
+		let value = Number(event.target.value);
+
 		setInput({
 			...input,
-			[event.target.name]: event.target.value,
+			[name]: event.target.value,
 		});
-		adjustDimensions({ [event.target.name]: Number(event.target.value) });
+		if (value === 500) {
+			value = null;
+		}
+
+		adjustDimensions({ [name]: value });
 	};
 
 	let dropDownMarkUp;
@@ -92,7 +101,9 @@ const Controls = ({
 					</button>
 					<button
 						id='mandalaDrawerBtn'
-						className='btns'
+						className={`btns ${
+							active === 'mandalaDrawerBtn' ? 'active' : ''
+						}`}
 						onClick={handleBtnClick}
 					>
 						Mandala Draw
@@ -123,7 +134,7 @@ const Controls = ({
 					/>
 				</p>
 			</section>
-			{dropDown ? dropDownMarkUp : null}
+			{dropDown && dropDownMarkUp}
 		</section>
 	);
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const initialState = {
+	blendMode: 'random',
 	loopCount: 5,
 	minShapeSize: 20,
 	maxShapeSize: '',
@@ -8,63 +9,107 @@ const initialState = {
 	maxShapeCount: 200,
 	minPathRadius: 20,
 	maxPathRadius: '',
-	blendMode: 'random',
 	chooseBackgroundColor: '#8C00FF',
 };
 
 const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	const [input, setInput] = useState(initialState);
 
-	const handleReset = (event) => {
+	const handleReset = () => {
 		setInput({
 			...initialState,
 		});
 		adjustMandalaState({
-			loopCount: '',
-			minShapeSize: '',
-			maxShapeSize: '',
-			minShapeCount: '',
-			maxShapeCount: '',
-			minPathRadius: '',
-			maxPathRadius: '',
-			blendMode: '',
-			chooseBackgroundColor: '',
+			loopCount: null,
+			minShapeSize: null,
+			maxShapeSize: null,
+			minShapeCount: null,
+			maxShapeCount: null,
+			minPathRadius: null,
+			maxPathRadius: null,
+			blendMode: null,
+			chooseBackgroundColor: null,
 		});
 	};
 	const handleChange = (event) => {
-		let keyName = event.target.id;
+		const id = event.target.id;
 		let value = event.target.value;
+		if (initialState[id] === value) {
+			value = null;
+		}
 		//defaults
+		switch (id) {
+			case 'chooseBackgroundColor':
+				setInput({
+					...input,
+					[id]: value,
+				});
+				break;
+			case 'customBackgroundSwitch':
+				const checked = event.target.checked;
+				adjustMandalaState({
+					[id]: checked,
+					chooseBackgroundColor: input.chooseBackgroundColor,
+				});
+				break;
+			case 'blendMode':
+				adjustMandalaState({ [id]: value });
+				setInput({
+					...input,
+					[id]: value,
+				});
+				break;
+			case 'loopCount':
+			case 'minShapeSize':
+			case 'maxShapeSize':
+			case 'maxShapeSize':
+			case 'minShapeCount':
+			case 'maxShapeCount':
+			case 'minPathRadius':
+			case 'maxPathRadius':
+				value = Number(value);
+				adjustMandalaState({ [id]: value });
+				setInput({
+					...input,
+					[id]: value,
+				});
+				break;
 
-		if (initialState[keyName] === value) {
-			adjustMandalaState({ [keyName]: null });
-			setInput({
-				...input,
-				[keyName]: value,
-			});
-			return;
+			default:
+				console.log(
+					'in default in handle change of mandala detail options'
+				);
+				break;
 		}
+		// if (initialState[id] === value) {
+		// adjustMandalaState({ [id]: null });
+		// setInput({
+		// ...input,
+		// [id]: value,
+		// });
+		// return;
+		// }
 		//custom
-		if (keyName === 'customBackgroundSwitch') {
-			const checked = event.target.checked;
-			adjustMandalaState({
-				[keyName]: checked,
-				chooseBackgroundColor: input.chooseBackgroundColor,
-			});
-			return;
-		}
+		// if (id === 'customBackgroundSwitch') {
+		// 	const checked = event.target.checked;
+		// 	adjustMandalaState({
+		// 		[id]: checked,
+		// 		chooseBackgroundColor: input.chooseBackgroundColor,
+		// 	});
+		// 	return;
+		// }
 		//update this state
-		if (keyName !== 'blendMode') {
-			value = Number(value);
-		}
-		setInput({
-			...input,
-			[keyName]: value,
-		});
+		// if (id !== 'blendMode') {
+		// 	value = Number(value);
+		// }
+		// setInput({
+		// 	...input,
+		// 	[id]: value,
+		// });
 
-		if (keyName === 'chooseBackgroundColor') return;
+		// if (id === 'chooseBackgroundColor') return;
 		//update main state
-		adjustMandalaState({ [keyName]: value });
+		// adjustMandalaState({ [id]: value });
 	};
 
 	return (
