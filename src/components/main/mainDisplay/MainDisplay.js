@@ -10,7 +10,7 @@ const initialState = {
 	startY: 0,
 };
 
-const MainDisplay = () => {
+const MainDisplay = ({ drawImage }) => {
 	const [scroll, setScroll] = useState(initialState);
 	const html = document.querySelector('html');
 
@@ -56,7 +56,7 @@ const MainDisplay = () => {
 			onMouseOut={handleMouseUp}
 			onMouseMove={handleMouseMove}
 		>
-			Drawing will go here
+			<img src={drawImage} alt='Drawing will go here' />
 		</section>
 	);
 };

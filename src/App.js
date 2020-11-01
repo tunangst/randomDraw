@@ -27,7 +27,8 @@ function App() {
 	// 		mandalaDrawObj: {},
 	// };
 	// let forceDesignObj = {};
-	const [modalType, setModalType] = useState('');
+	const [drawImage, setDrawImage] = useState(null);
+	const [modalType, setModalType] = useState(null);
 	const [designState, setDesignState] = useState({});
 	const [sequence, setSequence] = useState([]);
 
@@ -37,7 +38,7 @@ function App() {
 	console.log(modalType);
 	console.log(`!!!!!!!!`);
 	useEffect(() => {
-		handleModal('');
+		// handleModal(null);
 
 		//reset defaults
 		//updates the state then runs again
@@ -49,19 +50,23 @@ function App() {
 			adjustMandalaState
 		);
 		//clear clone state and clear empty regions
-		let inputObj = clearEmpties(cloneObj(designState));
-
+		const inputObj = clearEmpties(cloneObj(designState));
 		//draw
 		draw(inputObj);
 		// make sure arr isnt over max (default 20)
 		checkSequenceSize(sequence, setSequence, null);
 		//getImg
-		let grabImg = getImage();
-		//update sequence
-		grabImg && setSequence([grabImg, ...sequence]);
-		//also update faviocon
-		grabImg && changeFavicon(grabImg);
-		// }
+		const grabImg = getImage();
+		if (grabImg) {
+			//update sequence
+			grabImg && setSequence([grabImg, ...sequence]);
+			//also update faviocon
+			grabImg && changeFavicon(grabImg);
+			//replace randomDraw from drawing on screen canvas
+			//have it create canvas then show it here
+			setDrawImage(grabImg);
+			handleModal(null);
+		}
 	}, [designState]);
 
 	const handleModal = (type) => {
@@ -105,8 +110,7 @@ function App() {
 		});
 	};
 
-	const draw = (inputObj) => {
-		// debugger;
+	const draw = async (inputObj) => {
 		randomDraw(inputObj);
 	};
 
@@ -130,7 +134,7 @@ function App() {
 					adjustBoxState={adjustBoxState}
 					adjustMandalaState={adjustMandalaState}
 				/>
-				<MainDisplay />
+				<MainDisplay drawImage={drawImage} />
 			</Main>
 		</div>
 	);

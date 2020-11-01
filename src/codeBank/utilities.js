@@ -28,21 +28,17 @@ const createCanvasTemplate = (width, height) => {
 	return [canvasTemplate, ctx];
 };
 const createCanvasDraw = (width, height) => {
-	//find user defined space for canvas
-	const parentSpace =
-		document.querySelector('.randomDraw') ||
-		document.querySelector('#randomDraw');
 	//remove old canvas
-	parentSpace.innerHTML = '';
+	const old = document.querySelector('#canvasDraw');
+	if (old) {
+		old.remove();
+	}
 	//create new canvas
 	let canvasDraw = document.createElement('canvas');
 	canvasDraw.id = 'canvasDraw';
 	canvasDraw.width = width;
 	canvasDraw.height = height;
 	const ctx2 = canvasDraw.getContext('2d');
-
-	//place canvas
-	parentSpace.appendChild(canvasDraw);
 
 	return [canvasDraw, ctx2];
 };

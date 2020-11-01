@@ -49,15 +49,15 @@ const randomDraw = (forceDesignObj = {}) => {
 		case 'boxDraw':
 			const box = BoxDrawing(forceDesignObj);
 			pushSequence(box);
-			return;
+			return true;
 		case 'mandalaDraw':
 			const mandala = MandalaDrawing(forceDesignObj);
 			pushSequence(mandala);
-			return;
+			return true;
 		default:
 			const random = RandomDrawing(forceDesignObj);
 			pushSequence(random);
-			return;
+			return true;
 	}
 };
 
