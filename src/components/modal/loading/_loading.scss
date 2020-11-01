@@ -7,7 +7,7 @@
 	// align-items: center;
 	filter: drop-shadow(-2px -2px 5px black);
 
-	span {
+	.bars {
 		height: 100px;
 		width: 100px;
 		position: absolute;
@@ -65,4 +65,9 @@
 	to {
 		transform: rotate(360deg) translate(-50%, -50%);
 	}
+}
+
+h2 {
+	color: #ffffff;
+	font-size: 80px;
 }

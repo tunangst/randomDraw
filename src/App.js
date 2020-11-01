@@ -28,15 +28,10 @@ function App() {
 	// };
 	// let forceDesignObj = {};
 	const [drawImage, setDrawImage] = useState(null);
-	const [modalType, setModalType] = useState(null);
 	const [designState, setDesignState] = useState({});
+	const [modalType, setModalType] = useState(null);
 	const [sequence, setSequence] = useState([]);
 
-	console.log(modalType);
-	console.log(modalType);
-	console.log(modalType);
-	console.log(modalType);
-	console.log(`!!!!!!!!`);
 	useEffect(() => {
 		// handleModal(null);
 
@@ -114,15 +109,10 @@ function App() {
 		randomDraw(inputObj);
 	};
 
-	console.log(`!!!!!!!!`);
-	console.log(modalType);
-	console.log(modalType);
-	console.log(modalType);
-	console.log(modalType);
 	return (
 		<div className='App'>
 			<CodeInjector state={designState} />
-			{modalType && <Modal type={modalType} />}
+			{modalType && <Modal type={modalType} handleModal={handleModal} />}
 			<Head sequence={sequence} />
 			<Main>
 				<Controls

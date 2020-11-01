@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import MandalaCustomDrawOptions from './mandalaCustomDrawOptions/MandalaCustomDrawOptions';
-import MandalaDetailOptions from './mandalaDetailsOptions/MandalaDetailOptions';
+import MandalaDetailOptions from './mandalaDetailOptions/MandalaDetailOptions';
+import MandalaSameShapeOptions from './mandalaSameShapeOptions/MandalaSameShapeOptions';
 
 const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 	const [showDrawOptions, setShowDrawOptions] = useState(false);
+	const [showShapeTypeOptions, setShowShapeTypeOptions] = useState(false);
 
 	const [activeDrawType, setActiveDrawType] = useState('random');
 	const [activeShapeType, setActiveShapeType] = useState('shapeTypeRandom');
@@ -13,14 +15,17 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 		switch (id) {
 			case 'shapeTypeRandom':
 				setActiveShapeType(id);
+				setShowShapeTypeOptions(false);
 				adjustMandalaState({ shapeType: null });
 				break;
 			case 'shapeTypeSame':
 				setActiveShapeType(id);
+				setShowShapeTypeOptions(true);
 				adjustMandalaState({ shapeType: 'same' });
 				break;
 			case 'shapeTypeIncrement':
 				setActiveShapeType(id);
+				setShowShapeTypeOptions(false);
 				adjustMandalaState({ shapeType: 'increment' });
 				break;
 			default:
@@ -196,6 +201,11 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 						Increment
 					</button>
 				</div>
+				{showShapeTypeOptions && (
+					<MandalaSameShapeOptions
+						adjustMandalaState={adjustMandalaState}
+					/>
+				)}
 			</div>
 		</section>
 	);

@@ -17,4 +17,19 @@
 		background-color: rgba(black, 0.5);
 		backdrop-filter: blur(10px);
 	}
+	.close {
+		color: #fff;
+		background-color: $resetColor;
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		height: 40px;
+		width: 40px;
+		border-radius: 5px;
+		cursor: pointer;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }

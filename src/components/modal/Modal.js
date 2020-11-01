@@ -1,11 +1,11 @@
 import React from 'react';
-import loading from './loading/loading';
+import Loading from './loading/Loading';
 
-const Modal = ({ type }) => {
+const Modal = ({ type, handleModal }) => {
 	let inner;
 	switch (type) {
 		case 'loading':
-			inner = loading();
+			inner = <Loading />;
 			break;
 		case 'image':
 			inner = '';
@@ -16,7 +16,10 @@ const Modal = ({ type }) => {
 	}
 	return (
 		<section id='modal'>
-			{inner}
+			<div className='close' onClick={() => handleModal(null)}>
+				X
+			</div>
+			<Loading />
 			<div className='backdrop'></div>
 		</section>
 	);
