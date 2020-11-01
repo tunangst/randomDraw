@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SetResetPills from '../../reuse/SetResetPills';
 import BoxDropDownMarkUp from './boxDropdownMarkUp/BoxDropDownMarkUp';
 import MandalaDropDownMarkUp from './mandalaDropDownMarkUp/MandalaDropDownMarkUp';
 
@@ -55,25 +56,26 @@ const Controls = ({
 		adjustDimensions(setObj);
 	};
 	const handleReset = () => {
-		let setObj = {};
-		for (let key in initialInputState) {
-			setObj[key] = initialInputState[key];
+		let setObj = {
+			width: null,
+			height: null,
+		};
+		let setObj2 = {
+			width: initialInputState.width,
+			height: initialInputState.height,
+		};
+		//dont rerender if not needed
+		if (input.width !== 500 || input.height !== 500) {
+			setInput(setObj2);
+			adjustDimensions(setObj);
 		}
-		setInput(setObj);
-		adjustDimensions(setObj);
 	};
 	const handleChange = (event) => {
 		const name = event.target.name;
-		let value = Number(event.target.value);
-
 		setInput({
 			...input,
 			[name]: event.target.value,
 		});
-		// if (value === 500) {
-		// 	value = null;
-		// }
-		// adjustDimensions({ [name]: value });
 	};
 
 	let dropDownMarkUp;
@@ -152,14 +154,10 @@ const Controls = ({
 							onChange={handleChange}
 						/>
 					</p>
-					<div className='dimensionSubmits'>
-						<button className='setBtn' onClick={handleSet}>
-							Set
-						</button>
-						<button className='resetBtn' onClick={handleReset}>
-							Reset
-						</button>
-					</div>
+					<SetResetPills
+						handleSet={handleSet}
+						handleReset={handleReset}
+					/>
 				</div>
 			</section>
 			{dropDown && dropDownMarkUp}

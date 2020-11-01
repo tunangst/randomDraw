@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SetResetPills from '../../../../reuse/SetResetPills';
 
 const initialState = {
 	blendMode: 'random',
@@ -15,6 +16,7 @@ const initialState = {
 
 const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	const [input, setInput] = useState(initialState);
+	const [activeBlendMode, setActiveBlendMode] = useState('random');
 
 	const handleReset = () => {
 		let setObj = {};
@@ -79,25 +81,66 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 				break;
 		}
 	};
+	const handleBlendBtn = (event) => {
+		let name = event.target.name;
+		setActiveBlendMode(name);
+		if (name === 'random') {
+			name = null;
+		}
+		adjustMandalaState({
+			blendMode: name,
+		});
+	};
 
 	return (
 		<section id='detailsContainer'>
 			<header>
 				Details: <span>(some of these values are calculated)</span>
 			</header>
+			<div className='drawerContainer btnContainer'>
+				<button
+					id='randomBlendMode'
+					name='random'
+					className={`thinBtns ${
+						activeBlendMode === 'random' ? 'active' : ''
+					}`}
+					onClick={handleBlendBtn}
+				>
+					Random
+				</button>
+				<button
+					id='differenceBlendMode'
+					name='difference'
+					className={`thinBtns ${
+						activeBlendMode === 'difference' ? 'active' : ''
+					}`}
+					onClick={handleBlendBtn}
+				>
+					Difference
+				</button>
+				<button
+					id='screenBlendMode'
+					name='screen'
+					className={`thinBtns ${
+						activeBlendMode === 'screen' ? 'active' : ''
+					}`}
+					onClick={handleBlendBtn}
+				>
+					Screen
+				</button>
+				<button
+					id='multiplyBlendMode'
+					name='multiply'
+					className={`thinBtns ${
+						activeBlendMode === 'multiply' ? 'active' : ''
+					}`}
+					onClick={handleBlendBtn}
+				>
+					Multiply
+				</button>
+			</div>
 			<div className='container'>
 				<section className='detailsInputs'>
-					<select
-						name='blendMode'
-						id='blendMode'
-						className='mandalaInputs'
-						onChange={handleChange}
-					>
-						<option value='random'>random</option>
-						<option value='difference'>difference</option>
-						<option value='screen'>screen</option>
-						<option value='multiply'>multiply</option>
-					</select>
 					<input
 						id='loopCount'
 						className='mandalaInputs'
@@ -181,7 +224,6 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 					</div>
 				</section>
 				<section className='detailsLabels'>
-					<label htmlFor='blendMode'>Blend Mode</label>
 					<label htmlFor='loopCount'>Loop Count</label>
 					<label htmlFor='minShapeSize'>Min Shape Size</label>
 					<label htmlFor='maxShapeSize'>Max Shape Size</label>
@@ -191,15 +233,8 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 					<label htmlFor='maxPathRadius'>Max Path Radius</label>
 					<label htmlFor='backgroundColor'>Background Color</label>
 				</section>
-				<section className='detailsSubmits'>
-					<button className='setBtn' onClick={handleSet}>
-						Set
-					</button>
-					<button className='resetBtn' onClick={handleReset}>
-						Reset
-					</button>
-				</section>
 			</div>
+			<SetResetPills handleSet={handleSet} handleReset={handleReset} />
 		</section>
 	);
 };

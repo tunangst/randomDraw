@@ -21,6 +21,11 @@
 		}
 		.boxCountSeparator {
 			flex-direction: row;
+			justify-content: space-between;
+
+			.boxCountContainer {
+				display: flex;
+			}
 		}
 	}
 	.styleContainer {

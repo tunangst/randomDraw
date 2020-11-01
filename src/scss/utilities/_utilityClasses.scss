@@ -18,11 +18,13 @@
 	height: 40px;
 	width: 120px;
 	border-radius: 5px;
+
 	margin-bottom: 10px;
 	background-color: $btnDefaultColor;
 	color: $whiteText;
 	box-shadow: 3px 3px 5px $shadow;
 	border: none;
+	outline: none;
 
 	display: flex;
 	justify-content: center;
@@ -32,38 +34,59 @@
 
 	&:hover {
 		background-color: $btnHoverColor;
-		outline: none;
 	}
 }
-
-.resetBtn {
-	padding: 5px 10px;
-	background-color: $resetColor;
-	color: $whiteText;
+.thinBtns {
+	position: relative;
 	border-radius: 5px;
-	border: none;
-	box-shadow: 3px 3px 5px $shadow;
-	transition: 0.25s ease-out;
-
-	&:hover {
-		background-color: $resetColorHover;
-		box-shadow: 1px 1px 3px $shadow;
-		outline: none;
-	}
-}
-.setBtn {
 	padding: 5px 10px;
+	margin: 10px;
+
 	background-color: $btnDefaultColor;
 	color: $whiteText;
-	border-radius: 5px;
+	box-shadow: 1px 1px 3px $shadow;
 	border: none;
-	box-shadow: 3px 3px 5px $shadow;
+	outline: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	transition: 0.25s ease-out;
 
 	&:hover {
 		background-color: $btnHoverColor;
-		box-shadow: 1px 1px 3px $shadow;
+	}
+}
+.setResetPills {
+	.setBtn,
+	.resetBtn {
+		padding: 5px 10px;
+		color: $whiteText;
+		border: none;
 		outline: none;
+		box-shadow: 1px 1px 1px $shadow;
+		transition: 0.25s ease-out;
+
+		&:hover {
+			box-shadow: none;
+		}
+	}
+	.setBtn {
+		background-color: $btnDefaultColor;
+		border-radius: 5px 0 0 5px;
+
+		&:hover {
+			background-color: $btnHoverColor;
+		}
+	}
+	.resetBtn {
+		background-color: $resetColor;
+		border-radius: 0 5px 5px 0;
+
+		&:hover {
+			background-color: $resetColorHover;
+		}
 	}
 }
 
@@ -97,6 +120,7 @@
 .active {
 	background-color: #fff;
 	outline: none;
+	border: none;
 	box-shadow: 1px 1px 3px $shadow;
 	color: $btnDefaultColor;
 

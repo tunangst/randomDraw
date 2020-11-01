@@ -1,4 +1,5 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import SetResetPills from '../../../reuse/SetResetPills';
 
 const initialState = {
 	boxCount: 10,
@@ -20,19 +21,13 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 	);
 	const [activeStyle, setActiveStyle] = useState('random');
 
-	// useEffect(() => {
-	// 	console.log('refresh dropdown');
-	// 	//prevent input state refreshing component,
-	// }, []);
-
 	const handleChange = (event) => {
-		// debugger;
 		let value = event.target.value;
 		let keyName = event.target.id;
-		if (keyName === 'boxCount') {
-			value = Number(value);
-			adjustBoxState({ [keyName]: value });
-		}
+		// if (keyName === 'boxCount') {
+		// 	value = Number(value);
+		// 	adjustBoxState({ [keyName]: value });
+		// }
 		setInput({
 			...input,
 			[keyName]: value,
@@ -41,10 +36,11 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 
 	const handleBtns = (event) => {
 		const id = event.target.id;
+
 		switch (id) {
 			case 'defaultPrimaryColorBtn':
 				setActivePrimary(id);
-				adjustBoxState({ primaryToggle: 'default' });
+				adjustBoxState({ primaryToggle: null });
 				break;
 			case 'randomPrimaryColorBtn':
 				setActivePrimary(id);
@@ -52,25 +48,34 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 				break;
 			case 'choosePrimaryColorBtn':
 				setActivePrimary(id);
-				adjustBoxState({
-					primaryToggle: 'choose',
-					primaryColor: input.choosePrimaryColor,
-				});
+				let setObj = {};
+				setObj.primaryToggle = 'choose';
+				if (
+					input.choosePrimaryColor !== initialState.choosePrimaryColor
+				) {
+					setObj.primaryColor = input.choosePrimaryColor;
+				}
+				adjustBoxState(setObj);
 				break;
 			case 'defaultSecondaryColorBtn':
 				setActiveSecondary(id);
-				adjustBoxState({ secondaryToggle: 'default' });
+				adjustBoxState({ secondaryToggle: null });
 				break;
 			case 'chooseSecondaryColorBtn':
 				setActiveSecondary(id);
-				adjustBoxState({
-					secondaryToggle: 'choose',
-					secondaryColor: input.chooseSecondaryColor,
-				});
+				let setObj2 = {};
+				setObj2.secondaryToggle = 'choose';
+				if (
+					input.chooseSecondaryColor !==
+					initialState.chooseSecondaryColor
+				) {
+					setObj2.secondaryColor = input.chooseSecondaryColor;
+				}
+				adjustBoxState(setObj2);
 				break;
 			case 'defaultBackgroundColorBtn':
 				setActiveBackground(id);
-				adjustBoxState({ backgroundToggle: 'default' });
+				adjustBoxState({ backgroundToggle: null });
 				break;
 			case 'randomBackgroundColorBtn':
 				setActiveBackground(id);
@@ -78,10 +83,15 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 				break;
 			case 'chooseBackgroundColorBtn':
 				setActiveBackground(id);
-				adjustBoxState({
-					backgroundToggle: 'choose',
-					backgroundColor: input.chooseBackgroundColor,
-				});
+				let setObj3 = {};
+				setObj3.backgroundToggle = 'choose';
+				if (
+					input.chooseBackgroundColor !==
+					initialState.chooseBackgroundColor
+				) {
+					setObj3.backgroundColor = input.chooseBackgroundColor;
+				}
+				adjustBoxState(setObj3);
 				break;
 			default:
 				console.log('error in handleBtns');
@@ -91,26 +101,52 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 
 	const handleStyleBtns = (event) => {
 		const word = event.target.innerText;
-		const convertedWord =
+		let convertedWord =
 			word.charAt(0).toLowerCase() + word.replace(/\s/g, '').slice(1);
 		setActiveStyle(convertedWord);
+		if (convertedWord === 'random') {
+			convertedWord = null;
+		}
 		adjustBoxState({ drawStyle: convertedWord });
+	};
+
+	const handleSet = () => {
+		let value = Number(input.boxCount);
+		if (Number(input.boxCount) === initialState.boxCount) {
+			value = null;
+		}
+		adjustBoxState({ boxCount: value });
+	};
+	const handleReset = () => {
+		if (input.boxCount !== initialState.boxCount) {
+			setInput({
+				...input,
+				boxCount: initialState.boxCount,
+			});
+			adjustBoxState({ boxCount: null });
+		}
 	};
 
 	return (
 		<section id='boxSubControls'>
 			<div className='separatorContainer'>
 				<div className='separators boxCountSeparator'>
-					<p>Box Count:</p>
-					<input
-						id='boxCount'
-						className='inputField'
-						name='boxCount'
-						type='number'
-						value={input.boxCount}
-						min='2'
-						step='2'
-						onChange={handleChange}
+					<div className='boxCountContainer'>
+						<p>Box Count:</p>
+						<input
+							id='boxCount'
+							className='inputField'
+							name='boxCount'
+							type='number'
+							value={input.boxCount}
+							min='2'
+							step='2'
+							onChange={handleChange}
+						/>
+					</div>
+					<SetResetPills
+						handleSet={handleSet}
+						handleReset={handleReset}
 					/>
 				</div>
 				<div className='separators'>
@@ -118,6 +154,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 					<div className='primaryColorContainer btnContainer'>
 						<button
 							id='defaultPrimaryColorBtn'
+							name='primaryColor'
 							className={`btns ${
 								activePrimary === 'defaultPrimaryColorBtn'
 									? 'active'
@@ -129,6 +166,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 						</button>
 						<button
 							id='randomPrimaryColorBtn'
+							name='primaryColor'
 							className={`btns ${
 								activePrimary === 'randomPrimaryColorBtn'
 									? 'active'
@@ -140,6 +178,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 						</button>
 						<button
 							id='choosePrimaryColorBtn'
+							name='primaryColor'
 							className={`btns ${
 								activePrimary === 'choosePrimaryColorBtn'
 									? 'active'
@@ -150,7 +189,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 							Choose
 							<input
 								id='choosePrimaryColor'
-								name='choosePrimaryColor'
+								name='primaryColor'
 								className='colorInput'
 								type='color'
 								value={input.choosePrimaryColor}
@@ -164,6 +203,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 					<div className='secondaryColorContainer btnContainer'>
 						<button
 							id='defaultSecondaryColorBtn'
+							name='secondaryColor'
 							className={`btns ${
 								activeSecondary === 'defaultSecondaryColorBtn'
 									? 'active'
@@ -175,6 +215,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 						</button>
 						<button
 							id='chooseSecondaryColorBtn'
+							name='secondaryColor'
 							className={`btns ${
 								activeSecondary === 'chooseSecondaryColorBtn'
 									? 'active'
@@ -186,6 +227,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 							<input
 								id='chooseSecondaryColor'
 								className='colorInput'
+								name='secondaryColor'
 								type='color'
 								value={input.chooseSecondaryColor}
 								onChange={handleChange}
@@ -198,6 +240,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 					<div className='backgroundColorContainer btnContainer'>
 						<button
 							id='defaultBackgroundColorBtn'
+							name='backgroundColor'
 							className={`btns ${
 								activeBackground === 'defaultBackgroundColorBtn'
 									? 'active'
@@ -209,6 +252,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 						</button>
 						<button
 							id='randomBackgroundColorBtn'
+							name='backgroundColor'
 							className={`btns ${
 								activeBackground === 'randomBackgroundColorBtn'
 									? 'active'
@@ -220,6 +264,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 						</button>
 						<button
 							id='chooseBackgroundColorBtn'
+							name='backgroundColor'
 							className={`btns ${
 								activeBackground === 'chooseBackgroundColorBtn'
 									? 'active'
@@ -231,6 +276,7 @@ const BoxDropDownMarkUp = ({ adjustBoxState }) => {
 							<input
 								id='chooseBackgroundColor'
 								className='colorInput'
+								name='backgroundColor'
 								type='color'
 								value={input.chooseBackgroundColor}
 								onChange={handleChange}

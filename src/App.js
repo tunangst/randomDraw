@@ -65,7 +65,6 @@ function App() {
 	}, [designState]);
 
 	const handleModal = (type) => {
-		// debugger;
 		setModalType(type);
 	};
 	const adjustState = (obj) => {
@@ -106,9 +105,9 @@ function App() {
 		});
 	};
 
-	const draw = () => {
+	const draw = (inputObj) => {
 		// debugger;
-		randomDraw(designState);
+		randomDraw(inputObj);
 	};
 
 	console.log(`!!!!!!!!`);
