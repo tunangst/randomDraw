@@ -60,7 +60,7 @@ function App() {
 			//replace randomDraw from drawing on screen canvas
 			//have it create canvas then show it here
 			setDrawImage(grabImg);
-			handleModal(null);
+			// handleModal(null);
 		}
 	}, [designState]);
 
@@ -68,14 +68,14 @@ function App() {
 		setModalType(type);
 	};
 	const adjustState = (obj) => {
-		handleModal('loading');
+		// handleModal('loading');
 		setDesignState({
 			...designState,
 			...obj,
 		});
 	};
 	const adjustDimensions = (obj) => {
-		handleModal('loading');
+		// handleModal('loading');
 		setDesignState({
 			...designState,
 			dimensions: {
@@ -85,7 +85,7 @@ function App() {
 		});
 	};
 	const adjustBoxState = (obj) => {
-		handleModal('loading');
+		// handleModal('loading');
 		setDesignState({
 			...designState,
 			boxDrawObj: {
@@ -95,7 +95,7 @@ function App() {
 		});
 	};
 	const adjustMandalaState = (obj) => {
-		handleModal('loading');
+		// handleModal('loading');
 		setDesignState({
 			...designState,
 			mandalaDrawObj: {

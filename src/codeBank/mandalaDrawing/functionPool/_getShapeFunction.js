@@ -35,7 +35,11 @@ const getShapeFunction = (inputs) => {
 				break;
 		}
 	} else {
-		dice = roll(3);
+		if (inputs.drawType === 'fillOnly') {
+			dice = roll(2);
+		} else {
+			dice = roll(3);
+		}
 	}
 
 	switch (dice) {

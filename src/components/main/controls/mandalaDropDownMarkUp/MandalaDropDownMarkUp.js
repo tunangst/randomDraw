@@ -16,7 +16,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 			case 'shapeTypeRandom':
 				setActiveShapeType(id);
 				setShowShapeTypeOptions(false);
-				adjustMandalaState({ shapeType: null });
+				adjustMandalaState({ shapeType: null, customShape: null });
 				break;
 			case 'shapeTypeSame':
 				setActiveShapeType(id);
@@ -26,7 +26,10 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 			case 'shapeTypeIncrement':
 				setActiveShapeType(id);
 				setShowShapeTypeOptions(false);
-				adjustMandalaState({ shapeType: 'increment' });
+				adjustMandalaState({
+					shapeType: 'increment',
+					customShape: null,
+				});
 				break;
 			default:
 				break;
