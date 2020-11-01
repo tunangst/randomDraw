@@ -8,6 +8,8 @@ const initialInputState = {
 };
 
 const Controls = ({
+	modalType,
+	handleModal,
 	adjustState,
 	adjustDimensions,
 	adjustBoxState,
@@ -43,6 +45,23 @@ const Controls = ({
 				break;
 		}
 	};
+	const handleSet = () => {
+		let setObj = {};
+		for (let key in input) {
+			if (input[key] != initialInputState[key]) {
+				setObj[key] = input[key];
+			}
+		}
+		adjustDimensions(setObj);
+	};
+	const handleReset = () => {
+		let setObj = {};
+		for (let key in initialInputState) {
+			setObj[key] = initialInputState[key];
+		}
+		setInput(setObj);
+		adjustDimensions(setObj);
+	};
 	const handleChange = (event) => {
 		const name = event.target.name;
 		let value = Number(event.target.value);
@@ -51,11 +70,10 @@ const Controls = ({
 			...input,
 			[name]: event.target.value,
 		});
-		if (value === 500) {
-			value = null;
-		}
-
-		adjustDimensions({ [name]: value });
+		// if (value === 500) {
+		// 	value = null;
+		// }
+		// adjustDimensions({ [name]: value });
 	};
 
 	let dropDownMarkUp;
@@ -109,30 +127,40 @@ const Controls = ({
 						Mandala Draw
 					</button>
 				</div>
-				<p>
-					Dimensions:
-					<input
-						id='dimensionWidth'
-						name='width'
-						className='inputField'
-						type='number'
-						value={input.width}
-						min='2'
-						step='2'
-						onChange={handleChange}
-					/>
-					x
-					<input
-						id='dimensionHeight'
-						name='height'
-						className='inputField'
-						type='number'
-						value={input.height}
-						min='2'
-						step='2'
-						onChange={handleChange}
-					/>
-				</p>
+				<div className='dimensionsContainer'>
+					<p>
+						Dimensions:
+						<input
+							id='dimensionWidth'
+							name='width'
+							className='inputField'
+							type='number'
+							value={input.width}
+							min='2'
+							step='2'
+							onChange={handleChange}
+						/>
+						x
+						<input
+							id='dimensionHeight'
+							name='height'
+							className='inputField'
+							type='number'
+							value={input.height}
+							min='2'
+							step='2'
+							onChange={handleChange}
+						/>
+					</p>
+					<div className='dimensionSubmits'>
+						<button className='setBtn' onClick={handleSet}>
+							Set
+						</button>
+						<button className='resetBtn' onClick={handleReset}>
+							Reset
+						</button>
+					</div>
+				</div>
 			</section>
 			{dropDown && dropDownMarkUp}
 		</section>

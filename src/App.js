@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Modal from './components/modal/Modal';
 import Head from './components/head/Head';
-import Sequence from './components/head/sequence/Sequence';
 import CodeInjector from './components/codeInjector/CodeInjector';
 import Main from './components/main/Main';
 import Controls from './components/main/controls/Controls';
@@ -9,7 +9,6 @@ import MainDisplay from './components/main/mainDisplay/MainDisplay';
 import { randomDraw, getImage } from './randomDraw.js';
 import {
 	cloneObj,
-	writeInputCode,
 	resetDefaults,
 	clearEmpties,
 	checkSequenceSize,
@@ -28,10 +27,18 @@ function App() {
 	// 		mandalaDrawObj: {},
 	// };
 	// let forceDesignObj = {};
+	const [modalType, setModalType] = useState('');
 	const [designState, setDesignState] = useState({});
 	const [sequence, setSequence] = useState([]);
 
+	console.log(modalType);
+	console.log(modalType);
+	console.log(modalType);
+	console.log(modalType);
+	console.log(`!!!!!!!!`);
 	useEffect(() => {
+		handleModal('');
+
 		//reset defaults
 		//updates the state then runs again
 		resetDefaults(
@@ -45,7 +52,7 @@ function App() {
 		let inputObj = clearEmpties(cloneObj(designState));
 
 		//draw
-		randomDraw(inputObj);
+		draw(inputObj);
 		// make sure arr isnt over max (default 20)
 		checkSequenceSize(sequence, setSequence, null);
 		//getImg
@@ -57,14 +64,19 @@ function App() {
 		// }
 	}, [designState]);
 
+	const handleModal = (type) => {
+		// debugger;
+		setModalType(type);
+	};
 	const adjustState = (obj) => {
+		handleModal('loading');
 		setDesignState({
 			...designState,
 			...obj,
 		});
 	};
-
 	const adjustDimensions = (obj) => {
+		handleModal('loading');
 		setDesignState({
 			...designState,
 			dimensions: {
@@ -74,6 +86,7 @@ function App() {
 		});
 	};
 	const adjustBoxState = (obj) => {
+		handleModal('loading');
 		setDesignState({
 			...designState,
 			boxDrawObj: {
@@ -83,6 +96,7 @@ function App() {
 		});
 	};
 	const adjustMandalaState = (obj) => {
+		handleModal('loading');
 		setDesignState({
 			...designState,
 			mandalaDrawObj: {
@@ -93,16 +107,24 @@ function App() {
 	};
 
 	const draw = () => {
+		// debugger;
 		randomDraw(designState);
 	};
 
+	console.log(`!!!!!!!!`);
+	console.log(modalType);
+	console.log(modalType);
+	console.log(modalType);
+	console.log(modalType);
 	return (
 		<div className='App'>
-			<Head sequence={sequence} />
 			<CodeInjector state={designState} />
+			{modalType && <Modal type={modalType} />}
+			<Head sequence={sequence} />
 			<Main>
 				<Controls
-					draw={draw}
+					modalType={modalType}
+					handleModal={handleModal}
 					state={designState}
 					adjustState={adjustState}
 					adjustDimensions={adjustDimensions}

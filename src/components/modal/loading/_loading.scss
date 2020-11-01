@@ -1,0 +1,68 @@
+@keyframes spin {
+	from {
+		transform: rotate(0deg) translate(-50%, -50%);
+	}
+	to {
+		transform: rotate(360deg) translate(-50%, -50%);
+	}
+}
+
+#threeRotatingBars {
+	position: relative;
+	// display: block;
+
+	// display: flex;
+	// justify-content: center;
+	// align-items: center;
+	filter: drop-shadow(-2px -2px 5px black);
+
+	span {
+		height: 100px;
+		width: 100px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		transform-origin: top left;
+		border-radius: 50%;
+		border-top: 10px solid rgba(195, 0, 255, 1);
+		border-right: 10px solid rgba(195, 0, 255, 1);
+		border-bottom: 10px solid transparent;
+		border-left: 10px solid transparent;
+		box-shadow: inset 1px solid white;
+		animation: spin 2.4s linear infinite;
+
+		&:before {
+			content: '';
+			height: 120px;
+			width: 120px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			transform-origin: top left;
+			border-radius: 50%;
+			border-top: 10px solid rgba(255, 0, 255, 1);
+			border-right: 10px solid rgba(255, 0, 255, 1);
+			border-bottom: 10px solid rgba(255, 0, 255, 1);
+			border-left: 10px solid transparent;
+			animation: spin 3.7s linear infinite;
+		}
+		&:after {
+			content: '';
+			height: 40px;
+			width: 40px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			transform-origin: top left;
+			border-radius: 50%;
+			border-top: 10px solid rgba(255, 0, 160, 1);
+			border-right: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-left: 10px solid transparent;
+			animation: spin 1.2s linear infinite;
+		}
+	}
+}

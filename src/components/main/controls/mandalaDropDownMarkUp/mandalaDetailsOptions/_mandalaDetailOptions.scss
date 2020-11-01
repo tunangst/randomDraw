@@ -65,5 +65,14 @@
 				align-self: flex-start;
 			}
 		}
+		.detailsSubmits {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+
+			// .setBtn {
+			// 	margin-bottom: 10px;
+			// }
+		}
 	}
 }

@@ -37,7 +37,6 @@ const resetDefaults = (
 	adjustBoxState,
 	adjustMandalaState
 ) => {
-	// const state = cloneObj(inputState);
 	console.log('in resetDefaults');
 	console.log('testing for infinite loop');
 	// ======= dimensions adjustments

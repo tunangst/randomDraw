@@ -9,6 +9,7 @@ const initialState = {
 	maxShapeCount: 200,
 	minPathRadius: 20,
 	maxPathRadius: '',
+	customBackgroundSwitch: false,
 	chooseBackgroundColor: '#8C00FF',
 };
 
@@ -16,30 +17,34 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 	const [input, setInput] = useState(initialState);
 
 	const handleReset = () => {
-		setInput({
-			...initialState,
-		});
-		adjustMandalaState({
-			loopCount: null,
-			minShapeSize: null,
-			maxShapeSize: null,
-			minShapeCount: null,
-			maxShapeCount: null,
-			minPathRadius: null,
-			maxPathRadius: null,
-			blendMode: null,
-			chooseBackgroundColor: null,
-		});
+		let setObj = {};
+		for (let key in initialState) {
+			setObj[key] = initialState[key];
+		}
+		setInput(setObj);
+		adjustMandalaState(setObj);
+	};
+	const handleSet = () => {
+		let setObj = {};
+		for (let key in input) {
+			if (input[key] != initialState[key]) {
+				setObj[key] = input[key];
+			}
+			if (key === 'customBackgroundSwitch') {
+				setObj[key] = input[key];
+			}
+		}
+		adjustMandalaState(setObj);
 	};
 	const handleChange = (event) => {
 		const id = event.target.id;
 		let value = event.target.value;
-		if (initialState[id] === value) {
+		if (initialState[id] === value || initialState[id] === Number(value)) {
 			value = null;
 		}
-		//defaults
 		switch (id) {
 			case 'chooseBackgroundColor':
+			case 'blendMode':
 				setInput({
 					...input,
 					[id]: value,
@@ -47,16 +52,9 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 				break;
 			case 'customBackgroundSwitch':
 				const checked = event.target.checked;
-				adjustMandalaState({
-					[id]: checked,
-					chooseBackgroundColor: input.chooseBackgroundColor,
-				});
-				break;
-			case 'blendMode':
-				adjustMandalaState({ [id]: value });
 				setInput({
 					...input,
-					[id]: value,
+					[id]: checked,
 				});
 				break;
 			case 'loopCount':
@@ -67,8 +65,7 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 			case 'maxShapeCount':
 			case 'minPathRadius':
 			case 'maxPathRadius':
-				value = Number(value);
-				adjustMandalaState({ [id]: value });
+				value = value === null ? null : Number(value);
 				setInput({
 					...input,
 					[id]: value,
@@ -81,35 +78,6 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 				);
 				break;
 		}
-		// if (initialState[id] === value) {
-		// adjustMandalaState({ [id]: null });
-		// setInput({
-		// ...input,
-		// [id]: value,
-		// });
-		// return;
-		// }
-		//custom
-		// if (id === 'customBackgroundSwitch') {
-		// 	const checked = event.target.checked;
-		// 	adjustMandalaState({
-		// 		[id]: checked,
-		// 		chooseBackgroundColor: input.chooseBackgroundColor,
-		// 	});
-		// 	return;
-		// }
-		//update this state
-		// if (id !== 'blendMode') {
-		// 	value = Number(value);
-		// }
-		// setInput({
-		// 	...input,
-		// 	[id]: value,
-		// });
-
-		// if (id === 'chooseBackgroundColor') return;
-		//update main state
-		// adjustMandalaState({ [id]: value });
 	};
 
 	return (
@@ -223,7 +191,10 @@ const MandalaDetailOptions = ({ adjustMandalaState }) => {
 					<label htmlFor='maxPathRadius'>Max Path Radius</label>
 					<label htmlFor='backgroundColor'>Background Color</label>
 				</section>
-				<section className='detailsReset'>
+				<section className='detailsSubmits'>
+					<button className='setBtn' onClick={handleSet}>
+						Set
+					</button>
 					<button className='resetBtn' onClick={handleReset}>
 						Reset
 					</button>

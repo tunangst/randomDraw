@@ -38,7 +38,7 @@ const MandalaDropDownMarkUp = ({ adjustMandalaState }) => {
 			case 'mandalaCustom':
 				setShowDrawOptions(true);
 				setActiveDrawType('custom');
-				adjustMandalaState({ drawType: 'custom' });
+				// adjust mandala state done in module to prevent 2 renderings
 				break;
 			case 'strokeOnly':
 			case 'fillOnly':

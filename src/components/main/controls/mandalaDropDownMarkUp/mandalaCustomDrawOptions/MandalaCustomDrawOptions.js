@@ -38,11 +38,11 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 	const [showBackgroundOptions, setShowBackgroundOptions] = useState(false);
 
 	useEffect(() => {
-		console.log(
-			'refresh on input change so it does not take two submits to show'
-		);
-		adjustMandalaState({ ...collapseState(input) });
-		//prevent input state refreshing component,
+		console.log('useEffect in mandalaCustomDrawOptions');
+		adjustMandalaState({
+			drawType: 'custom',
+			...collapseState(input),
+		});
 	}, [input]);
 
 	const collapseState = (state) => {
@@ -63,6 +63,7 @@ const MandalaCustomDrawOptions = ({ adjustMandalaState }) => {
 			event.target.checked = false;
 			setInput({
 				...input,
+
 				[name]: {
 					...initialState[name],
 				},
