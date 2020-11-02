@@ -1,35 +1,44 @@
 #modal {
 	z-index: 100;
 	position: absolute;
-	min-width: 100vw;
-	min-height: 100vh;
+	min-width: 100%;
+	min-height: 100%;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	.modalContainer {
+		width: 100vw;
+		height: 100vh;
+		padding: 10px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.close {
+			color: #fff;
+			background-color: $resetColor;
+			position: absolute;
+			right: 20px;
+			top: 10px;
+			height: 40px;
+			width: 40px;
+			border-radius: 5px;
+			cursor: pointer;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
 
 	.backdrop {
-		position: absolute;
+		position: fixed;
+		top: 0;
+		left: 0;
 		z-index: -1;
 		height: 100%;
 		width: 100%;
 
 		background-color: rgba(black, 0.5);
 		backdrop-filter: blur(10px);
-	}
-	.close {
-		color: #fff;
-		background-color: $resetColor;
-		position: absolute;
-		right: 20px;
-		top: 20px;
-		height: 40px;
-		width: 40px;
-		border-radius: 5px;
-		cursor: pointer;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 }

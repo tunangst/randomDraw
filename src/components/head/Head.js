@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sequence from './sequence/Sequence';
 import { getImage } from '../../randomDraw';
 
-const Head = ({ sequence }) => {
+const Head = ({ sequence, adjustModal }) => {
 	const [showSequence, setShowSequence] = useState(false);
 	let iconImage;
 	if (sequence.length > 0) {
@@ -34,7 +34,9 @@ const Head = ({ sequence }) => {
 					{sequenceArrow}
 				</button>
 			</section>
-			{showSequence && <Sequence sequence={sequence} />}
+			{showSequence && (
+				<Sequence sequence={sequence} adjustModal={adjustModal} />
+			)}
 		</header>
 	);
 };

@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Card = ({ image }) => {
+const Card = ({ image, adjustModal }) => {
 	const handleClick = (event) => {
-		console.log('clicked');
-		//open modal with large image
+		adjustModal({
+			display: true,
+			type: 'image',
+			payload: image,
+		});
 	};
 	return (
 		<figure className='card' onClick={handleClick}>

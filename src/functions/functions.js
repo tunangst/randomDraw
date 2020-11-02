@@ -244,6 +244,18 @@ const resetDefaults = (
 		// ) {
 		// 	adjustMandalaState({ maxPathRadius: null });
 		// }
+		if (
+			state.mandalaDrawObj.backgroundColor &&
+			state.mandalaDrawObj.backgroundColor === false
+		) {
+			adjustMandalaState({ backgroundColor: null });
+		}
+		if (
+			state.mandalaDrawObj.chooseBackgroundColor &&
+			state.mandalaDrawObj.chooseBackgroundColor === '#8C00FF'
+		) {
+			adjustMandalaState({ chooseBackgroundColor: null });
+		}
 
 		// ~~~~~~~~~~~~~~~ reset loopCount
 

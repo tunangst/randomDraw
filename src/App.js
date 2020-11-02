@@ -15,6 +15,12 @@ import {
 	changeFavicon,
 } from './functions/functions.js';
 
+const initialModalState = {
+	display: false,
+	type: '',
+	payload: '',
+};
+
 function App() {
 	// let forceDesignObj = {
 	// 		typeOfDrawer: 'random',
@@ -29,12 +35,10 @@ function App() {
 	// let forceDesignObj = {};
 	const [drawImage, setDrawImage] = useState(null);
 	const [designState, setDesignState] = useState({});
-	const [modalType, setModalType] = useState(null);
+	const [modalState, setModalState] = useState(initialModalState);
 	const [sequence, setSequence] = useState([]);
 
 	useEffect(() => {
-		// handleModal(null);
-
 		//reset defaults
 		//updates the state then runs again
 		resetDefaults(
@@ -60,22 +64,27 @@ function App() {
 			//replace randomDraw from drawing on screen canvas
 			//have it create canvas then show it here
 			setDrawImage(grabImg);
-			// handleModal(null);
 		}
 	}, [designState]);
-
-	const handleModal = (type) => {
-		setModalType(type);
+	// const toggleModal = () => {
+	// 	setModalState({
+	// 		...modalState,
+	// 		display: !modalState.display,
+	// 	});
+	// };
+	const adjustModal = (obj) => {
+		setModalState({
+			...modalState,
+			...obj,
+		});
 	};
 	const adjustState = (obj) => {
-		// handleModal('loading');
 		setDesignState({
 			...designState,
 			...obj,
 		});
 	};
 	const adjustDimensions = (obj) => {
-		// handleModal('loading');
 		setDesignState({
 			...designState,
 			dimensions: {
@@ -85,7 +94,6 @@ function App() {
 		});
 	};
 	const adjustBoxState = (obj) => {
-		// handleModal('loading');
 		setDesignState({
 			...designState,
 			boxDrawObj: {
@@ -95,7 +103,6 @@ function App() {
 		});
 	};
 	const adjustMandalaState = (obj) => {
-		// handleModal('loading');
 		setDesignState({
 			...designState,
 			mandalaDrawObj: {
@@ -104,7 +111,6 @@ function App() {
 			},
 		});
 	};
-
 	const draw = async (inputObj) => {
 		randomDraw(inputObj);
 	};
@@ -112,12 +118,18 @@ function App() {
 	return (
 		<div className='App'>
 			<CodeInjector state={designState} />
-			{modalType && <Modal type={modalType} handleModal={handleModal} />}
-			<Head sequence={sequence} />
+			{modalState.display && (
+				<Modal
+					type={modalState.type}
+					payload={modalState.payload}
+					adjustModal={adjustModal}
+				/>
+			)}
+			<Head sequence={sequence} adjustModal={adjustModal} />
 			<Main>
 				<Controls
-					modalType={modalType}
-					handleModal={handleModal}
+					modalType={modalState.type}
+					adjustModal={adjustModal}
 					state={designState}
 					adjustState={adjustState}
 					adjustDimensions={adjustDimensions}

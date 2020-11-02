@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SetResetPills from '../../../../reuse/SetResetPills';
 
 const initialState = {
-	blendMode: 'random',
 	loopCount: 5,
 	minShapeSize: 20,
 	maxShapeSize: '',

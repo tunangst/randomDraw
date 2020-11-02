@@ -1,14 +1,21 @@
 import React from 'react';
 import Loading from './loading/Loading';
+import Image from './image/Image';
 
-const Modal = ({ type, handleModal }) => {
+const Modal = ({ type, payload, adjustModal }) => {
+	const handleModalClose = () => {
+		adjustModal({
+			display: false,
+		});
+	};
+
 	let inner;
 	switch (type) {
 		case 'loading':
 			inner = <Loading />;
 			break;
 		case 'image':
-			inner = '';
+			inner = <Image src={payload} />;
 			break;
 		default:
 			console.log('default in Modal');
@@ -16,10 +23,12 @@ const Modal = ({ type, handleModal }) => {
 	}
 	return (
 		<section id='modal'>
-			<div className='close' onClick={() => handleModal(null)}>
-				X
+			<div className='modalContainer'>
+				<div className='close' onClick={handleModalClose}>
+					X
+				</div>
+				{inner}
 			</div>
-			<Loading />
 			<div className='backdrop'></div>
 		</section>
 	);

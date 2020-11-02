@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './card/Card';
 
-const Sequence = ({ sequence }) => {
+const Sequence = ({ sequence, adjustModal }) => {
 	let intervalId;
 
 	const scroll = (target, direction) => {
@@ -80,7 +80,11 @@ const Sequence = ({ sequence }) => {
 			<div className='cardContainer'>
 				{cardDeck &&
 					cardDeck.map((card, index) => (
-						<Card key={`card${index}`} image={card} />
+						<Card
+							key={`card${index}`}
+							image={card}
+							adjustModal={adjustModal}
+						/>
 					))}
 			</div>
 			<div
